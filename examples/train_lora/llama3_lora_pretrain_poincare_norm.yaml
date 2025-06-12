@@ -21,7 +21,7 @@ preprocessing_num_workers: 16
 dataloader_num_workers: 4
 
 ### output
-output_dir: saves/qwen-0.5b/lora_all_embed_hyperbolic/pretrain
+output_dir: saves/qwen-0.5b/lora_all_embed_hyperbolic_poincare_norm/pretrain
 logging_steps: 10
 save_steps: 500
 plot_loss: true
