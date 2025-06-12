@@ -8,14 +8,14 @@ do_train: true
 finetuning_type: lora
 lora_rank: 8
 lora_target: all
-additional_target: ['embed_tokens.weight']
+additional_target: "embed_tokens,lm_head"
 
 ### dataset
 # dataset: fineweb_edu_1,fineweb_edu_2,fineweb_edu_3,fineweb_edu_4,fineweb_edu_5,fineweb_edu_6,fineweb_edu_7,fineweb_edu_8,fineweb_edu_9,fineweb_edu_10
 dataset: fineweb_edu_1,fineweb_edu_2,fineweb_edu_3
 template: llama3
 cutoff_len: 2048
-max_samples: 1000
+max_samples: 1000000
 overwrite_cache: true
 preprocessing_num_workers: 16
 dataloader_num_workers: 4
