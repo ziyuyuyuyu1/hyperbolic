@@ -180,3 +180,5 @@ predictions_score.json
 
 log*
 hyperbolic_head
+
+hyperbolic_model
