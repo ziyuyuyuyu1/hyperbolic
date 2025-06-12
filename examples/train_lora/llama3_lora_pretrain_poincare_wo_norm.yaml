@@ -1,5 +1,5 @@
 ### model
-model_name_or_path: hyperbolic_model/poincare_norm
+model_name_or_path: ./hyperbolic_model/poincare_norm
 trust_remote_code: true
 
 ### method
