@@ -16,7 +16,6 @@ from transformers import (
 
 def project_to_poincare_ball(v, eps=1e-5):
     norm = torch.norm(v, dim=-1, keepdim=True)
-    print(norm, norm.shape)
     max_norm = 1 - eps
     scale = torch.clamp(max_norm / (norm + 1e-10), max=1.0)
     # print(v.shape, scale.shape)
@@ -55,8 +54,8 @@ class HyperbolicDistanceHead(nn.Module):
         # trainable scale parameter
         self.use_scale = scale
         if scale:
-            self.hidden_state_scale = nn.Parameter(torch.ones(1)) * 0.005
-            self.logit_scale = nn.Parameter(torch.ones(1))  # Scale parameter for the distance head
+            self.hidden_state_scale = nn.Parameter(torch.tensor(0.005))
+            self.logit_scale = nn.Parameter(torch.tensor(1.0))
 
     def forward(self, hidden_states):
         # compute the Poincare distance
@@ -92,7 +91,7 @@ class PoincareNormForCausalLM(Qwen2ForCausalLM):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.lm_head = HyperbolicDistanceHead(self.get_input_embeddings().weight)
+        self.lm_head = HyperbolicDistanceHead(self.get_input_embeddings().weight, scale=True)
 
 AutoConfig.register("poincare_norm_config", PoinCareNormConfig)
 AutoModelForCausalLM.register(PoinCareNormConfig, PoincareNormForCausalLM)
@@ -110,33 +109,15 @@ class PoincareWoNormForCausalLM(Qwen2ForCausalLM):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.lm_head = HyperbolicDistanceHead(self.get_input_embeddings().weight)
+        self.lm_head = HyperbolicDistanceHead(self.get_input_embeddings().weight, scale=True)
         self.model.norm = nn.Identity()
 
 AutoConfig.register("poincare_wo_norm_config", PoinCareWoNormConfig)
 AutoModelForCausalLM.register(PoinCareWoNormConfig, PoincareWoNormForCausalLM)
 
 if __name__ == "__main__":
-    # # Example save 
-    # model_name = "Qwen/Qwen2.5-0.5B"
-    # tokenizer = AutoTokenizer.from_pretrained(model_name)
-    # model = PoincareWoNormForCausalLM.from_pretrained(
-    #     model_name,
-    #     torch_dtype="auto",
-    #     device_map="auto"
-    # )
-
-    # tokenizer.save_pretrained("hyperbolic_model/poincare_wo_norm")
-
-    # print(model.lm_head)
-    # print(model.model.norm)
-    # print("Model loaded successfully with Poincare norm head.")
-
-    # model.save_pretrained("hyperbolic_model/poincare_wo_norm")
-
-    # Example usage
-    model_name = "output/poincare_norm"
-    # model_name = "hyperbolic_model/poincare_wo_norm"
+    # Example save 
+    model_name = "Qwen/Qwen2.5-0.5B"
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = PoincareWoNormForCausalLM.from_pretrained(
         model_name,
@@ -144,28 +125,45 @@ if __name__ == "__main__":
         device_map="auto"
     )
 
-    print(model.lm_head.weight - model.get_input_embeddings().weight)
+    tokenizer.save_pretrained("hyperbolic_model/poincare_wo_norm_scale")
 
+    print(model.lm_head)
+    print(model.model.norm)
+    print("Model loaded successfully with Poincare norm head.")
 
-    # prepare the model input
-    prompt = "Give me a short introduction to large language models."
-    messages = [
-        {"role": "user", "content": prompt}
-    ]
-    text = tokenizer.apply_chat_template(
-        messages,
-        tokenize=False,
-        add_generation_prompt=True,
-        enable_thinking=True # Switches between thinking and non-thinking modes. Default is True.
-    )
-    model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
+    model.save_pretrained("hyperbolic_model/poincare_wo_norm_scale")
 
-    # conduct text completion
-    generated_ids = model.generate(
-        **model_inputs,
-        max_new_tokens=32768
-    )
-    output_ids = generated_ids[0][len(model_inputs.input_ids[0]):].tolist() 
+    # # Example usage
+    # model_name = "output/poincare_norm"
+    # # model_name = "hyperbolic_model/poincare_wo_norm"
+    # tokenizer = AutoTokenizer.from_pretrained(model_name)
+    # model = PoincareWoNormForCausalLM.from_pretrained(
+    #     model_name,
+    #     torch_dtype="auto",
+    #     device_map="auto"
+    # )
 
-    # the result will begin with thinking content in <think></think> tags, followed by the actual response
-    print(tokenizer.decode(output_ids, skip_special_tokens=True))
+    # print(model.lm_head.weight - model.get_input_embeddings().weight)
+
+    # # prepare the model input
+    # prompt = "Give me a short introduction to large language models."
+    # messages = [
+    #     {"role": "user", "content": prompt}
+    # ]
+    # text = tokenizer.apply_chat_template(
+    #     messages,
+    #     tokenize=False,
+    #     add_generation_prompt=True,
+    #     enable_thinking=True # Switches between thinking and non-thinking modes. Default is True.
+    # )
+    # model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
+
+    # # conduct text completion
+    # generated_ids = model.generate(
+    #     **model_inputs,
+    #     max_new_tokens=32768
+    # )
+    # output_ids = generated_ids[0][len(model_inputs.input_ids[0]):].tolist() 
+
+    # # the result will begin with thinking content in <think></think> tags, followed by the actual response
+    # print(tokenizer.decode(output_ids, skip_special_tokens=True))
