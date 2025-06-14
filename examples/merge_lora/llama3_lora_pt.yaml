@@ -1,0 +1,13 @@
+### Note: DO NOT use quantized model or quantization_bit when merging lora adapters
+
+### model
+model_name_or_path: hyperbolic_model/poincare_norm
+adapter_name_or_path: saves/qwen-0.5b/lora_all_embed_hyperbolic/pretrain
+template: llama3
+trust_remote_code: true
+
+### export
+export_dir: output/poincare_norm
+export_size: 5
+export_device: cpu  # choices: [cpu, auto]
+export_legacy_format: false

@@ -16,6 +16,7 @@ from transformers import (
 
 def project_to_poincare_ball(v, eps=1e-5):
     norm = torch.norm(v, dim=-1, keepdim=True)
+    print(norm, norm.shape)
     max_norm = 1 - eps
     scale = torch.clamp(max_norm / (norm + 1e-10), max=1.0)
     # print(v.shape, scale.shape)
@@ -46,16 +47,23 @@ def poincare_distance(x, y, eps=1e-5):
     return torch.acosh(argument).squeeze(-1)
     
 class HyperbolicDistanceHead(nn.Module):
-    def __init__(self, embedding_weight, eps=1e-5):
+    def __init__(self, embedding_weight, eps=1e-5, scale=False):
         super().__init__()
         print('---------------- HyperbolicDistanceHead initialized ---------------')
         self.weight = embedding_weight  # shape (vocab_size, hidden_dim)
         self.eps = eps  # Small epsilon to prevent numerical issues
+        # trainable scale parameter
+        self.use_scale = scale
+        if scale:
+            self.hidden_state_scale = nn.Parameter(torch.ones(1)) * 0.005
+            self.logit_scale = nn.Parameter(torch.ones(1))  # Scale parameter for the distance head
 
     def forward(self, hidden_states):
         # compute the Poincare distance
         batch_size, seq_len, hidden_dim = hidden_states.size()
         hidden_states = hidden_states.view(-1, hidden_dim)
+        if self.use_scale:
+            hidden_states = hidden_states * self.hidden_state_scale
         hidden_states = project_to_poincare_ball(hidden_states, self.eps)
         vocab_embeddings = project_to_poincare_ball(self.weight, self.eps)
 
@@ -67,6 +75,8 @@ class HyperbolicDistanceHead(nn.Module):
 
         logits = -distances  # Negate to convert distance to similarity
         logits = logits.view(batch_size, seq_len, -1)  # Reshape back to (batch, seq_len, vocab_size)
+        if self.use_scale:
+            logits = logits * self.logit_scale  # Apply the scale parameter
         return logits
     
 
@@ -107,8 +117,26 @@ AutoConfig.register("poincare_wo_norm_config", PoinCareWoNormConfig)
 AutoModelForCausalLM.register(PoinCareWoNormConfig, PoincareWoNormForCausalLM)
 
 if __name__ == "__main__":
+    # # Example save 
+    # model_name = "Qwen/Qwen2.5-0.5B"
+    # tokenizer = AutoTokenizer.from_pretrained(model_name)
+    # model = PoincareWoNormForCausalLM.from_pretrained(
+    #     model_name,
+    #     torch_dtype="auto",
+    #     device_map="auto"
+    # )
+
+    # tokenizer.save_pretrained("hyperbolic_model/poincare_wo_norm")
+
+    # print(model.lm_head)
+    # print(model.model.norm)
+    # print("Model loaded successfully with Poincare norm head.")
+
+    # model.save_pretrained("hyperbolic_model/poincare_wo_norm")
+
     # Example usage
-    model_name = "Qwen/Qwen2.5-0.5B"
+    model_name = "output/poincare_norm"
+    # model_name = "hyperbolic_model/poincare_wo_norm"
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = PoincareWoNormForCausalLM.from_pretrained(
         model_name,
@@ -116,10 +144,28 @@ if __name__ == "__main__":
         device_map="auto"
     )
 
-    tokenizer.save_pretrained("hyperbolic_model/poincare_wo_norm")
+    print(model.lm_head.weight - model.get_input_embeddings().weight)
 
-    print(model.lm_head)
-    print(model.model.norm)
-    print("Model loaded successfully with Poincare norm head.")
 
-    model.save_pretrained("hyperbolic_model/poincare_wo_norm")
+    # prepare the model input
+    prompt = "Give me a short introduction to large language models."
+    messages = [
+        {"role": "user", "content": prompt}
+    ]
+    text = tokenizer.apply_chat_template(
+        messages,
+        tokenize=False,
+        add_generation_prompt=True,
+        enable_thinking=True # Switches between thinking and non-thinking modes. Default is True.
+    )
+    model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
+
+    # conduct text completion
+    generated_ids = model.generate(
+        **model_inputs,
+        max_new_tokens=32768
+    )
+    output_ids = generated_ids[0][len(model_inputs.input_ids[0]):].tolist() 
+
+    # the result will begin with thinking content in <think></think> tags, followed by the actual response
+    print(tokenizer.decode(output_ids, skip_special_tokens=True))

@@ -33,6 +33,8 @@ from .processor import (
     UnsupervisedDatasetProcessor,
 )
 
+from typing import Any
+from itertools import chain
 
 if TYPE_CHECKING:
     from datasets import Dataset, IterableDataset
@@ -47,6 +49,38 @@ if TYPE_CHECKING:
 
 logger = logging.get_logger(__name__)
 
+
+def token_count(processor, examples: dict[str, list[Any]]) -> dict[str, list[Any]]:
+        total_token_count = 0
+        # build grouped texts with format `X1 X2 X3 ...` if packing is enabled
+        eos_token = "<|end_of_text|>" if processor.data_args.template == "llama3" else processor.tokenizer.eos_token
+        text_examples = [messages[0]["content"] + eos_token for messages in examples["_prompt"]]
+
+        if not processor.data_args.packing:
+            if getattr(processor.tokenizer, "add_bos_token", False):
+                text_examples = [processor.tokenizer.bos_token + example for example in text_examples]
+
+            result = processor.tokenizer(
+                text_examples, add_special_tokens=False, truncation=True, max_length=processor.data_args.cutoff_len, padding=False
+            )
+            total_token_count += sum(len(ids) for ids in result["input_ids"])
+        else:
+            tokenized_examples = processor.tokenizer(text_examples, add_special_tokens=False, padding=False)
+            concatenated_examples = {k: list(chain(*tokenized_examples[k])) for k in tokenized_examples.keys()}
+            total_length = len(concatenated_examples[list(concatenated_examples.keys())[0]])
+            block_size = processor.data_args.cutoff_len
+            total_length = (total_length // block_size) * block_size
+            result = {
+                k: [t[i : i + block_size] for i in range(0, total_length, block_size)]
+                for k, t in concatenated_examples.items()
+            }
+            if getattr(processor.tokenizer, "add_bos_token", False):
+                for i in range(len(result["input_ids"])):
+                    result["input_ids"][i][0] = processor.tokenizer.bos_token_id
+            total_token_count += sum(len(ids) for ids in result["input_ids"])
+
+        print("num_total_tokens: {}".format(total_token_count))
+        return total_token_count
 
 def _load_single_dataset(
     dataset_attr: "DatasetAttr",
@@ -252,6 +286,8 @@ def _get_preprocessed_dataset(
             load_from_cache_file=(not data_args.overwrite_cache) or (training_args.local_process_index != 0),
             desc="Running tokenizer on dataset",
         )
+
+    token_count(dataset_processor, dataset)
 
     dataset = dataset.map(
         dataset_processor.preprocess_dataset,

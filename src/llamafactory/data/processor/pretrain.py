@@ -24,7 +24,6 @@ from .processor_utils import DatasetProcessor
 
 @dataclass
 class PretrainDatasetProcessor(DatasetProcessor):
-    total_token_count: int = 0
 
     def preprocess_dataset(self, examples: dict[str, list[Any]]) -> dict[str, list[Any]]:
         # build grouped texts with format `X1 X2 X3 ...` if packing is enabled
@@ -38,7 +37,6 @@ class PretrainDatasetProcessor(DatasetProcessor):
             result = self.tokenizer(
                 text_examples, add_special_tokens=False, truncation=True, max_length=self.data_args.cutoff_len
             )
-            self.total_token_count += sum(len(ids) for ids in result["input_ids"])
         else:
             tokenized_examples = self.tokenizer(text_examples, add_special_tokens=False)
             concatenated_examples = {k: list(chain(*tokenized_examples[k])) for k in tokenized_examples.keys()}
@@ -52,12 +50,9 @@ class PretrainDatasetProcessor(DatasetProcessor):
             if getattr(self.tokenizer, "add_bos_token", False):
                 for i in range(len(result["input_ids"])):
                     result["input_ids"][i][0] = self.tokenizer.bos_token_id
-            self.total_token_count += sum(len(ids) for ids in result["input_ids"])
 
         return result
 
     def print_data_example(self, example: dict[str, list[int]]) -> None:
         print("input_ids:\n{}".format(example["input_ids"]))
         print("inputs:\n{}".format(self.tokenizer.decode(example["input_ids"], skip_special_tokens=False)))
-        # Note that this function is called after preprocess_dataset, so total_token_count is already updated!!!!!
-        print("num_total_tokens: {}".format(self.total_token_count))
