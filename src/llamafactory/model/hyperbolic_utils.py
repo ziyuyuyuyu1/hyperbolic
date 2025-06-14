@@ -125,10 +125,17 @@ if __name__ == "__main__":
         device_map="auto"
     )
 
+    model.lm_head.hidden_state_scale = nn.Parameter(torch.tensor(0.005, dtype=model.dtype).to(model.device))
+    model.lm_head.logit_scale = nn.Parameter(torch.tensor(1.0, dtype=model.dtype).to(model.device))
+
     tokenizer.save_pretrained("hyperbolic_model/poincare_wo_norm_scale")
 
     print(model.lm_head)
     print(model.model.norm)
+    print(model.lm_head.hidden_state_scale)
+    print(model.lm_head.logit_scale)
+    print(model.lm_head.weight- model.get_input_embeddings().weight)
+    assert torch.allclose(model.lm_head.weight, model.get_input_embeddings().weight, atol=1e-5), "lm_head weight should be same as input embeddings weight"
     print("Model loaded successfully with Poincare norm head.")
 
     model.save_pretrained("hyperbolic_model/poincare_wo_norm_scale")
