@@ -206,11 +206,24 @@ AutoModelForCausalLM.register(PoinCareWoNormConfig, PoincareWoNormForCausalLM)
 #     """
 #     model_type = "poincare_wo_norm_proj_config"
 
+# class ProjectedEmbedding(nn.Embedding):
+#     def __init__(self, num_embeddings, embedding_dim, proj_dim, **kwargs):
+#         super().__init__(num_embeddings, embedding_dim, **kwargs)
+#         self.embed_proj = nn.Linear(embedding_dim, proj_dim, bias=False)
+
+#     def forward(self, input_ids):
+#         embeds = super().forward(input_ids)  # (batch, seq, embed_dim)
+#         projected = self.embed_proj(embeds)        # (batch, seq, proj_dim)
+#         return projected
+
 # class PoincareWoNormProjForCausalLM(Qwen2ForCausalLM):
 #     config_class = PoinCareWoNormProjConfig
 
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
+#     def __init__(self, config):
+#         super().__init__(config)
+#         self.model.embed_tokens = ProjectedEmbedding(
+#             config.vocab_size, config.hidden_size, self.model.padding_idx
+#         )
 #         self.lm_head = HyperbolicDistanceHead(self.get_input_embeddings().weight, scale=True)
 #         self.model.norm = nn.Identity()
 
@@ -248,7 +261,7 @@ if __name__ == "__main__":
     model.lm_head.hidden_state_scale = nn.Parameter(torch.tensor(0.01, dtype=model.dtype).to(model.device))
     model.lm_head.logit_scale = nn.Parameter(torch.tensor(1.0, dtype=model.dtype).to(model.device))
 
-    tokenizer.save_pretrained("hyperbolic_model/lorentz_wo_norm_scale")
+    tokenizer.save_pretrained("hyperbolic_model/poincare_wo_norm_proj_scale")
 
     print(model.lm_head)
     print(model.model.norm)

@@ -103,14 +103,16 @@ def _setup_freeze_tuning(
             non_hidden_modules.add(name.split(".")[-2])  # remove weight/bias
 
     trainable_layers = []
-    for module_name in finetuning_args.freeze_trainable_modules:
-        if module_name != "all" and module_name not in hidden_modules:
-            raise ValueError(
-                "Module {} is not found, please choose from {}".format(module_name, ", ".join(hidden_modules))
-            )
 
-        for idx in trainable_layer_ids:
-            trainable_layers.append(".{:d}.{}".format(idx, module_name if module_name != "all" else ""))
+    if finetuning_args.freeze_trainable_modules is not None:
+        for module_name in finetuning_args.freeze_trainable_modules:
+            if module_name != "all" and module_name not in hidden_modules:
+                raise ValueError(
+                    "Module {} is not found, please choose from {}".format(module_name, ", ".join(hidden_modules))
+                )
+
+            for idx in trainable_layer_ids:
+                trainable_layers.append(".{:d}.{}".format(idx, module_name if module_name != "all" else ""))
 
     if finetuning_args.freeze_extra_modules:
         for module_name in finetuning_args.freeze_extra_modules:
@@ -134,6 +136,10 @@ def _setup_freeze_tuning(
                 param.data = param.data.to(torch.float32)
         else:
             param.requires_grad_(False)
+
+    for name, param in model.named_parameters():
+        if param.requires_grad:
+            print("Trainable parameter: {}".format(name))
 
     logger.info_rank0("Set trainable layers: {}".format(",".join(trainable_layers)))
 
