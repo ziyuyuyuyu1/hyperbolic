@@ -1,5 +1,5 @@
 ### model
-model_name_or_path: ./hyperbolic_model/poincare_wo_norm_scale
+model_name_or_path: ./hyperbolic_model/lorentz_wo_norm_scale
 trust_remote_code: true
 
 ### method
@@ -15,13 +15,13 @@ additional_target: "embed_tokens,lm_head"
 dataset: fineweb_edu_1,fineweb_edu_2,fineweb_edu_3
 template: llama3
 cutoff_len: 2048
-max_samples: 20000
+max_samples: 3000
 overwrite_cache: true
 preprocessing_num_workers: 16
 dataloader_num_workers: 4
 
 ### output
-output_dir: saves/qwen-0.5b/lora_all_embed_hyperbolic_poincare_wo_norm_scale/pretrain
+output_dir: saves/qwen-0.5b/lora_all_embed_hyperbolic_lorentz_wo_norm_scale/pretrain_2
 logging_steps: 10
 save_steps: 500
 plot_loss: true
@@ -36,7 +36,7 @@ gradient_accumulation_steps: 8
 learning_rate: 1.0e-4
 num_train_epochs: 10.0
 lr_scheduler_type: cosine
-warmup_ratio: 0.1
+warmup_ratio: 0.05
 bf16: true
 ddp_timeout: 180000000
 resume_from_checkpoint: null
