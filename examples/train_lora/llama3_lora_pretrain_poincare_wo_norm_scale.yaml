@@ -15,7 +15,7 @@ additional_target: "embed_tokens,lm_head"
 dataset: fineweb_edu_1,fineweb_edu_2,fineweb_edu_3
 template: llama3
 cutoff_len: 2048
-max_samples: 3000
+max_samples: 20000
 overwrite_cache: true
 preprocessing_num_workers: 16
 dataloader_num_workers: 4
