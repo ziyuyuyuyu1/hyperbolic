@@ -287,7 +287,7 @@ def _get_preprocessed_dataset(
             desc="Running tokenizer on dataset",
         )
 
-    # token_count(dataset_processor, dataset)
+    token_count(dataset_processor, dataset)
 
     dataset = dataset.map(
         dataset_processor.preprocess_dataset,
