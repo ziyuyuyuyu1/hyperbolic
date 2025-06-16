@@ -249,68 +249,79 @@ AutoConfig.register("lorentz_wo_norm_config", LorentzWoNormConfig)
 AutoModelForCausalLM.register(LorentzWoNormConfig, LorentzWoNormForCausalLM)
 
 if __name__ == "__main__":
-    # Example save 
-    model_name = "Qwen/Qwen2.5-0.5B"
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = LorentzWoNormForCausalLM.from_pretrained(
-        model_name,
-        torch_dtype="auto",
-        device_map="auto"
-    )
-
-    model.lm_head.hidden_state_scale = nn.Parameter(torch.tensor(0.01, dtype=model.dtype).to(model.device))
-    model.lm_head.logit_scale = nn.Parameter(torch.tensor(1.0, dtype=model.dtype).to(model.device))
-
-    tokenizer.save_pretrained("hyperbolic_model/poincare_wo_norm_proj_scale")
-
-    print(model.lm_head)
-    print(model.model.norm)
-    print(model.lm_head.hidden_state_scale)
-    print(model.lm_head.logit_scale)
-    print(model.lm_head.weight- model.get_input_embeddings().weight)
-    assert torch.allclose(model.lm_head.weight, model.get_input_embeddings().weight, atol=1e-5), "lm_head weight should be same as input embeddings weight"
-    print("Model loaded successfully with lorentz norm head.")
-
-    model.save_pretrained("hyperbolic_model/lorentz_wo_norm_scale")
-
-    # ----------------------------------------
-
-    # # Example usage
-    # # model_name = "output/poincare_wo_norm_scale"
-    # # model_name = "hyperbolic_model/poincare_wo_norm"
+    # # Example save 
     # model_name = "Qwen/Qwen2.5-0.5B"
     # tokenizer = AutoTokenizer.from_pretrained(model_name)
-    # model = PoincareWoNormForCausalLM.from_pretrained(
+    # model = LorentzWoNormForCausalLM.from_pretrained(
     #     model_name,
     #     torch_dtype="auto",
     #     device_map="auto"
     # )
 
+    # model.lm_head.hidden_state_scale = nn.Parameter(torch.tensor(0.01, dtype=model.dtype).to(model.device))
+    # model.lm_head.logit_scale = nn.Parameter(torch.tensor(1.0, dtype=model.dtype).to(model.device))
+
+    # tokenizer.save_pretrained("hyperbolic_model/poincare_wo_norm_proj_scale")
+
+    # print(model.lm_head)
+    # print(model.model.norm)
+    # print(model.lm_head.hidden_state_scale)
+    # print(model.lm_head.logit_scale)
+    # print(model.lm_head.weight- model.get_input_embeddings().weight)
+    # assert torch.allclose(model.lm_head.weight, model.get_input_embeddings().weight, atol=1e-5), "lm_head weight should be same as input embeddings weight"
+    # print("Model loaded successfully with lorentz norm head.")
+
+    # model.save_pretrained("hyperbolic_model/lorentz_wo_norm_scale")
+
+    # ----------------------------------------
+
+    # Example usage
+    # model_name = "output/poincare_wo_norm_scale"
+    # model_name = "hyperbolic_model/poincare_wo_norm"
+    model_name = "Qwen/Qwen2.5-0.5B"
+    # model_name = "saves/qwen-0.5b/only_embed_hyperbolic_lorentz_wo_norm_scale/pretrain"
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    # model = PoincareWoNormForCausalLM.from_pretrained(
+    #     model_name,
+    #     torch_dtype="auto",
+    #     device_map="auto"
+    # )
+    # model = LorentzWoNormForCausalLM.from_pretrained(
+    #     model_name,
+    #     torch_dtype="auto",
+    #     device_map="auto"
+    # )
+    model = Qwen2ForCausalLM.from_pretrained(
+        model_name,
+        torch_dtype="auto",
+        device_map="auto"
+    )
+
     # model.lm_head.hidden_state_scale = nn.Parameter(torch.tensor(0.005, dtype=model.dtype).to(model.device))
-    # # model.lm_head.logit_scale = nn.Parameter(torch.tensor(1.0, dtype=model.dtype).to(model.device))
+    # model.lm_head.logit_scale = nn.Parameter(torch.tensor(1.0, dtype=model.dtype).to(model.device))
 
-    # # print(model.lm_head.weight - model.get_input_embeddings().weight)
-    # # print(model.lm_head.hidden_state_scale, model.lm_head.logit_scale)
+    # print(model.lm_head.weight - model.get_input_embeddings().weight)
+    # print(model.lm_head.hidden_state_scale, model.lm_head.logit_scale)
 
-    # # prepare the model input
-    # prompt = "Give me a short introduction to large language models."
-    # messages = [
-    #     {"role": "user", "content": prompt}
-    # ]
-    # text = tokenizer.apply_chat_template(
-    #     messages,
-    #     tokenize=False,
-    #     add_generation_prompt=True,
-    #     enable_thinking=True # Switches between thinking and non-thinking modes. Default is True.
-    # )
-    # model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
+    # prepare the model input
+    prompt = "Give me a short introduction to large language models."
+    messages = [
+        {"role": "user", "content": prompt}
+    ]
+    text = tokenizer.apply_chat_template(
+        messages,
+        tokenize=False,
+        add_generation_prompt=True,
+        enable_thinking=True # Switches between thinking and non-thinking modes. Default is True.
+    )
+    model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
 
-    # # conduct text completion
-    # generated_ids = model.generate(
-    #     **model_inputs,
-    #     max_new_tokens=100,
-    # )
-    # output_ids = generated_ids[0][len(model_inputs.input_ids[0]):].tolist() 
+    # conduct text completion
+    generated_ids = model.generate(
+        **model_inputs,
+        max_new_tokens=100,
+    )
+    output_ids = generated_ids[0][len(model_inputs.input_ids[0]):].tolist() 
 
-    # # the result will begin with thinking content in <think></think> tags, followed by the actual response
-    # print(tokenizer.decode(output_ids, skip_special_tokens=True))
+    # the result will begin with thinking content in <think></think> tags, followed by the actual response
+    print(tokenizer.decode(output_ids, skip_special_tokens=True))
