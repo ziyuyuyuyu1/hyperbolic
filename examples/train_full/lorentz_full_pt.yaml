@@ -19,18 +19,19 @@ dataloader_num_workers: 4
 streaming: true
 
 ### output
-output_dir: saves/llama3-8b/full/sft
+output_dir: saves/lorentz/full/pretrain
 logging_steps: 10
 save_steps: 500
 plot_loss: true
 overwrite_output_dir: true
 save_only_model: false
-report_to: none  # choices: [none, wandb, tensorboard, swanlab, mlflow]
+# report_to: none  # choices: [none, wandb, tensorboard, swanlab, mlflow]
+report_to: swanlab  # choices: [none, wandb, tensorboard, swanlab, mlflow]
 
 ### train
-per_device_train_batch_size: 1
+per_device_train_batch_size: 8
 gradient_accumulation_steps: 2
-learning_rate: 1.0e-5
+learning_rate: 1.0e-4
 num_train_epochs: 20.0
 lr_scheduler_type: cosine
 warmup_ratio: 0.1
