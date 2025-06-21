@@ -1,0 +1,49 @@
+### model
+model_name_or_path: saves/poincare/full/pretrain_lr_large # choices: [meta-llama/Meta-Llama-3-8B-Instruct, hyperbolic_model/poincare_wo_norm_scale, hyperbolic_model/lorentz_wo_norm_scale]
+trust_remote_code: true
+
+### method
+stage: pt
+do_train: true
+finetuning_type: full
+deepspeed: examples/deepspeed/ds_z3_config.json  # choices: [ds_z0_config.json, ds_z2_config.json, ds_z3_config.json]
+
+### dataset
+dataset: redpajama_v2
+template: llama3
+cutoff_len: 2048
+# max_samples: 1000
+overwrite_cache: true
+preprocessing_num_workers: null
+dataloader_num_workers: 4
+streaming: true
+
+### output
+output_dir: saves/poincare/full/continue_lr_large
+logging_steps: 10
+save_steps: 10000
+plot_loss: true
+overwrite_output_dir: true
+save_only_model: false
+# report_to: none  # choices: [none, wandb, tensorboard, swanlab, mlflow]
+report_to: swanlab  # choices: [none, wandb, tensorboard, swanlab, mlflow]
+
+### train
+per_device_train_batch_size: 8
+gradient_accumulation_steps: 2
+learning_rate: 1.0e-4
+num_train_epochs: 5.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.05
+bf16: true
+ddp_timeout: 180000000
+# resume_from_checkpoint: "saves/llama3-8b/full/sft/checkpoint-5000"
+resume_from_checkpoint: null
+max_steps: 100000
+
+### eval
+# eval_dataset: alpaca_en_demo
+# val_size: 0.1
+# per_device_eval_batch_size: 1
+# eval_strategy: steps
+# eval_steps: 500

@@ -278,24 +278,24 @@ if __name__ == "__main__":
     # Example usage
     # model_name = "output/poincare_wo_norm_scale"
     # model_name = "hyperbolic_model/poincare_wo_norm"
-    model_name = "Qwen/Qwen2.5-0.5B"
-    # model_name = "saves/qwen-0.5b/only_embed_hyperbolic_lorentz_wo_norm_scale/pretrain"
+    # model_name = "Qwen/Qwen2.5-0.5B"
+    model_name = "saves/poincare/full/pretrain_lr_large/"
     tokenizer = AutoTokenizer.from_pretrained(model_name)
-    # model = PoincareWoNormForCausalLM.from_pretrained(
-    #     model_name,
-    #     torch_dtype="auto",
-    #     device_map="auto"
-    # )
+    model = PoincareWoNormForCausalLM.from_pretrained(
+        model_name,
+        torch_dtype="auto",
+        device_map="auto"
+    )
     # model = LorentzWoNormForCausalLM.from_pretrained(
     #     model_name,
     #     torch_dtype="auto",
     #     device_map="auto"
     # )
-    model = Qwen2ForCausalLM.from_pretrained(
-        model_name,
-        torch_dtype="auto",
-        device_map="auto"
-    )
+    # model = Qwen2ForCausalLM.from_pretrained(
+    #     model_name,
+    #     torch_dtype="auto",
+    #     device_map="auto"
+    # )
 
     # model.lm_head.hidden_state_scale = nn.Parameter(torch.tensor(0.005, dtype=model.dtype).to(model.device))
     # model.lm_head.logit_scale = nn.Parameter(torch.tensor(1.0, dtype=model.dtype).to(model.device))
@@ -313,6 +313,7 @@ if __name__ == "__main__":
         tokenize=False,
         add_generation_prompt=True,
         enable_thinking=True # Switches between thinking and non-thinking modes. Default is True.
+        # enable_thinking=False  # Set to False to disable thinking mode
     )
     model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
 
