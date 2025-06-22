@@ -44,6 +44,9 @@ from .patcher import patch_config, patch_model, patch_processor, patch_tokenizer
 
 from .hyperbolic_utils import PoincareNormForCausalLM, PoincareWoNormForCausalLM
 
+# Import CalcTokenizer to ensure it's registered with AutoTokenizer
+from .calc_tokenizer import CalcTokenizer
+
 if is_transformers_version_greater_than("4.46.0"):
     from transformers import AutoModelForImageTextToText
 

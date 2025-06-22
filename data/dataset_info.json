@@ -8,6 +8,12 @@
   "alpaca_zh_demo": {
     "file_name": "alpaca_zh_demo.json"
   },
+  "calc_pretrain": {
+    "file_name": "calc_pretrain.json",
+    "columns": {
+      "prompt": "text"
+    }
+  },
   "glaive_toolcall_en_demo": {
     "file_name": "glaive_toolcall_en_demo.json",
     "formatting": "sharegpt",

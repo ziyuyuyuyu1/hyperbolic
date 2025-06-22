@@ -1,0 +1,52 @@
+[
+  {
+    "instruction": "Solve this mathematical expression:",
+    "input": "389 + 577",
+    "output": "389 + 577 = 966"
+  },
+  {
+    "instruction": "Solve this mathematical expression:",
+    "input": "237 + 355",
+    "output": "237 + 355 = 592"
+  },
+  {
+    "instruction": "Solve this mathematical expression:",
+    "input": "4 - 1",
+    "output": "4 - 1 = 3"
+  },
+  {
+    "instruction": "Solve this mathematical expression:",
+    "input": "370 + 15",
+    "output": "370 + 15 = 385"
+  },
+  {
+    "instruction": "Solve this mathematical expression:",
+    "input": "14 * 70",
+    "output": "14 * 70 = 980"
+  },
+  {
+    "instruction": "Solve this mathematical expression:",
+    "input": "948 + 43",
+    "output": "948 + 43 = 991"
+  },
+  {
+    "instruction": "Solve this mathematical expression:",
+    "input": "305 - 71",
+    "output": "305 - 71 = 234"
+  },
+  {
+    "instruction": "Solve this mathematical expression:",
+    "input": "456 / 24",
+    "output": "456 / 24 = 19"
+  },
+  {
+    "instruction": "Solve this mathematical expression:",
+    "input": "9 - 5",
+    "output": "9 - 5 = 4"
+  },
+  {
+    "instruction": "Solve this mathematical expression:",
+    "input": "520 / 40",
+    "output": "520 / 40 = 13"
+  }
+]

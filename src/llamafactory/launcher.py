@@ -14,6 +14,9 @@
 
 from llamafactory.train.tuner import run_exp  # use absolute import
 
+# Import CalcTokenizer to ensure it's registered with AutoTokenizer
+from llamafactory.model.calc_tokenizer import CalcTokenizer
+
 
 def launch():
     run_exp()

@@ -18,6 +18,8 @@ import sys
 from copy import deepcopy
 from functools import partial
 
+# Import CalcTokenizer to ensure it's registered with AutoTokenizer
+from .model.calc_tokenizer import CalcTokenizer
 
 USAGE = (
     "-" * 70

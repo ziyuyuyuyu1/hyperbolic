@@ -11,8 +11,10 @@ from transformers import (
     AutoProcessor,
     AutoTokenizer,
     Qwen2Config,
-    Qwen2ForCausalLM
+    Qwen2ForCausalLM,
 )
+
+from transformers.models.qwen2.modeling_qwen2 import Qwen2RMSNorm
 
 def lift_to_lorentz(x, c=1.0):
     norm_sq = torch.sum(x * x, dim=-1, keepdim=True)  # (..., 1)
@@ -94,6 +96,122 @@ def poincare_distance(x, y, eps=1e-5):
     argument = torch.clamp(argument, min=1 + eps)
 
     return torch.acosh(argument).squeeze(-1)
+
+
+################
+
+def poincare_log_map(x, c=1.0):
+    """
+    Logarithmic map from Poincaré ball to tangent space at origin.
+    Args:
+        x: Points in Poincaré ball, shape (..., dim)
+        c: Curvature parameter (default: 1.0)
+    Returns:
+        Points in tangent space, shape (..., dim)
+    """
+    x_norm = torch.norm(x, dim=-1, keepdim=True)
+    # Handle zero norm case
+    x_norm = torch.clamp(x_norm, min=1e-5)
+    
+    # Convert c to tensor if it's a float
+    if isinstance(c, float):
+        c = torch.tensor(c, device=x.device, dtype=x.dtype)
+    
+    log_map = torch.arctanh(torch.sqrt(c) * x_norm) * x / x_norm / torch.sqrt(c)
+    
+    return log_map
+
+def poincare_exp_map(v, c=1.0):
+    """
+    Exponential map from tangent space to Poincaré ball.
+    Args:
+        v: Points in tangent space, shape (..., dim)
+        c: Curvature parameter (default: 1.0)
+    Returns:
+        Points in Poincaré ball, shape (..., dim)
+    """
+    # Compute the norm of the tangent vector
+    v_norm = torch.norm(v, dim=-1, keepdim=True)
+    # Handle zero norm case
+    v_norm = torch.clamp(v_norm, min=1e-5)
+    
+    # Convert c to tensor if it's a float
+    if isinstance(c, float):
+        c = torch.tensor(c, device=v.device, dtype=v.dtype)
+    
+    exp_v = torch.tanh(torch.sqrt(c) * v_norm) * v / v_norm / torch.sqrt(c)
+    
+    return exp_v
+
+def remove_all_norms(model):
+    """
+    Remove all normalization layers from the model and replace them with Identity.
+    Args:
+        model: The model to modify
+    """
+    for name, module in model.named_modules():
+        if isinstance(module, (Qwen2RMSNorm)):
+            # Replace with Identity
+            parent_name = '.'.join(name.split('.')[:-1])
+            child_name = name.split('.')[-1]
+            if parent_name:
+                parent_module = model.get_submodule(parent_name)
+                setattr(parent_module, child_name, nn.Identity())
+            else:
+                setattr(model, child_name, nn.Identity())
+            print(f"Replaced {name} with Identity")
+
+class PoincareLogExpDistanceHead(nn.Module):
+    def __init__(self, embedding_weight, eps=1e-2, scale=False, hidden_dim=None):
+        super().__init__()
+        print('---------------- PoincareLogExpDistanceHead initialized ---------------')
+        self.weight = embedding_weight  # shape (vocab_size, hidden_dim)
+        self.eps = eps  # Small epsilon to prevent numerical issues
+        # trainable scale parameter
+        self.use_scale = scale
+        if scale:
+            self.hidden_state_scale = nn.Parameter(torch.tensor(0.005))
+            self.logit_scale = nn.Parameter(torch.tensor(1.0))
+        
+        # Transformation layer in tangent space
+        if hidden_dim is None:
+            hidden_dim = embedding_weight.shape[1]
+        self.tangent_transform = nn.Linear(hidden_dim, hidden_dim)
+        
+        # Initialize the transformation layer
+        nn.init.xavier_uniform_(self.tangent_transform.weight)
+
+    def forward(self, hidden_states):
+        # Step 1: Apply scaling if enabled
+        batch_size, seq_len, hidden_dim = hidden_states.size()
+        hidden_states = hidden_states.view(-1, hidden_dim)
+        if self.use_scale:
+            hidden_states = hidden_states * self.hidden_state_scale
+        
+        # Step 2: Apply transformation in tangent space
+        hidden_states_transformed = self.tangent_transform(hidden_states)
+
+        # Step 3: Apply exponential map to Poincaré ball
+        hidden_states_exp = poincare_exp_map(hidden_states_transformed)
+        
+        # Step 4: Project vocabulary embeddings to Poincaré ball
+        vocab_embeddings_poincare = poincare_exp_map(self.weight)
+        
+        # Step 5: Compute Poincaré distances
+        distances = poincare_distance(
+            hidden_states_exp.unsqueeze(1),
+            vocab_embeddings_poincare.unsqueeze(0),
+            eps=self.eps
+        )
+
+        logits = -distances  # Negate to convert distance to similarity
+        logits = logits.view(batch_size, seq_len, -1)  # Reshape back to (batch, seq_len, vocab_size)
+        if self.use_scale:
+            logits = logits * self.logit_scale  # Apply the scale parameter
+        return logits
+
+################
+
 
 class LorentzDistanceHead(nn.Module):
     def __init__(self, embedding_weight, eps=1e-2, scale=False):
@@ -248,81 +366,182 @@ class LorentzWoNormForCausalLM(Qwen2ForCausalLM):
 AutoConfig.register("lorentz_wo_norm_config", LorentzWoNormConfig)
 AutoModelForCausalLM.register(LorentzWoNormConfig, LorentzWoNormForCausalLM)
 
+################
+
+class PoincareLogExpConfig(Qwen2Config):
+    """
+    Custom configuration for Qwen2 model with Poincaré log-exp distance head.
+    """
+    model_type = "poincare_log_exp_config"
+
+class PoincareLogExpForCausalLM(Qwen2ForCausalLM):
+    config_class = PoincareLogExpConfig
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.lm_head = PoincareLogExpDistanceHead(self.get_input_embeddings().weight, scale=True)
+
+AutoConfig.register("poincare_log_exp_config", PoincareLogExpConfig)
+AutoModelForCausalLM.register(PoincareLogExpConfig, PoincareLogExpForCausalLM)
+
+class PoincareLogExpWoNormConfig(Qwen2Config):
+    """
+    Custom configuration for Qwen2 model with Poincaré log-exp distance head without final norm.
+    """
+    model_type = "poincare_log_exp_wo_norm_config"
+
+class PoincareLogExpWoNormForCausalLM(Qwen2ForCausalLM):
+    config_class = PoincareLogExpWoNormConfig
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.lm_head = PoincareLogExpDistanceHead(self.get_input_embeddings().weight, scale=True)
+        self.model.norm = nn.Identity()
+
+AutoConfig.register("poincare_log_exp_wo_norm_config", PoincareLogExpWoNormConfig)
+AutoModelForCausalLM.register(PoincareLogExpWoNormConfig, PoincareLogExpWoNormForCausalLM)
+
+class PoincareLogExpAllWoNormConfig(Qwen2Config):
+    """
+    Custom configuration for Qwen2 model with Poincaré log-exp distance head and all norm layers removed.
+    """
+    model_type = "poincare_log_exp_all_wo_norm_config"
+
+class PoincareLogExpAllWoNormForCausalLM(Qwen2ForCausalLM):
+    config_class = PoincareLogExpAllWoNormConfig
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.lm_head = PoincareLogExpDistanceHead(self.get_input_embeddings().weight, scale=True)
+        # Remove all normalization layers from the entire model
+        remove_all_norms(self)
+
+AutoConfig.register("poincare_log_exp_all_wo_norm_config", PoincareLogExpAllWoNormConfig)
+AutoModelForCausalLM.register(PoincareLogExpAllWoNormConfig, PoincareLogExpAllWoNormForCausalLM)
+
+################
+
 if __name__ == "__main__":
-    # # Example save 
-    # model_name = "Qwen/Qwen2.5-0.5B"
-    # tokenizer = AutoTokenizer.from_pretrained(model_name)
-    # model = LorentzWoNormForCausalLM.from_pretrained(
-    #     model_name,
-    #     torch_dtype="auto",
-    #     device_map="auto"
-    # )
-
-    # model.lm_head.hidden_state_scale = nn.Parameter(torch.tensor(0.01, dtype=model.dtype).to(model.device))
-    # model.lm_head.logit_scale = nn.Parameter(torch.tensor(1.0, dtype=model.dtype).to(model.device))
-
-    # tokenizer.save_pretrained("hyperbolic_model/poincare_wo_norm_proj_scale")
-
-    # print(model.lm_head)
-    # print(model.model.norm)
-    # print(model.lm_head.hidden_state_scale)
-    # print(model.lm_head.logit_scale)
-    # print(model.lm_head.weight- model.get_input_embeddings().weight)
-    # assert torch.allclose(model.lm_head.weight, model.get_input_embeddings().weight, atol=1e-5), "lm_head weight should be same as input embeddings weight"
-    # print("Model loaded successfully with lorentz norm head.")
-
-    # model.save_pretrained("hyperbolic_model/lorentz_wo_norm_scale")
-
-    # ----------------------------------------
-
-    # Example usage
-    # model_name = "output/poincare_wo_norm_scale"
-    # model_name = "hyperbolic_model/poincare_wo_norm"
-    # model_name = "Qwen/Qwen2.5-0.5B"
-    model_name = "saves/poincare/full/pretrain_lr_large/"
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = PoincareWoNormForCausalLM.from_pretrained(
-        model_name,
-        torch_dtype="auto",
-        device_map="auto"
+    # Import the CalcTokenizer
+    import sys
+    import os
+    # Add the src directory to the path to import calc_tokenizer
+    sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+    from calc_tokenizer import CalcTokenizer
+    
+    # Initialize the CalcTokenizer
+    tokenizer = CalcTokenizer()
+    print(f"Tokenizer vocab size: {tokenizer.vocab_size}")
+    
+    # Create a randomly initialized model configuration
+    from transformers import Qwen2Config
+    
+    # Very small model configuration for simple arithmetic task
+    config = Qwen2Config(
+        vocab_size=tokenizer.vocab_size,
+        hidden_size=128,  # Much smaller hidden size
+        intermediate_size=256,  # Smaller intermediate size
+        num_hidden_layers=4,  # Fewer layers
+        num_attention_heads=4,  # Fewer attention heads
+        num_key_value_heads=4,  # Required for Qwen2
+        max_position_embeddings=64,  # Shorter sequences (a op b = c is short)
+        pad_token_id=tokenizer.pad_token_id,
+        bos_token_id=tokenizer.bos_token_id,
+        eos_token_id=tokenizer.eos_token_id,
+        tie_word_embeddings=True,  # Important for hyperbolic models
+        use_cache=False,  # Disable cache for training
+        attention_dropout=0.0,  # No dropout for deterministic behavior
+        hidden_dropout=0.0,  # No dropout for deterministic behavior
+        rope_theta=10000.0,  # Default RoPE theta
+        use_sliding_window=False,  # Disable sliding window attention
+        sliding_window=4096,  # Default sliding window size
+        attention_bias=False,  # No attention bias
+        max_window_layers=0,  # No window layers
     )
-    # model = LorentzWoNormForCausalLM.from_pretrained(
-    #     model_name,
-    #     torch_dtype="auto",
-    #     device_map="auto"
+    
+    # Alternative: Even smaller model for testing
+    # config = Qwen2Config(
+    #     vocab_size=tokenizer.vocab_size,
+    #     hidden_size=64,  # Very small
+    #     intermediate_size=128,
+    #     num_hidden_layers=2,  # Just 2 layers
+    #     num_attention_heads=2,
+    #     num_key_value_heads=2,
+    #     max_position_embeddings=32,
+    #     pad_token_id=tokenizer.pad_token_id,
+    #     bos_token_id=tokenizer.bos_token_id,
+    #     eos_token_id=tokenizer.eos_token_id,
+    #     tie_word_embeddings=True,
+    #     use_cache=False,
+    #     attention_dropout=0.0,
+    #     hidden_dropout=0.0,
+    #     rope_theta=10000.0,
+    #     use_sliding_window=False,
+    #     sliding_window=4096,
+    #     attention_bias=False,
+    #     max_window_layers=0,
     # )
-    # model = Qwen2ForCausalLM.from_pretrained(
-    #     model_name,
-    #     torch_dtype="auto",
-    #     device_map="auto"
-    # )
-
-    # model.lm_head.hidden_state_scale = nn.Parameter(torch.tensor(0.005, dtype=model.dtype).to(model.device))
-    # model.lm_head.logit_scale = nn.Parameter(torch.tensor(1.0, dtype=model.dtype).to(model.device))
-
-    # print(model.lm_head.weight - model.get_input_embeddings().weight)
-    # print(model.lm_head.hidden_state_scale, model.lm_head.logit_scale)
-
-    # prepare the model input
-    prompt = "Give me a short introduction to large language models."
-    messages = [
-        {"role": "user", "content": prompt}
-    ]
-    text = tokenizer.apply_chat_template(
-        messages,
-        tokenize=False,
-        add_generation_prompt=True,
-        enable_thinking=True # Switches between thinking and non-thinking modes. Default is True.
-        # enable_thinking=False  # Set to False to disable thinking mode
-    )
-    model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
-
-    # conduct text completion
-    generated_ids = model.generate(
-        **model_inputs,
-        max_new_tokens=100,
-    )
-    output_ids = generated_ids[0][len(model_inputs.input_ids[0]):].tolist() 
-
-    # the result will begin with thinking content in <think></think> tags, followed by the actual response
-    print(tokenizer.decode(output_ids, skip_special_tokens=True))
+    
+    # Choose one of the following randomly initialized models:
+    
+    # Standard Poincaré log-exp model
+    # model = PoincareLogExpForCausalLM(config)
+    
+    # Version without final norm only
+    # model = PoincareLogExpWoNormForCausalLM(config)
+    
+    # Version with ALL norm layers removed (recommended for hyperbolic training)
+    model = PoincareLogExpAllWoNormForCausalLM(config)
+    
+    print("Randomly initialized model created successfully with Poincaré log-exp distance head.")
+    print(f"Model config: vocab_size={config.vocab_size}, hidden_size={config.hidden_size}")
+    print(f"Tangent transform layer: {model.lm_head.tangent_transform}")
+    print(f"Model parameters: {sum(p.numel() for p in model.parameters()):,}")
+    
+    # Test the model with a simple calculation
+    test_input = "2 + 3 ="
+    print(f"\nTesting with input: '{test_input}'")
+    
+    # Tokenize the input
+    inputs = tokenizer(test_input, return_tensors="pt", add_special_tokens=True)
+    print(f"Tokenized input: {inputs.input_ids}")
+    print(f"Tokens: {tokenizer.convert_ids_to_tokens(inputs.input_ids[0])}")
+    
+    # Test forward pass
+    with torch.no_grad():
+        try:
+            outputs = model(**inputs)
+            logits = outputs.logits
+            print(f"Output logits shape: {logits.shape}")
+            
+            # Get the last token's logits
+            last_logits = logits[0, -1, :]
+            print(f"Last token logits shape: {last_logits.shape}")
+            
+            # Get top 5 predictions
+            top_k = 5
+            top_probs, top_indices = torch.topk(torch.softmax(last_logits, dim=-1), top_k)
+            print(f"\nTop {top_k} predictions for next token:")
+            for i, (prob, idx) in enumerate(zip(top_probs, top_indices)):
+                token = tokenizer.convert_ids_to_tokens(idx.item())
+                print(f"  {i+1}. '{token}' (prob: {prob:.4f})")
+        except Exception as e:
+            print(f"Error during forward pass: {e}")
+            print("This might be due to model configuration issues.")
+    
+    # Example of how to save the model and tokenizer for training
+    print(f"\nTo train with LLaMA Factory, save the model and tokenizer:")
+    print(f"model.save_pretrained('hyperbolic_models/poincare_log_exp_all_wo_norm')")
+    print(f"tokenizer.save_pretrained('hyperbolic_models/poincare_log_exp_all_wo_norm')")
+    
+    # Uncomment the following lines to actually save:
+    model.save_pretrained('hyperbolic_models/poincare_log_exp_all_wo_norm')
+    tokenizer.save_pretrained('hyperbolic_models/poincare_log_exp_all_wo_norm')
+    print("Model and tokenizer saved to hyperbolic_models/poincare_log_exp_all_wo_norm")
+    
+    # Example training configuration for LLaMA Factory:
+    print(f"\nExample LLaMA Factory training config:")
+    print(f"model_name_or_path: hyperbolic_models/poincare_log_exp_all_wo_norm")
+    print(f"dataset_path: data/calc_pretrain.json")
+    print(f"dataset_name: calc_pretrain")
+    print(f"template: identity")  # Since CalcTokenizer handles its own formatting
