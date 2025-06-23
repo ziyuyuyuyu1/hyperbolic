@@ -167,18 +167,19 @@ class PoincareLogExpDistanceHead(nn.Module):
         print('---------------- PoincareLogExpDistanceHead initialized ---------------')
         self.weight = embedding_weight  # shape (vocab_size, hidden_dim)
         self.eps = eps  # Small epsilon to prevent numerical issues
-        # trainable scale parameter
         self.use_scale = scale
         if scale:
             self.hidden_state_scale = nn.Parameter(torch.tensor(0.005))
             self.logit_scale = nn.Parameter(torch.tensor(1.0))
         
-        # Transformation layer in tangent space
+        # Use hidden_dim from config if not provided
         if hidden_dim is None:
-            hidden_dim = embedding_weight.shape[1]
+            # Try to get from embedding_weight, fallback to 128 (or raise error)
+            if hasattr(embedding_weight, "shape") and len(embedding_weight.shape) == 2:
+                hidden_dim = embedding_weight.shape[1]
+            else:
+                hidden_dim = 128  # or raise an error, or get from config
         self.tangent_transform = nn.Linear(hidden_dim, hidden_dim)
-        
-        # Initialize the transformation layer
         nn.init.xavier_uniform_(self.tangent_transform.weight)
 
     def forward(self, hidden_states):
