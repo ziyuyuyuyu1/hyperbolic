@@ -42,7 +42,7 @@ from .model_utils.unsloth import load_unsloth_pretrained_model
 from .model_utils.valuehead import load_valuehead_params
 from .patcher import patch_config, patch_model, patch_processor, patch_tokenizer, patch_valuehead_model
 
-from .hyperbolic_utils import PoincareNormForCausalLM, PoincareWoNormForCausalLM
+from .hyperbolic_utils import PoincareNormForCausalLM, PoincareWoNormForCausalLM, PoincareLogExpAllWoNormForCausalLM, PoincareLogExpWoNormForCausalLM, PoincareLogExpForCausalLM
 
 # Import CalcTokenizer to ensure it's registered with AutoTokenizer
 from .calc_tokenizer import CalcTokenizer
