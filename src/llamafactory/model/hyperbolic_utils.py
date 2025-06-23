@@ -422,126 +422,74 @@ AutoModelForCausalLM.register(PoincareLogExpAllWoNormConfig, PoincareLogExpAllWo
 ################
 
 if __name__ == "__main__":
-    # Import the CalcTokenizer
+    # --- Old wo_norm block commented out ---
+    '''
     import sys
     import os
-    # Add the src directory to the path to import calc_tokenizer
     sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
     from calc_tokenizer import CalcTokenizer
-    
-    # Initialize the CalcTokenizer
     tokenizer = CalcTokenizer()
     print(f"Tokenizer vocab size: {tokenizer.vocab_size}")
-    
-    # Create a randomly initialized model configuration
     from transformers import Qwen2Config
-    
-    # Very small model configuration for simple arithmetic task
-    config = Qwen2Config(
+    config = PoincareLogExpAllWoNormConfig(
         vocab_size=tokenizer.vocab_size,
-        hidden_size=128,  # Much smaller hidden size
-        intermediate_size=256,  # Smaller intermediate size
-        num_hidden_layers=4,  # Fewer layers
-        num_attention_heads=4,  # Fewer attention heads
-        num_key_value_heads=4,  # Required for Qwen2
-        max_position_embeddings=64,  # Shorter sequences (a op b = c is short)
+        hidden_size=128,
+        intermediate_size=256,
+        num_hidden_layers=4,
+        num_attention_heads=4,
+        num_key_value_heads=4,
+        max_position_embeddings=64,
         pad_token_id=tokenizer.pad_token_id,
         bos_token_id=tokenizer.bos_token_id,
         eos_token_id=tokenizer.eos_token_id,
-        tie_word_embeddings=True,  # Important for hyperbolic models
-        use_cache=False,  # Disable cache for training
-        attention_dropout=0.0,  # No dropout for deterministic behavior
-        hidden_dropout=0.0,  # No dropout for deterministic behavior
-        rope_theta=10000.0,  # Default RoPE theta
-        use_sliding_window=False,  # Disable sliding window attention
-        sliding_window=4096,  # Default sliding window size
-        attention_bias=False,  # No attention bias
-        max_window_layers=0,  # No window layers
+        tie_word_embeddings=True,
+        use_cache=False,
+        attention_dropout=0.0,
+        hidden_dropout=0.0,
+        rope_theta=10000.0,
+        use_sliding_window=False,
+        sliding_window=4096,
+        attention_bias=False,
+        max_window_layers=0,
     )
-    
-    # Alternative: Even smaller model for testing
-    # config = Qwen2Config(
-    #     vocab_size=tokenizer.vocab_size,
-    #     hidden_size=64,  # Very small
-    #     intermediate_size=128,
-    #     num_hidden_layers=2,  # Just 2 layers
-    #     num_attention_heads=2,
-    #     num_key_value_heads=2,
-    #     max_position_embeddings=32,
-    #     pad_token_id=tokenizer.pad_token_id,
-    #     bos_token_id=tokenizer.bos_token_id,
-    #     eos_token_id=tokenizer.eos_token_id,
-    #     tie_word_embeddings=True,
-    #     use_cache=False,
-    #     attention_dropout=0.0,
-    #     hidden_dropout=0.0,
-    #     rope_theta=10000.0,
-    #     use_sliding_window=False,
-    #     sliding_window=4096,
-    #     attention_bias=False,
-    #     max_window_layers=0,
-    # )
-    
-    # Choose one of the following randomly initialized models:
-    
-    # Standard Poincaré log-exp model
-    # model = PoincareLogExpForCausalLM(config)
-    
-    # Version without final norm only
-    # model = PoincareLogExpWoNormForCausalLM(config)
-    
-    # Version with ALL norm layers removed (recommended for hyperbolic training)
     model = PoincareLogExpAllWoNormForCausalLM(config)
-    
-    print("Randomly initialized model created successfully with Poincaré log-exp distance head.")
-    print(f"Model config: vocab_size={config.vocab_size}, hidden_size={config.hidden_size}")
-    print(f"Tangent transform layer: {model.lm_head.tangent_transform}")
-    print(f"Model parameters: {sum(p.numel() for p in model.parameters()):,}")
-    
-    # Test the model with a simple calculation
-    test_input = "2 + 3 ="
-    print(f"\nTesting with input: '{test_input}'")
-    
-    # Tokenize the input
-    inputs = tokenizer(test_input, return_tensors="pt", add_special_tokens=True)
-    print(f"Tokenized input: {inputs.input_ids}")
-    print(f"Tokens: {tokenizer.convert_ids_to_tokens(inputs.input_ids[0])}")
-    
-    # Test forward pass
-    with torch.no_grad():
-        try:
-            outputs = model(**inputs)
-            logits = outputs.logits
-            print(f"Output logits shape: {logits.shape}")
-            
-            # Get the last token's logits
-            last_logits = logits[0, -1, :]
-            print(f"Last token logits shape: {last_logits.shape}")
-            
-            # Get top 5 predictions
-            top_k = 5
-            top_probs, top_indices = torch.topk(torch.softmax(last_logits, dim=-1), top_k)
-            print(f"\nTop {top_k} predictions for next token:")
-            for i, (prob, idx) in enumerate(zip(top_probs, top_indices)):
-                token = tokenizer.convert_ids_to_tokens(idx.item())
-                print(f"  {i+1}. '{token}' (prob: {prob:.4f})")
-        except Exception as e:
-            print(f"Error during forward pass: {e}")
-            print("This might be due to model configuration issues.")
-    
-    # Example of how to save the model and tokenizer for training
-    print(f"\nTo train with LLaMA Factory, save the model and tokenizer:")
-    print(f"model.save_pretrained('hyperbolic_models/poincare_log_exp_all_wo_norm')")
-    print(f"tokenizer.save_pretrained('hyperbolic_models/poincare_log_exp_all_wo_norm')")
-    
-    # Uncomment the following lines to actually save:
     model.save_pretrained('hyperbolic_models/poincare_log_exp_all_wo_norm')
     tokenizer.save_pretrained('hyperbolic_models/poincare_log_exp_all_wo_norm')
     print("Model and tokenizer saved to hyperbolic_models/poincare_log_exp_all_wo_norm")
-    
-    # Example training configuration for LLaMA Factory:
-    print(f"\nExample LLaMA Factory training config:")
-    print(f"model_name_or_path: hyperbolic_models/poincare_log_exp_all_wo_norm")
-    print(f"dataset_path: data/calc_pretrain.json")
-    print(f"dataset_name: calc_pretrain")
-    print(f"template: identity")  # Since CalcTokenizer handles its own formatting
+    '''
+
+    # --- New with-norm block ---
+    import sys
+    import os
+    sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+    from calc_tokenizer import CalcTokenizer
+    tokenizer = CalcTokenizer()
+    print(f"Tokenizer vocab size: {tokenizer.vocab_size}")
+    from transformers import Qwen2Config
+    config = PoincareLogExpConfig(
+        vocab_size=tokenizer.vocab_size,
+        hidden_size=128,
+        intermediate_size=256,
+        num_hidden_layers=4,
+        num_attention_heads=4,
+        num_key_value_heads=4,
+        max_position_embeddings=64,
+        pad_token_id=tokenizer.pad_token_id,
+        bos_token_id=tokenizer.bos_token_id,
+        eos_token_id=tokenizer.eos_token_id,
+        tie_word_embeddings=True,
+        use_cache=False,
+        attention_dropout=0.0,
+        hidden_dropout=0.0,
+        rope_theta=10000.0,
+        use_sliding_window=False,
+        sliding_window=4096,
+        attention_bias=False,
+        max_window_layers=0,
+    )
+    model = PoincareLogExpForCausalLM(config)
+    # Ensure model_type is set correctly before saving
+    model.config.model_type = "poincare_log_exp"
+    model.save_pretrained('hyperbolic_models/poincare_log_exp')
+    tokenizer.save_pretrained('hyperbolic_models/poincare_log_exp')
+    print("Model and tokenizer saved to hyperbolic_models/poincare_log_exp")
