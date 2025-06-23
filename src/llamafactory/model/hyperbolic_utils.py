@@ -87,10 +87,11 @@ def poincare_distance(x, y, eps=1e-5):
     argument = 1 + 2 * diff_norm_sq / (denom + eps)
 
     # check 1 - x_norm_sq > 0
-    if torch.any(x_norm_sq >= 1 - eps):
-        print("Warning: x_norm_sq >= 1 - eps, clamping to avoid NaNs.")
-        print("x_norm_sq values:", x_norm_sq[x_norm_sq >= 1 - eps])
-        assert False, "Norm of x is too large, should be less than 1 - eps."
+    if torch.any(x_norm_sq > 1) or torch.any(y_norm_sq > 1):
+        print("Warning: x_norm_sq >= 1 or y_norm_sq >= 1, clamping to avoid NaNs.")
+        print("x_norm_sq values:", x_norm_sq[x_norm_sq >= 1])
+        print("y_norm_sq values:", y_norm_sq[y_norm_sq >= 1])
+        assert False, "Norm of x or y is too large, should be less than 1."
 
     # Clamp argument to be >= 1 to avoid NaNs in arccosh
     argument = torch.clamp(argument, min=1 + eps)
@@ -169,7 +170,7 @@ class PoincareLogExpDistanceHead(nn.Module):
         self.eps = eps  # Small epsilon to prevent numerical issues
         self.use_scale = scale
         if scale:
-            self.hidden_state_scale = nn.Parameter(torch.tensor(0.005))
+            self.hidden_state_scale = nn.Parameter(torch.tensor(1.0))
             self.logit_scale = nn.Parameter(torch.tensor(1.0))
         
         # Use hidden_dim from config if not provided
@@ -193,10 +194,10 @@ class PoincareLogExpDistanceHead(nn.Module):
         hidden_states_transformed = self.tangent_transform(hidden_states)
 
         # Step 3: Apply exponential map to Poincaré ball
-        hidden_states_exp = poincare_exp_map(hidden_states_transformed)
+        hidden_states_exp = poincare_exp_map(hidden_states_transformed) # (batch_size * seq_len, hidden_dim)
         
         # Step 4: Project vocabulary embeddings to Poincaré ball
-        vocab_embeddings_poincare = poincare_exp_map(self.weight)
+        vocab_embeddings_poincare = poincare_exp_map(self.weight) # (vocab_size, hidden_dim)
         
         # Step 5: Compute Poincaré distances
         distances = poincare_distance(
@@ -381,6 +382,7 @@ class PoincareLogExpForCausalLM(Qwen2ForCausalLM):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.lm_head = PoincareLogExpDistanceHead(self.get_input_embeddings().weight, scale=True)
+        nn.init.xavier_uniform_(self.model.embed_tokens.weight)
 
 AutoConfig.register("poincare_log_exp_config", PoincareLogExpConfig)
 AutoModelForCausalLM.register(PoincareLogExpConfig, PoincareLogExpForCausalLM)
@@ -398,6 +400,7 @@ class PoincareLogExpWoNormForCausalLM(Qwen2ForCausalLM):
         super().__init__(*args, **kwargs)
         self.lm_head = PoincareLogExpDistanceHead(self.get_input_embeddings().weight, scale=True)
         self.model.norm = nn.Identity()
+        nn.init.xavier_uniform_(self.model.embed_tokens.weight)
 
 AutoConfig.register("poincare_log_exp_wo_norm_config", PoincareLogExpWoNormConfig)
 AutoModelForCausalLM.register(PoincareLogExpWoNormConfig, PoincareLogExpWoNormForCausalLM)
@@ -416,6 +419,7 @@ class PoincareLogExpAllWoNormForCausalLM(Qwen2ForCausalLM):
         self.lm_head = PoincareLogExpDistanceHead(self.get_input_embeddings().weight, scale=True)
         # Remove all normalization layers from the entire model
         remove_all_norms(self)
+        nn.init.xavier_uniform_(self.model.embed_tokens.weight)
 
 AutoConfig.register("poincare_log_exp_all_wo_norm_config", PoincareLogExpAllWoNormConfig)
 AutoModelForCausalLM.register(PoincareLogExpAllWoNormConfig, PoincareLogExpAllWoNormForCausalLM)
@@ -424,7 +428,7 @@ AutoModelForCausalLM.register(PoincareLogExpAllWoNormConfig, PoincareLogExpAllWo
 
 if __name__ == "__main__":
     # --- Old wo_norm block commented out ---
-    '''
+    
     import sys
     import os
     sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
@@ -457,40 +461,40 @@ if __name__ == "__main__":
     model.save_pretrained('hyperbolic_models/poincare_log_exp_all_wo_norm')
     tokenizer.save_pretrained('hyperbolic_models/poincare_log_exp_all_wo_norm')
     print("Model and tokenizer saved to hyperbolic_models/poincare_log_exp_all_wo_norm")
-    '''
+    
 
-    # --- New with-norm block ---
-    import sys
-    import os
-    sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
-    from calc_tokenizer import CalcTokenizer
-    tokenizer = CalcTokenizer()
-    print(f"Tokenizer vocab size: {tokenizer.vocab_size}")
-    from transformers import Qwen2Config
-    config = PoincareLogExpConfig(
-        vocab_size=tokenizer.vocab_size,
-        hidden_size=128,
-        intermediate_size=256,
-        num_hidden_layers=4,
-        num_attention_heads=4,
-        num_key_value_heads=4,
-        max_position_embeddings=64,
-        pad_token_id=tokenizer.pad_token_id,
-        bos_token_id=tokenizer.bos_token_id,
-        eos_token_id=tokenizer.eos_token_id,
-        tie_word_embeddings=True,
-        use_cache=False,
-        attention_dropout=0.0,
-        hidden_dropout=0.0,
-        rope_theta=10000.0,
-        use_sliding_window=False,
-        sliding_window=4096,
-        attention_bias=False,
-        max_window_layers=0,
-    )
-    model = PoincareLogExpForCausalLM(config)
-    # Ensure model_type is set correctly before saving
-    model.config.model_type = "poincare_log_exp"
-    model.save_pretrained('hyperbolic_models/poincare_log_exp')
-    tokenizer.save_pretrained('hyperbolic_models/poincare_log_exp')
-    print("Model and tokenizer saved to hyperbolic_models/poincare_log_exp")
+    # # --- New with-norm block ---
+    # import sys
+    # import os
+    # sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+    # from calc_tokenizer import CalcTokenizer
+    # tokenizer = CalcTokenizer()
+    # print(f"Tokenizer vocab size: {tokenizer.vocab_size}")
+    # from transformers import Qwen2Config
+    # config = PoincareLogExpConfig(
+    #     vocab_size=tokenizer.vocab_size,
+    #     hidden_size=128,
+    #     intermediate_size=256,
+    #     num_hidden_layers=4,
+    #     num_attention_heads=4,
+    #     num_key_value_heads=4,
+    #     max_position_embeddings=64,
+    #     pad_token_id=tokenizer.pad_token_id,
+    #     bos_token_id=tokenizer.bos_token_id,
+    #     eos_token_id=tokenizer.eos_token_id,
+    #     tie_word_embeddings=True,
+    #     use_cache=False,
+    #     attention_dropout=0.0,
+    #     hidden_dropout=0.0,
+    #     rope_theta=10000.0,
+    #     use_sliding_window=False,
+    #     sliding_window=4096,
+    #     attention_bias=False,
+    #     max_window_layers=0,
+    # )
+    # model = PoincareLogExpForCausalLM(config)
+    # # Ensure model_type is set correctly before saving
+    # model.config.model_type = "poincare_log_exp"
+    # model.save_pretrained('hyperbolic_models/poincare_log_exp')
+    # tokenizer.save_pretrained('hyperbolic_models/poincare_log_exp')
+    # print("Model and tokenizer saved to hyperbolic_models/poincare_log_exp")
