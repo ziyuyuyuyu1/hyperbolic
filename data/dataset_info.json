@@ -14,11 +14,23 @@
       "prompt": "text"
     }
   },
+  "calc_pm_pretrain": {
+    "file_name": "calc_pm_pretrain.json",
+    "columns": {
+      "prompt": "text"
+    }
+  },
   "calc_pretrain_test": {
     "file_name": "calc_pretrain_demo.json",
     "columns": {
       "prompt": "text"
     }
+  },
+  "calc_sft": {
+    "file_name": "calc_sft.json"
+  },
+  "calc_sft_test": {
+    "file_name": "calc_sft_demo.json"
   },
   "glaive_toolcall_en_demo": {
     "file_name": "glaive_toolcall_en_demo.json",

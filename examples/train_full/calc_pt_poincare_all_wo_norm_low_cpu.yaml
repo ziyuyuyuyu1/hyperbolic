@@ -6,8 +6,7 @@ trust_remote_code: true
 stage: pt
 do_train: true
 finetuning_type: full
-# deepspeed: examples/deepspeed/ds_z3_config.json  # choices: [ds_z0_config.json, ds_z2_config.json, ds_z3_config.json]
-deepspeed: examples/deepspeed/ds_z2_config.json
+deepspeed: examples/deepspeed/ds_z2_low_cpu_config.json  # Use Stage 2 for lower CPU usage
 
 ### dataset
 dataset: calc_pretrain
@@ -15,24 +14,24 @@ template: llama3
 cutoff_len: 64
 # max_samples: 1000
 overwrite_cache: true
-preprocessing_num_workers: null
-dataloader_num_workers: 0
+preprocessing_num_workers: 0  # Reduce CPU usage by disabling multiprocessing
+dataloader_num_workers: 0     # Reduce CPU usage by disabling multiprocessing
 streaming: false
 
 ### output
-output_dir: saves/poincare_log_exp_all_wo_norm/
+output_dir: saves/poincare_log_exp_all_wo_norm_low_cpu/
 logging_steps: 10
 save_steps: 5000
 plot_loss: true
 overwrite_output_dir: true
 save_only_model: false
-# report_to: none  # choices: [none, wandb, tensorboard, swanlab, mlflow]
-report_to: swanlab  # choices: [none, wandb, tensorboard, swanlab, mlflow]
+# report_to: none  # Disable reporting to reduce CPU usage
+report_to: none  # choices: [none, wandb, tensorboard, swanlab, mlflow]
 
 ### train
 per_device_train_batch_size: 8
 gradient_accumulation_steps: 2
-learning_rate: 5.0e-5
+learning_rate: 1.0e-4
 num_train_epochs: 10.0
 lr_scheduler_type: cosine
 warmup_ratio: 0.1
@@ -48,4 +47,4 @@ max_grad_norm: 3.0
 # val_size: 0.1
 # per_device_eval_batch_size: 1
 # eval_strategy: steps
-# eval_steps: 500
+# eval_steps: 500 

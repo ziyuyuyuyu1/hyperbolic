@@ -50,19 +50,35 @@ def lorentz_distance(x, y, eps=1e-5, c=1.0):
     return dist
 
 def project_to_poincare_ball(v, eps=1e-5, print_norm=False):
+    # Ensure inputs are finite
+    if not torch.isfinite(v).all():
+        print("WARNING: Non-finite values detected in project_to_poincare_ball input!")
+        return torch.zeros_like(v)
+    
     norm = torch.norm(v, dim=-1, keepdim=True)
-    max_norm = 0.96 - eps
-    scale = torch.clamp(max_norm / (norm + 1e-5), max=1.0)
+    
+    # Check for NaN in norm calculation
+    if torch.isnan(norm).any():
+        return torch.zeros_like(v)
+    
+    # Use more conservative projection bounds
+    max_norm = 0.96 - eps  
+    scale = torch.clamp(max_norm / (norm + 1e-5), max=1.0)  # Better epsilon
+    
+    # Check for invalid scale
+    if torch.isnan(scale).any() or torch.isinf(scale).any():
+        return torch.zeros_like(v)
+    
     if print_norm:
         print(norm)
-    # # assert False
-    # if torch.any(torch.norm(v*scale, dim=-1) >= 1 - eps):
-    #     print("Warning: projected vector norm >= 1 - eps, clamping to avoid NaNs.")
-    #     print("Projected vector norms:", torch.norm(v*scale, dim=-1)[torch.norm(v*scale, dim=-1) >= 1 - eps])
-    #     print("v norms:", torch.norm(v, dim=-1)[torch.norm(v*scale, dim=-1) >= 1 - eps])
-    #     print("scale:", scale[torch.norm(v*scale, dim=-1) >= 1 - eps])
-    #     assert False
-    return v * scale
+    
+    result = v * scale
+    
+    # Check for invalid output
+    if torch.isnan(result).any() or torch.isinf(result).any():
+        return torch.zeros_like(v)
+    
+    return result
 
 def poincare_distance(x, y, eps=1e-5):
     """
@@ -75,28 +91,51 @@ def poincare_distance(x, y, eps=1e-5):
         Tensor of shape (...) with distances.
     """
     
+    # Ensure inputs are finite
+    if not torch.isfinite(x).all() or not torch.isfinite(y).all():
+        return torch.full_like(x[..., 0], float('inf'))
+    
     x_norm_sq = torch.sum(x * x, dim=-1, keepdim=True)  # (..., 1)
     y_norm_sq = torch.sum(y * y, dim=-1, keepdim=True)  # (..., 1)
-    # diff_norm_sq = torch.cdist(rearrange(x, 'b 1 d -> 1 b d'), y, p=2, compute_mode='use_mm_for_euclid_dist').squeeze(0).unsqueeze(-1)  # (..., 1)
+    
+    # Check for NaN in norm calculations
+    if torch.isnan(x_norm_sq).any() or torch.isnan(y_norm_sq).any():
+        return torch.full_like(x[..., 0], float('inf'))
+    
+    # Compute squared Euclidean distance more safely
     diff_norm_sq = torch.cdist(x.squeeze(1), y.squeeze(0), p=2, compute_mode='use_mm_for_euclid_dist').unsqueeze(-1)  # (..., 1)
     diff_norm_sq = torch.sum(diff_norm_sq * diff_norm_sq, dim=-1, keepdim=True)  # (..., 1)
+    
+    # Check for NaN in distance calculation
+    if torch.isnan(diff_norm_sq).any():
+        return torch.full_like(x[..., 0], float('inf'))
 
-    # return torch.acosh(diff_norm_sq - y_norm_sq + 1).squeeze(-1)
-
+    # Clamp norms to prevent numerical issues
+    x_norm_sq = torch.clamp(x_norm_sq, max=0.95)  # Prevent norm from getting too close to 1
+    y_norm_sq = torch.clamp(y_norm_sq, max=0.95)  # Prevent norm from getting too close to 1
+    
+    # Compute denominator with better numerical stability
     denom = (1 - x_norm_sq) * (1 - y_norm_sq)
-    argument = 1 + 2 * diff_norm_sq / (denom + eps)
-
-    # check 1 - x_norm_sq > 0
-    if torch.any(x_norm_sq > 1) or torch.any(y_norm_sq > 1):
-        print("Warning: x_norm_sq >= 1 or y_norm_sq >= 1, clamping to avoid NaNs.")
-        print("x_norm_sq values:", x_norm_sq[x_norm_sq >= 1])
-        print("y_norm_sq values:", y_norm_sq[y_norm_sq >= 1])
-        assert False, "Norm of x or y is too large, should be less than 1."
-
-    # Clamp argument to be >= 1 to avoid NaNs in arccosh
-    argument = torch.clamp(argument, min=1 + eps)
-
-    return torch.acosh(argument).squeeze(-1)
+    denom = torch.clamp(denom, min=eps)  # Ensure denominator is not too small
+    
+    # Compute argument with better bounds
+    argument = 1 + 2 * diff_norm_sq / denom
+    
+    # Clamp argument to valid range for arccosh
+    argument = torch.clamp(argument, min=1.0 + eps, max=1e6)  # Upper bound to prevent overflow
+    
+    # Check for invalid arguments
+    if torch.isnan(argument).any() or torch.isinf(argument).any():
+        return torch.full_like(x[..., 0], float('inf'))
+    
+    # Compute distance
+    distance = torch.acosh(argument).squeeze(-1)
+    
+    # Final check for valid output
+    if torch.isnan(distance).any() or torch.isinf(distance).any():
+        return torch.full_like(x[..., 0], float('inf'))
+    
+    return distance
 
 
 ################
@@ -112,7 +151,7 @@ def poincare_log_map(x, c=1.0):
     """
     x_norm = torch.norm(x, dim=-1, keepdim=True)
     # Handle zero norm case
-    x_norm = torch.clamp(x_norm, min=1e-5)
+    x_norm = torch.clamp(x_norm, min=1e-2)
     
     # Convert c to tensor if it's a float
     if isinstance(c, float):
@@ -131,16 +170,46 @@ def poincare_exp_map(v, c=1.0):
     Returns:
         Points in Poincaré ball, shape (..., dim)
     """
+    # Ensure inputs are finite
+    if not torch.isfinite(v).all():
+        return torch.zeros_like(v)
+    
     # Compute the norm of the tangent vector
     v_norm = torch.norm(v, dim=-1, keepdim=True)
-    # Handle zero norm case
-    v_norm = torch.clamp(v_norm, min=1e-5)
+    
+    # Check for NaN in norm calculation
+    if torch.isnan(v_norm).any():
+        return torch.zeros_like(v)
+    
+    # Handle zero norm case with better numerical stability
+    v_norm = torch.clamp(v_norm, min=1e-2, max=1e2)
     
     # Convert c to tensor if it's a float
     if isinstance(c, float):
         c = torch.tensor(c, device=v.device, dtype=v.dtype)
     
-    exp_v = torch.tanh(torch.sqrt(c) * v_norm) * v / v_norm / torch.sqrt(c)
+    # Ensure c is positive and finite
+    c = torch.clamp(c, min=1e-8, max=1e6)
+    
+    # Compute sqrt(c) safely
+    sqrt_c = torch.sqrt(c)
+    if torch.isnan(sqrt_c).any() or torch.isinf(sqrt_c).any():
+        return torch.zeros_like(v)
+    
+    # Compute tanh argument with bounds
+    tanh_arg = sqrt_c * v_norm
+    tanh_arg = torch.clamp(tanh_arg, min=-10.0, max=10.0)  # Prevent overflow in tanh
+    
+    # Check for invalid tanh argument
+    if torch.isnan(tanh_arg).any() or torch.isinf(tanh_arg).any():
+        return torch.zeros_like(v)
+    
+    # Compute exponential map with better numerical stability
+    exp_v = torch.tanh(tanh_arg) * v / v_norm / sqrt_c
+    
+    # Check for invalid output
+    if torch.isnan(exp_v).any() or torch.isinf(exp_v).any():
+        return torch.zeros_like(v)
     
     return exp_v
 
@@ -180,6 +249,8 @@ class PoincareLogExpDistanceHead(nn.Module):
                 hidden_dim = embedding_weight.shape[1]
             else:
                 hidden_dim = 128  # or raise an error, or get from config
+        
+        # Initialize tangent transform with smaller weights
         self.tangent_transform = nn.Linear(hidden_dim, hidden_dim)
         nn.init.xavier_uniform_(self.tangent_transform.weight)
 
@@ -187,17 +258,36 @@ class PoincareLogExpDistanceHead(nn.Module):
         # Step 1: Apply scaling if enabled
         batch_size, seq_len, hidden_dim = hidden_states.size()
         hidden_states = hidden_states.view(-1, hidden_dim)
+        
+        # Check for NaN in input
+        if torch.isnan(hidden_states).any():
+            return torch.zeros(batch_size, seq_len, self.weight.shape[0], device=hidden_states.device)
+        
         if self.use_scale:
             hidden_states = hidden_states * self.hidden_state_scale
         
         # Step 2: Apply transformation in tangent space
         hidden_states_transformed = self.tangent_transform(hidden_states)
+        
+        # Check for NaN after transformation
+        if torch.isnan(hidden_states_transformed).any():
+            return torch.zeros(batch_size, seq_len, self.weight.shape[0], device=hidden_states.device)
 
         # Step 3: Apply exponential map to Poincaré ball
         hidden_states_exp = poincare_exp_map(hidden_states_transformed) # (batch_size * seq_len, hidden_dim)
+        hidden_states_exp = project_to_poincare_ball(hidden_states_exp)
+        
+        # Check for NaN after exponential map
+        if torch.isnan(hidden_states_exp).any():
+            return torch.zeros(batch_size, seq_len, self.weight.shape[0], device=hidden_states.device)
         
         # Step 4: Project vocabulary embeddings to Poincaré ball
         vocab_embeddings_poincare = poincare_exp_map(self.weight) # (vocab_size, hidden_dim)
+        vocab_embeddings_poincare = project_to_poincare_ball(vocab_embeddings_poincare)
+        
+        # Check for NaN in vocabulary embeddings
+        if torch.isnan(vocab_embeddings_poincare).any():
+            return torch.zeros(batch_size, seq_len, self.weight.shape[0], device=hidden_states.device)
         
         # Step 5: Compute Poincaré distances
         distances = poincare_distance(
@@ -205,6 +295,10 @@ class PoincareLogExpDistanceHead(nn.Module):
             vocab_embeddings_poincare.unsqueeze(0),
             eps=self.eps
         )
+
+        # Check for NaN in distances
+        if torch.isnan(distances).any():
+            return torch.zeros(batch_size, seq_len, self.weight.shape[0], device=hidden_states.device)
 
         logits = -distances  # Negate to convert distance to similarity
         logits = logits.view(batch_size, seq_len, -1)  # Reshape back to (batch, seq_len, vocab_size)
@@ -427,6 +521,39 @@ AutoModelForCausalLM.register(PoincareLogExpAllWoNormConfig, PoincareLogExpAllWo
 ################
 
 if __name__ == "__main__":
+    # import sys
+    # import os
+    # sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+    # from calc_tokenizer import CalcTokenizer
+    # tokenizer = CalcTokenizer()
+    # print(f"Tokenizer vocab size: {tokenizer.vocab_size}")
+    # from transformers import Qwen2Config
+    # config = Qwen2Config(
+    #     vocab_size=tokenizer.vocab_size + 1,
+    #     hidden_size=128,
+    #     intermediate_size=512,
+    #     num_hidden_layers=8,
+    #     num_attention_heads=4,
+    #     num_key_value_heads=4,
+    #     max_position_embeddings=64,
+    #     pad_token_id=tokenizer.pad_token_id,
+    #     bos_token_id=tokenizer.bos_token_id,
+    #     eos_token_id=tokenizer.eos_token_id,
+    #     tie_word_embeddings=True,
+    #     use_cache=False,
+    #     attention_dropout=0.0,
+    #     hidden_dropout=0.0,
+    #     rope_theta=10000.0,
+    #     use_sliding_window=False,
+    #     sliding_window=4096,
+    #     attention_bias=False,
+    #     max_window_layers=0,
+    # )
+    # model = Qwen2ForCausalLM(config)
+    # model.save_pretrained('hyperbolic_models/qwen2_base')
+    # tokenizer.save_pretrained('hyperbolic_models/qwen2_base')
+    # print("Model and tokenizer saved to hyperbolic_models/qwen2_base")
+
     # --- Old wo_norm block commented out ---
     
     import sys
@@ -437,10 +564,10 @@ if __name__ == "__main__":
     print(f"Tokenizer vocab size: {tokenizer.vocab_size}")
     from transformers import Qwen2Config
     config = PoincareLogExpAllWoNormConfig(
-        vocab_size=tokenizer.vocab_size,
+        vocab_size=tokenizer.vocab_size + 1,
         hidden_size=128,
-        intermediate_size=256,
-        num_hidden_layers=4,
+        intermediate_size=512,
+        num_hidden_layers=8,
         num_attention_heads=4,
         num_key_value_heads=4,
         max_position_embeddings=64,
@@ -472,10 +599,10 @@ if __name__ == "__main__":
     # print(f"Tokenizer vocab size: {tokenizer.vocab_size}")
     # from transformers import Qwen2Config
     # config = PoincareLogExpConfig(
-    #     vocab_size=tokenizer.vocab_size,
+    #     vocab_size=tokenizer.vocab_size + 1,
     #     hidden_size=128,
-    #     intermediate_size=256,
-    #     num_hidden_layers=4,
+    #     intermediate_size=512,
+    #     num_hidden_layers=8,
     #     num_attention_heads=4,
     #     num_key_value_heads=4,
     #     max_position_embeddings=64,

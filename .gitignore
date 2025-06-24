@@ -183,5 +183,5 @@ hyperbolic_head
 
 hyperbolic_model
 
-data/calc_pretrain.json
+data/calc_*
 hyperbolic_models/

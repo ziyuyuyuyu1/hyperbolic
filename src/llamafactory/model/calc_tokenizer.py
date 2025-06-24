@@ -28,7 +28,7 @@ class CalcTokenizer(PreTrainedTokenizer):
     def __init__(
         self,
         pad_token: str = "<pad>",
-        eos_token: str = "<eos>",
+        eos_token: str = "<|end_of_text|>",
         bos_token: str = "<bos>",
         unk_token: str = "<unk>",
         **kwargs
@@ -107,7 +107,32 @@ class CalcTokenizer(PreTrainedTokenizer):
         if current_token:
             tokens.append(current_token)
         
-        return tokens
+        # Post-process tokens to handle special tokens that might be concatenated
+        processed_tokens = []
+        for token in tokens:
+            # Check if token contains special tokens
+            if self.eos_token in token and token != self.eos_token:
+                # Split token that contains EOS
+                parts = token.split(self.eos_token)
+                for i, part in enumerate(parts):
+                    if part:  # Add non-empty part
+                        processed_tokens.append(part)
+                    if i < len(parts) - 1:  # Add EOS token (except after last part)
+                        processed_tokens.append(self.eos_token)
+            elif self.bos_token in token and token != self.bos_token:
+                # Split token that contains BOS
+                parts = token.split(self.bos_token)
+                for i, part in enumerate(parts):
+                    if i == 0 and part:  # Add first part if non-empty
+                        processed_tokens.append(part)
+                    if i > 0:  # Add BOS token and remaining parts
+                        processed_tokens.append(self.bos_token)
+                        if part:
+                            processed_tokens.append(part)
+            else:
+                processed_tokens.append(token)
+        
+        return processed_tokens
     
     def _convert_token_to_id(self, token: str) -> int:
         """Convert a token to its ID."""
@@ -161,6 +186,9 @@ class CalcTokenizer(PreTrainedTokenizer):
             token_ids = token_ids.tolist()
         
         tokens = self.convert_ids_to_tokens(token_ids, skip_special_tokens=skip_special_tokens)
+        
+        # Filter out empty tokens
+        tokens = [token for token in tokens if token]
         
         # Join tokens with spaces
         text = " ".join(tokens)

@@ -1,5 +1,5 @@
 ### model
-model_name_or_path: hyperbolic_models/poincare_log_exp_all_wo_norm
+model_name_or_path: hyperbolic_models/qwen2_base
 trust_remote_code: true
 
 ### method
@@ -10,7 +10,7 @@ finetuning_type: full
 deepspeed: examples/deepspeed/ds_z2_config.json
 
 ### dataset
-dataset: calc_pretrain
+dataset: calc_pm_pretrain
 template: llama3
 cutoff_len: 64
 # max_samples: 1000
@@ -20,7 +20,7 @@ dataloader_num_workers: 0
 streaming: false
 
 ### output
-output_dir: saves/poincare_log_exp_all_wo_norm/
+output_dir: saves/qwen2_pm/
 logging_steps: 10
 save_steps: 5000
 plot_loss: true
