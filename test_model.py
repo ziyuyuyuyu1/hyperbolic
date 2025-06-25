@@ -12,10 +12,11 @@ from llamafactory.model import hyperbolic_utils  # This runs the registration co
 
 # Path to your saved model and tokenizer
 # MODEL_PATH = "saves/poincare_log_exp_all_wo_norm/checkpoint-5000"  # Try earlier checkpoint
-MODEL_PATH = "saves/qwen2_large"
+MODEL_PATH = "saves/qwen2_large_sft"
 
 # Load tokenizer and model
 tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
+num_added_tokens = tokenizer.add_tokens(new_tokens=["<|eom_id|>"], special_tokens=True)
 model = AutoModelForCausalLM.from_pretrained(MODEL_PATH)
 model.eval()
 
@@ -87,11 +88,16 @@ if hasattr(model, 'lm_head'):
 
 # List of test equations with expected answers
 test_data = [
-    ("2 + 3 =", "5"),
-    ("15 * 7 =", "105"),
-    ("100 - 45 =", "55"),
-    ("81 / 9 =", "9"),
-    ("999 + 1 =", "1000")
+    # ("2 + 3 =", "5"),
+    # ("15 * 7 =", "105"),
+    # ("100 - 45 =", "55"),
+    # ("81 / 9 =", "9"),
+    # ("999 + 1 =", "1000")
+    ("<bos> <unk> 2 + 3 <|eom_id|> <unk>", "5"),
+    ("<bos> <unk> 15 * 7 <|eom_id|> <unk>", "105"),
+    ("<bos> <unk> 100 - 45 <|eom_id|> <unk>", "55"),
+    ("<bos> <unk> 81 / 9 <|eom_id|> <unk>", "9"),
+    ("<bos> <unk> 999 + 1 <|eom_id|> <unk>", "1000"),
 ]
 
 for eq, expected_answer in test_data:
@@ -111,7 +117,7 @@ for eq, expected_answer in test_data:
         )
 
     # Decode output
-    output_text = tokenizer.decode(output_ids[0], skip_special_tokens=True)
+    output_text = tokenizer.decode(output_ids[0], skip_special_tokens=False)
     print(f"Model output: {output_text}")
 
     # Extract predicted answer (after the '=')
