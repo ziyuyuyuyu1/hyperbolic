@@ -32,6 +32,9 @@
   "calc_sft_test": {
     "file_name": "calc_sft_demo.json"
   },
+  "calc_pm_sft": {
+    "file_name": "calc_pm_sft.json"
+  },
   "glaive_toolcall_en_demo": {
     "file_name": "glaive_toolcall_en_demo.json",
     "formatting": "sharegpt",

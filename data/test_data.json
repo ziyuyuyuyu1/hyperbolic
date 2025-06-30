@@ -1,0 +1,5002 @@
+[
+  {
+    "input": "<bos> <unk> 25 + 759 <|eom_id|> <unk>",
+    "expected_answer": "784",
+    "expression": "25 + 759"
+  },
+  {
+    "input": "<bos> <unk> 15 * 28 <|eom_id|> <unk>",
+    "expected_answer": "420",
+    "expression": "15 * 28"
+  },
+  {
+    "input": "<bos> <unk> 754 - 104 <|eom_id|> <unk>",
+    "expected_answer": "650",
+    "expression": "754 - 104"
+  },
+  {
+    "input": "<bos> <unk> 604 + 216 <|eom_id|> <unk>",
+    "expected_answer": "820",
+    "expression": "604 + 216"
+  },
+  {
+    "input": "<bos> <unk> 30 + 95 <|eom_id|> <unk>",
+    "expected_answer": "125",
+    "expression": "30 + 95"
+  },
+  {
+    "input": "<bos> <unk> 238 - 129 <|eom_id|> <unk>",
+    "expected_answer": "109",
+    "expression": "238 - 129"
+  },
+  {
+    "input": "<bos> <unk> 574 + 101 <|eom_id|> <unk>",
+    "expected_answer": "675",
+    "expression": "574 + 101"
+  },
+  {
+    "input": "<bos> <unk> 855 / 15 <|eom_id|> <unk>",
+    "expected_answer": "57",
+    "expression": "855 / 15"
+  },
+  {
+    "input": "<bos> <unk> 0 * 777 <|eom_id|> <unk>",
+    "expected_answer": "0",
+    "expression": "0 * 777"
+  },
+  {
+    "input": "<bos> <unk> 714 - 432 <|eom_id|> <unk>",
+    "expected_answer": "282",
+    "expression": "714 - 432"
+  },
+  {
+    "input": "<bos> <unk> 17 * 9 <|eom_id|> <unk>",
+    "expected_answer": "153",
+    "expression": "17 * 9"
+  },
+  {
+    "input": "<bos> <unk> 980 - 781 <|eom_id|> <unk>",
+    "expected_answer": "199",
+    "expression": "980 - 781"
+  },
+  {
+    "input": "<bos> <unk> 6 * 23 <|eom_id|> <unk>",
+    "expected_answer": "138",
+    "expression": "6 * 23"
+  },
+  {
+    "input": "<bos> <unk> 637 / 7 <|eom_id|> <unk>",
+    "expected_answer": "91",
+    "expression": "637 / 7"
+  },
+  {
+    "input": "<bos> <unk> 16 * 51 <|eom_id|> <unk>",
+    "expected_answer": "816",
+    "expression": "16 * 51"
+  },
+  {
+    "input": "<bos> <unk> 747 + 117 <|eom_id|> <unk>",
+    "expected_answer": "864",
+    "expression": "747 + 117"
+  },
+  {
+    "input": "<bos> <unk> 996 + 3 <|eom_id|> <unk>",
+    "expected_answer": "999",
+    "expression": "996 + 3"
+  },
+  {
+    "input": "<bos> <unk> 565 + 150 <|eom_id|> <unk>",
+    "expected_answer": "715",
+    "expression": "565 + 150"
+  },
+  {
+    "input": "<bos> <unk> 12 * 8 <|eom_id|> <unk>",
+    "expected_answer": "96",
+    "expression": "12 * 8"
+  },
+  {
+    "input": "<bos> <unk> 677 + 116 <|eom_id|> <unk>",
+    "expected_answer": "793",
+    "expression": "677 + 116"
+  },
+  {
+    "input": "<bos> <unk> 5 * 59 <|eom_id|> <unk>",
+    "expected_answer": "295",
+    "expression": "5 * 59"
+  },
+  {
+    "input": "<bos> <unk> 389 + 284 <|eom_id|> <unk>",
+    "expected_answer": "673",
+    "expression": "389 + 284"
+  },
+  {
+    "input": "<bos> <unk> 451 / 41 <|eom_id|> <unk>",
+    "expected_answer": "11",
+    "expression": "451 / 41"
+  },
+  {
+    "input": "<bos> <unk> 379 - 181 <|eom_id|> <unk>",
+    "expected_answer": "198",
+    "expression": "379 - 181"
+  },
+  {
+    "input": "<bos> <unk> 686 - 273 <|eom_id|> <unk>",
+    "expected_answer": "413",
+    "expression": "686 - 273"
+  },
+  {
+    "input": "<bos> <unk> 623 + 325 <|eom_id|> <unk>",
+    "expected_answer": "948",
+    "expression": "623 + 325"
+  },
+  {
+    "input": "<bos> <unk> 546 - 250 <|eom_id|> <unk>",
+    "expected_answer": "296",
+    "expression": "546 - 250"
+  },
+  {
+    "input": "<bos> <unk> 473 - 194 <|eom_id|> <unk>",
+    "expected_answer": "279",
+    "expression": "473 - 194"
+  },
+  {
+    "input": "<bos> <unk> 14 * 41 <|eom_id|> <unk>",
+    "expected_answer": "574",
+    "expression": "14 * 41"
+  },
+  {
+    "input": "<bos> <unk> 234 + 32 <|eom_id|> <unk>",
+    "expected_answer": "266",
+    "expression": "234 + 32"
+  },
+  {
+    "input": "<bos> <unk> 25 * 17 <|eom_id|> <unk>",
+    "expected_answer": "425",
+    "expression": "25 * 17"
+  },
+  {
+    "input": "<bos> <unk> 216 + 580 <|eom_id|> <unk>",
+    "expected_answer": "796",
+    "expression": "216 + 580"
+  },
+  {
+    "input": "<bos> <unk> 13 * 63 <|eom_id|> <unk>",
+    "expected_answer": "819",
+    "expression": "13 * 63"
+  },
+  {
+    "input": "<bos> <unk> 588 / 42 <|eom_id|> <unk>",
+    "expected_answer": "14",
+    "expression": "588 / 42"
+  },
+  {
+    "input": "<bos> <unk> 271 - 71 <|eom_id|> <unk>",
+    "expected_answer": "200",
+    "expression": "271 - 71"
+  },
+  {
+    "input": "<bos> <unk> 762 - 574 <|eom_id|> <unk>",
+    "expected_answer": "188",
+    "expression": "762 - 574"
+  },
+  {
+    "input": "<bos> <unk> 27 * 37 <|eom_id|> <unk>",
+    "expected_answer": "999",
+    "expression": "27 * 37"
+  },
+  {
+    "input": "<bos> <unk> 336 / 24 <|eom_id|> <unk>",
+    "expected_answer": "14",
+    "expression": "336 / 24"
+  },
+  {
+    "input": "<bos> <unk> 521 - 505 <|eom_id|> <unk>",
+    "expected_answer": "16",
+    "expression": "521 - 505"
+  },
+  {
+    "input": "<bos> <unk> 773 + 12 <|eom_id|> <unk>",
+    "expected_answer": "785",
+    "expression": "773 + 12"
+  },
+  {
+    "input": "<bos> <unk> 156 + 642 <|eom_id|> <unk>",
+    "expected_answer": "798",
+    "expression": "156 + 642"
+  },
+  {
+    "input": "<bos> <unk> 811 - 696 <|eom_id|> <unk>",
+    "expected_answer": "115",
+    "expression": "811 - 696"
+  },
+  {
+    "input": "<bos> <unk> 78 / 39 <|eom_id|> <unk>",
+    "expected_answer": "2",
+    "expression": "78 / 39"
+  },
+  {
+    "input": "<bos> <unk> 950 / 25 <|eom_id|> <unk>",
+    "expected_answer": "38",
+    "expression": "950 / 25"
+  },
+  {
+    "input": "<bos> <unk> 272 / 34 <|eom_id|> <unk>",
+    "expected_answer": "8",
+    "expression": "272 / 34"
+  },
+  {
+    "input": "<bos> <unk> 696 + 58 <|eom_id|> <unk>",
+    "expected_answer": "754",
+    "expression": "696 + 58"
+  },
+  {
+    "input": "<bos> <unk> 21 * 7 <|eom_id|> <unk>",
+    "expected_answer": "147",
+    "expression": "21 * 7"
+  },
+  {
+    "input": "<bos> <unk> 27 * 10 <|eom_id|> <unk>",
+    "expected_answer": "270",
+    "expression": "27 * 10"
+  },
+  {
+    "input": "<bos> <unk> 976 / 1 <|eom_id|> <unk>",
+    "expected_answer": "976",
+    "expression": "976 / 1"
+  },
+  {
+    "input": "<bos> <unk> 11 * 64 <|eom_id|> <unk>",
+    "expected_answer": "704",
+    "expression": "11 * 64"
+  },
+  {
+    "input": "<bos> <unk> 891 + 80 <|eom_id|> <unk>",
+    "expected_answer": "971",
+    "expression": "891 + 80"
+  },
+  {
+    "input": "<bos> <unk> 12 * 19 <|eom_id|> <unk>",
+    "expected_answer": "228",
+    "expression": "12 * 19"
+  },
+  {
+    "input": "<bos> <unk> 10 * 69 <|eom_id|> <unk>",
+    "expected_answer": "690",
+    "expression": "10 * 69"
+  },
+  {
+    "input": "<bos> <unk> 613 + 165 <|eom_id|> <unk>",
+    "expected_answer": "778",
+    "expression": "613 + 165"
+  },
+  {
+    "input": "<bos> <unk> 114 / 2 <|eom_id|> <unk>",
+    "expected_answer": "57",
+    "expression": "114 / 2"
+  },
+  {
+    "input": "<bos> <unk> 19 * 15 <|eom_id|> <unk>",
+    "expected_answer": "285",
+    "expression": "19 * 15"
+  },
+  {
+    "input": "<bos> <unk> 246 + 580 <|eom_id|> <unk>",
+    "expected_answer": "826",
+    "expression": "246 + 580"
+  },
+  {
+    "input": "<bos> <unk> 87 + 749 <|eom_id|> <unk>",
+    "expected_answer": "836",
+    "expression": "87 + 749"
+  },
+  {
+    "input": "<bos> <unk> 970 / 5 <|eom_id|> <unk>",
+    "expected_answer": "194",
+    "expression": "970 / 5"
+  },
+  {
+    "input": "<bos> <unk> 131 - 121 <|eom_id|> <unk>",
+    "expected_answer": "10",
+    "expression": "131 - 121"
+  },
+  {
+    "input": "<bos> <unk> 271 - 270 <|eom_id|> <unk>",
+    "expected_answer": "1",
+    "expression": "271 - 270"
+  },
+  {
+    "input": "<bos> <unk> 966 / 14 <|eom_id|> <unk>",
+    "expected_answer": "69",
+    "expression": "966 / 14"
+  },
+  {
+    "input": "<bos> <unk> 730 - 319 <|eom_id|> <unk>",
+    "expected_answer": "411",
+    "expression": "730 - 319"
+  },
+  {
+    "input": "<bos> <unk> 860 / 43 <|eom_id|> <unk>",
+    "expected_answer": "20",
+    "expression": "860 / 43"
+  },
+  {
+    "input": "<bos> <unk> 28 * 33 <|eom_id|> <unk>",
+    "expected_answer": "924",
+    "expression": "28 * 33"
+  },
+  {
+    "input": "<bos> <unk> 248 / 8 <|eom_id|> <unk>",
+    "expected_answer": "31",
+    "expression": "248 / 8"
+  },
+  {
+    "input": "<bos> <unk> 65 - 43 <|eom_id|> <unk>",
+    "expected_answer": "22",
+    "expression": "65 - 43"
+  },
+  {
+    "input": "<bos> <unk> 602 + 283 <|eom_id|> <unk>",
+    "expected_answer": "885",
+    "expression": "602 + 283"
+  },
+  {
+    "input": "<bos> <unk> 602 - 225 <|eom_id|> <unk>",
+    "expected_answer": "377",
+    "expression": "602 - 225"
+  },
+  {
+    "input": "<bos> <unk> 72 + 724 <|eom_id|> <unk>",
+    "expected_answer": "796",
+    "expression": "72 + 724"
+  },
+  {
+    "input": "<bos> <unk> 234 + 69 <|eom_id|> <unk>",
+    "expected_answer": "303",
+    "expression": "234 + 69"
+  },
+  {
+    "input": "<bos> <unk> 880 + 42 <|eom_id|> <unk>",
+    "expected_answer": "922",
+    "expression": "880 + 42"
+  },
+  {
+    "input": "<bos> <unk> 526 + 121 <|eom_id|> <unk>",
+    "expected_answer": "647",
+    "expression": "526 + 121"
+  },
+  {
+    "input": "<bos> <unk> 31 * 13 <|eom_id|> <unk>",
+    "expected_answer": "403",
+    "expression": "31 * 13"
+  },
+  {
+    "input": "<bos> <unk> 740 - 584 <|eom_id|> <unk>",
+    "expected_answer": "156",
+    "expression": "740 - 584"
+  },
+  {
+    "input": "<bos> <unk> 800 / 16 <|eom_id|> <unk>",
+    "expected_answer": "50",
+    "expression": "800 / 16"
+  },
+  {
+    "input": "<bos> <unk> 324 / 27 <|eom_id|> <unk>",
+    "expected_answer": "12",
+    "expression": "324 / 27"
+  },
+  {
+    "input": "<bos> <unk> 99 + 674 <|eom_id|> <unk>",
+    "expected_answer": "773",
+    "expression": "99 + 674"
+  },
+  {
+    "input": "<bos> <unk> 621 / 23 <|eom_id|> <unk>",
+    "expected_answer": "27",
+    "expression": "621 / 23"
+  },
+  {
+    "input": "<bos> <unk> 90 / 30 <|eom_id|> <unk>",
+    "expected_answer": "3",
+    "expression": "90 / 30"
+  },
+  {
+    "input": "<bos> <unk> 62 + 412 <|eom_id|> <unk>",
+    "expected_answer": "474",
+    "expression": "62 + 412"
+  },
+  {
+    "input": "<bos> <unk> 6 * 63 <|eom_id|> <unk>",
+    "expected_answer": "378",
+    "expression": "6 * 63"
+  },
+  {
+    "input": "<bos> <unk> 194 - 137 <|eom_id|> <unk>",
+    "expected_answer": "57",
+    "expression": "194 - 137"
+  },
+  {
+    "input": "<bos> <unk> 486 / 9 <|eom_id|> <unk>",
+    "expected_answer": "54",
+    "expression": "486 / 9"
+  },
+  {
+    "input": "<bos> <unk> 285 - 236 <|eom_id|> <unk>",
+    "expected_answer": "49",
+    "expression": "285 - 236"
+  },
+  {
+    "input": "<bos> <unk> 895 - 77 <|eom_id|> <unk>",
+    "expected_answer": "818",
+    "expression": "895 - 77"
+  },
+  {
+    "input": "<bos> <unk> 108 / 36 <|eom_id|> <unk>",
+    "expected_answer": "3",
+    "expression": "108 / 36"
+  },
+  {
+    "input": "<bos> <unk> 667 + 276 <|eom_id|> <unk>",
+    "expected_answer": "943",
+    "expression": "667 + 276"
+  },
+  {
+    "input": "<bos> <unk> 992 + 1 <|eom_id|> <unk>",
+    "expected_answer": "993",
+    "expression": "992 + 1"
+  },
+  {
+    "input": "<bos> <unk> 170 - 104 <|eom_id|> <unk>",
+    "expected_answer": "66",
+    "expression": "170 - 104"
+  },
+  {
+    "input": "<bos> <unk> 403 / 31 <|eom_id|> <unk>",
+    "expected_answer": "13",
+    "expression": "403 / 31"
+  },
+  {
+    "input": "<bos> <unk> 168 / 4 <|eom_id|> <unk>",
+    "expected_answer": "42",
+    "expression": "168 / 4"
+  },
+  {
+    "input": "<bos> <unk> 399 / 1 <|eom_id|> <unk>",
+    "expected_answer": "399",
+    "expression": "399 / 1"
+  },
+  {
+    "input": "<bos> <unk> 29 * 18 <|eom_id|> <unk>",
+    "expected_answer": "522",
+    "expression": "29 * 18"
+  },
+  {
+    "input": "<bos> <unk> 765 / 45 <|eom_id|> <unk>",
+    "expected_answer": "17",
+    "expression": "765 / 45"
+  },
+  {
+    "input": "<bos> <unk> 240 / 10 <|eom_id|> <unk>",
+    "expected_answer": "24",
+    "expression": "240 / 10"
+  },
+  {
+    "input": "<bos> <unk> 13 * 7 <|eom_id|> <unk>",
+    "expected_answer": "91",
+    "expression": "13 * 7"
+  },
+  {
+    "input": "<bos> <unk> 765 + 80 <|eom_id|> <unk>",
+    "expected_answer": "845",
+    "expression": "765 + 80"
+  },
+  {
+    "input": "<bos> <unk> 51 + 598 <|eom_id|> <unk>",
+    "expected_answer": "649",
+    "expression": "51 + 598"
+  },
+  {
+    "input": "<bos> <unk> 957 / 33 <|eom_id|> <unk>",
+    "expected_answer": "29",
+    "expression": "957 / 33"
+  },
+  {
+    "input": "<bos> <unk> 58 - 32 <|eom_id|> <unk>",
+    "expected_answer": "26",
+    "expression": "58 - 32"
+  },
+  {
+    "input": "<bos> <unk> 871 + 47 <|eom_id|> <unk>",
+    "expected_answer": "918",
+    "expression": "871 + 47"
+  },
+  {
+    "input": "<bos> <unk> 609 + 34 <|eom_id|> <unk>",
+    "expected_answer": "643",
+    "expression": "609 + 34"
+  },
+  {
+    "input": "<bos> <unk> 413 - 61 <|eom_id|> <unk>",
+    "expected_answer": "352",
+    "expression": "413 - 61"
+  },
+  {
+    "input": "<bos> <unk> 592 - 40 <|eom_id|> <unk>",
+    "expected_answer": "552",
+    "expression": "592 - 40"
+  },
+  {
+    "input": "<bos> <unk> 429 + 535 <|eom_id|> <unk>",
+    "expected_answer": "964",
+    "expression": "429 + 535"
+  },
+  {
+    "input": "<bos> <unk> 16 * 13 <|eom_id|> <unk>",
+    "expected_answer": "208",
+    "expression": "16 * 13"
+  },
+  {
+    "input": "<bos> <unk> 15 * 33 <|eom_id|> <unk>",
+    "expected_answer": "495",
+    "expression": "15 * 33"
+  },
+  {
+    "input": "<bos> <unk> 765 / 9 <|eom_id|> <unk>",
+    "expected_answer": "85",
+    "expression": "765 / 9"
+  },
+  {
+    "input": "<bos> <unk> 29 * 20 <|eom_id|> <unk>",
+    "expected_answer": "580",
+    "expression": "29 * 20"
+  },
+  {
+    "input": "<bos> <unk> 9 + 469 <|eom_id|> <unk>",
+    "expected_answer": "478",
+    "expression": "9 + 469"
+  },
+  {
+    "input": "<bos> <unk> 75 + 550 <|eom_id|> <unk>",
+    "expected_answer": "625",
+    "expression": "75 + 550"
+  },
+  {
+    "input": "<bos> <unk> 518 - 271 <|eom_id|> <unk>",
+    "expected_answer": "247",
+    "expression": "518 - 271"
+  },
+  {
+    "input": "<bos> <unk> 955 - 357 <|eom_id|> <unk>",
+    "expected_answer": "598",
+    "expression": "955 - 357"
+  },
+  {
+    "input": "<bos> <unk> 900 + 31 <|eom_id|> <unk>",
+    "expected_answer": "931",
+    "expression": "900 + 31"
+  },
+  {
+    "input": "<bos> <unk> 18 * 10 <|eom_id|> <unk>",
+    "expected_answer": "180",
+    "expression": "18 * 10"
+  },
+  {
+    "input": "<bos> <unk> 770 / 35 <|eom_id|> <unk>",
+    "expected_answer": "22",
+    "expression": "770 / 35"
+  },
+  {
+    "input": "<bos> <unk> 0 * 683 <|eom_id|> <unk>",
+    "expected_answer": "0",
+    "expression": "0 * 683"
+  },
+  {
+    "input": "<bos> <unk> 6 * 34 <|eom_id|> <unk>",
+    "expected_answer": "204",
+    "expression": "6 * 34"
+  },
+  {
+    "input": "<bos> <unk> 7 * 27 <|eom_id|> <unk>",
+    "expected_answer": "189",
+    "expression": "7 * 27"
+  },
+  {
+    "input": "<bos> <unk> 278 - 144 <|eom_id|> <unk>",
+    "expected_answer": "134",
+    "expression": "278 - 144"
+  },
+  {
+    "input": "<bos> <unk> 734 - 351 <|eom_id|> <unk>",
+    "expected_answer": "383",
+    "expression": "734 - 351"
+  },
+  {
+    "input": "<bos> <unk> 703 - 649 <|eom_id|> <unk>",
+    "expected_answer": "54",
+    "expression": "703 - 649"
+  },
+  {
+    "input": "<bos> <unk> 31 * 16 <|eom_id|> <unk>",
+    "expected_answer": "496",
+    "expression": "31 * 16"
+  },
+  {
+    "input": "<bos> <unk> 94 + 649 <|eom_id|> <unk>",
+    "expected_answer": "743",
+    "expression": "94 + 649"
+  },
+  {
+    "input": "<bos> <unk> 36 / 18 <|eom_id|> <unk>",
+    "expected_answer": "2",
+    "expression": "36 / 18"
+  },
+  {
+    "input": "<bos> <unk> 341 + 133 <|eom_id|> <unk>",
+    "expected_answer": "474",
+    "expression": "341 + 133"
+  },
+  {
+    "input": "<bos> <unk> 10 * 94 <|eom_id|> <unk>",
+    "expected_answer": "940",
+    "expression": "10 * 94"
+  },
+  {
+    "input": "<bos> <unk> 792 / 36 <|eom_id|> <unk>",
+    "expected_answer": "22",
+    "expression": "792 / 36"
+  },
+  {
+    "input": "<bos> <unk> 0 / 36 <|eom_id|> <unk>",
+    "expected_answer": "0",
+    "expression": "0 / 36"
+  },
+  {
+    "input": "<bos> <unk> 77 + 904 <|eom_id|> <unk>",
+    "expected_answer": "981",
+    "expression": "77 + 904"
+  },
+  {
+    "input": "<bos> <unk> 558 - 36 <|eom_id|> <unk>",
+    "expected_answer": "522",
+    "expression": "558 - 36"
+  },
+  {
+    "input": "<bos> <unk> 9 * 55 <|eom_id|> <unk>",
+    "expected_answer": "495",
+    "expression": "9 * 55"
+  },
+  {
+    "input": "<bos> <unk> 42 - 19 <|eom_id|> <unk>",
+    "expected_answer": "23",
+    "expression": "42 - 19"
+  },
+  {
+    "input": "<bos> <unk> 2 * 460 <|eom_id|> <unk>",
+    "expected_answer": "920",
+    "expression": "2 * 460"
+  },
+  {
+    "input": "<bos> <unk> 13 * 31 <|eom_id|> <unk>",
+    "expected_answer": "403",
+    "expression": "13 * 31"
+  },
+  {
+    "input": "<bos> <unk> 362 + 573 <|eom_id|> <unk>",
+    "expected_answer": "935",
+    "expression": "362 + 573"
+  },
+  {
+    "input": "<bos> <unk> 920 / 40 <|eom_id|> <unk>",
+    "expected_answer": "23",
+    "expression": "920 / 40"
+  },
+  {
+    "input": "<bos> <unk> 947 - 242 <|eom_id|> <unk>",
+    "expected_answer": "705",
+    "expression": "947 - 242"
+  },
+  {
+    "input": "<bos> <unk> 999 - 819 <|eom_id|> <unk>",
+    "expected_answer": "180",
+    "expression": "999 - 819"
+  },
+  {
+    "input": "<bos> <unk> 902 - 422 <|eom_id|> <unk>",
+    "expected_answer": "480",
+    "expression": "902 - 422"
+  },
+  {
+    "input": "<bos> <unk> 183 + 754 <|eom_id|> <unk>",
+    "expected_answer": "937",
+    "expression": "183 + 754"
+  },
+  {
+    "input": "<bos> <unk> 26 * 15 <|eom_id|> <unk>",
+    "expected_answer": "390",
+    "expression": "26 * 15"
+  },
+  {
+    "input": "<bos> <unk> 10 * 89 <|eom_id|> <unk>",
+    "expected_answer": "890",
+    "expression": "10 * 89"
+  },
+  {
+    "input": "<bos> <unk> 391 + 39 <|eom_id|> <unk>",
+    "expected_answer": "430",
+    "expression": "391 + 39"
+  },
+  {
+    "input": "<bos> <unk> 375 / 15 <|eom_id|> <unk>",
+    "expected_answer": "25",
+    "expression": "375 / 15"
+  },
+  {
+    "input": "<bos> <unk> 437 / 23 <|eom_id|> <unk>",
+    "expected_answer": "19",
+    "expression": "437 / 23"
+  },
+  {
+    "input": "<bos> <unk> 228 - 6 <|eom_id|> <unk>",
+    "expected_answer": "222",
+    "expression": "228 - 6"
+  },
+  {
+    "input": "<bos> <unk> 408 - 168 <|eom_id|> <unk>",
+    "expected_answer": "240",
+    "expression": "408 - 168"
+  },
+  {
+    "input": "<bos> <unk> 4 * 247 <|eom_id|> <unk>",
+    "expected_answer": "988",
+    "expression": "4 * 247"
+  },
+  {
+    "input": "<bos> <unk> 22 * 41 <|eom_id|> <unk>",
+    "expected_answer": "902",
+    "expression": "22 * 41"
+  },
+  {
+    "input": "<bos> <unk> 748 / 44 <|eom_id|> <unk>",
+    "expected_answer": "17",
+    "expression": "748 / 44"
+  },
+  {
+    "input": "<bos> <unk> 1 * 118 <|eom_id|> <unk>",
+    "expected_answer": "118",
+    "expression": "1 * 118"
+  },
+  {
+    "input": "<bos> <unk> 11 * 74 <|eom_id|> <unk>",
+    "expected_answer": "814",
+    "expression": "11 * 74"
+  },
+  {
+    "input": "<bos> <unk> 2 * 55 <|eom_id|> <unk>",
+    "expected_answer": "110",
+    "expression": "2 * 55"
+  },
+  {
+    "input": "<bos> <unk> 460 / 23 <|eom_id|> <unk>",
+    "expected_answer": "20",
+    "expression": "460 / 23"
+  },
+  {
+    "input": "<bos> <unk> 624 / 39 <|eom_id|> <unk>",
+    "expected_answer": "16",
+    "expression": "624 / 39"
+  },
+  {
+    "input": "<bos> <unk> 394 + 590 <|eom_id|> <unk>",
+    "expected_answer": "984",
+    "expression": "394 + 590"
+  },
+  {
+    "input": "<bos> <unk> 260 - 22 <|eom_id|> <unk>",
+    "expected_answer": "238",
+    "expression": "260 - 22"
+  },
+  {
+    "input": "<bos> <unk> 532 / 1 <|eom_id|> <unk>",
+    "expected_answer": "532",
+    "expression": "532 / 1"
+  },
+  {
+    "input": "<bos> <unk> 372 - 220 <|eom_id|> <unk>",
+    "expected_answer": "152",
+    "expression": "372 - 220"
+  },
+  {
+    "input": "<bos> <unk> 971 + 21 <|eom_id|> <unk>",
+    "expected_answer": "992",
+    "expression": "971 + 21"
+  },
+  {
+    "input": "<bos> <unk> 20 * 42 <|eom_id|> <unk>",
+    "expected_answer": "840",
+    "expression": "20 * 42"
+  },
+  {
+    "input": "<bos> <unk> 737 + 153 <|eom_id|> <unk>",
+    "expected_answer": "890",
+    "expression": "737 + 153"
+  },
+  {
+    "input": "<bos> <unk> 26 * 20 <|eom_id|> <unk>",
+    "expected_answer": "520",
+    "expression": "26 * 20"
+  },
+  {
+    "input": "<bos> <unk> 405 / 45 <|eom_id|> <unk>",
+    "expected_answer": "9",
+    "expression": "405 / 45"
+  },
+  {
+    "input": "<bos> <unk> 196 - 107 <|eom_id|> <unk>",
+    "expected_answer": "89",
+    "expression": "196 - 107"
+  },
+  {
+    "input": "<bos> <unk> 220 / 44 <|eom_id|> <unk>",
+    "expected_answer": "5",
+    "expression": "220 / 44"
+  },
+  {
+    "input": "<bos> <unk> 25 * 35 <|eom_id|> <unk>",
+    "expected_answer": "875",
+    "expression": "25 * 35"
+  },
+  {
+    "input": "<bos> <unk> 311 + 293 <|eom_id|> <unk>",
+    "expected_answer": "604",
+    "expression": "311 + 293"
+  },
+  {
+    "input": "<bos> <unk> 440 - 402 <|eom_id|> <unk>",
+    "expected_answer": "38",
+    "expression": "440 - 402"
+  },
+  {
+    "input": "<bos> <unk> 29 * 28 <|eom_id|> <unk>",
+    "expected_answer": "812",
+    "expression": "29 * 28"
+  },
+  {
+    "input": "<bos> <unk> 264 / 44 <|eom_id|> <unk>",
+    "expected_answer": "6",
+    "expression": "264 / 44"
+  },
+  {
+    "input": "<bos> <unk> 240 / 48 <|eom_id|> <unk>",
+    "expected_answer": "5",
+    "expression": "240 / 48"
+  },
+  {
+    "input": "<bos> <unk> 290 + 527 <|eom_id|> <unk>",
+    "expected_answer": "817",
+    "expression": "290 + 527"
+  },
+  {
+    "input": "<bos> <unk> 5 * 192 <|eom_id|> <unk>",
+    "expected_answer": "960",
+    "expression": "5 * 192"
+  },
+  {
+    "input": "<bos> <unk> 688 - 317 <|eom_id|> <unk>",
+    "expected_answer": "371",
+    "expression": "688 - 317"
+  },
+  {
+    "input": "<bos> <unk> 825 - 203 <|eom_id|> <unk>",
+    "expected_answer": "622",
+    "expression": "825 - 203"
+  },
+  {
+    "input": "<bos> <unk> 25 - 1 <|eom_id|> <unk>",
+    "expected_answer": "24",
+    "expression": "25 - 1"
+  },
+  {
+    "input": "<bos> <unk> 486 - 312 <|eom_id|> <unk>",
+    "expected_answer": "174",
+    "expression": "486 - 312"
+  },
+  {
+    "input": "<bos> <unk> 466 + 424 <|eom_id|> <unk>",
+    "expected_answer": "890",
+    "expression": "466 + 424"
+  },
+  {
+    "input": "<bos> <unk> 735 - 713 <|eom_id|> <unk>",
+    "expected_answer": "22",
+    "expression": "735 - 713"
+  },
+  {
+    "input": "<bos> <unk> 800 / 32 <|eom_id|> <unk>",
+    "expected_answer": "25",
+    "expression": "800 / 32"
+  },
+  {
+    "input": "<bos> <unk> 151 - 1 <|eom_id|> <unk>",
+    "expected_answer": "150",
+    "expression": "151 - 1"
+  },
+  {
+    "input": "<bos> <unk> 797 + 108 <|eom_id|> <unk>",
+    "expected_answer": "905",
+    "expression": "797 + 108"
+  },
+  {
+    "input": "<bos> <unk> 180 - 178 <|eom_id|> <unk>",
+    "expected_answer": "2",
+    "expression": "180 - 178"
+  },
+  {
+    "input": "<bos> <unk> 568 / 4 <|eom_id|> <unk>",
+    "expected_answer": "142",
+    "expression": "568 / 4"
+  },
+  {
+    "input": "<bos> <unk> 939 - 868 <|eom_id|> <unk>",
+    "expected_answer": "71",
+    "expression": "939 - 868"
+  },
+  {
+    "input": "<bos> <unk> 467 + 136 <|eom_id|> <unk>",
+    "expected_answer": "603",
+    "expression": "467 + 136"
+  },
+  {
+    "input": "<bos> <unk> 688 / 43 <|eom_id|> <unk>",
+    "expected_answer": "16",
+    "expression": "688 / 43"
+  },
+  {
+    "input": "<bos> <unk> 28 * 32 <|eom_id|> <unk>",
+    "expected_answer": "896",
+    "expression": "28 * 32"
+  },
+  {
+    "input": "<bos> <unk> 504 / 36 <|eom_id|> <unk>",
+    "expected_answer": "14",
+    "expression": "504 / 36"
+  },
+  {
+    "input": "<bos> <unk> 761 - 486 <|eom_id|> <unk>",
+    "expected_answer": "275",
+    "expression": "761 - 486"
+  },
+  {
+    "input": "<bos> <unk> 816 / 17 <|eom_id|> <unk>",
+    "expected_answer": "48",
+    "expression": "816 / 17"
+  },
+  {
+    "input": "<bos> <unk> 860 - 652 <|eom_id|> <unk>",
+    "expected_answer": "208",
+    "expression": "860 - 652"
+  },
+  {
+    "input": "<bos> <unk> 31 * 15 <|eom_id|> <unk>",
+    "expected_answer": "465",
+    "expression": "31 * 15"
+  },
+  {
+    "input": "<bos> <unk> 28 * 4 <|eom_id|> <unk>",
+    "expected_answer": "112",
+    "expression": "28 * 4"
+  },
+  {
+    "input": "<bos> <unk> 15 * 34 <|eom_id|> <unk>",
+    "expected_answer": "510",
+    "expression": "15 * 34"
+  },
+  {
+    "input": "<bos> <unk> 20 * 34 <|eom_id|> <unk>",
+    "expected_answer": "680",
+    "expression": "20 * 34"
+  },
+  {
+    "input": "<bos> <unk> 141 + 154 <|eom_id|> <unk>",
+    "expected_answer": "295",
+    "expression": "141 + 154"
+  },
+  {
+    "input": "<bos> <unk> 392 - 355 <|eom_id|> <unk>",
+    "expected_answer": "37",
+    "expression": "392 - 355"
+  },
+  {
+    "input": "<bos> <unk> 723 - 219 <|eom_id|> <unk>",
+    "expected_answer": "504",
+    "expression": "723 - 219"
+  },
+  {
+    "input": "<bos> <unk> 424 + 417 <|eom_id|> <unk>",
+    "expected_answer": "841",
+    "expression": "424 + 417"
+  },
+  {
+    "input": "<bos> <unk> 29 * 26 <|eom_id|> <unk>",
+    "expected_answer": "754",
+    "expression": "29 * 26"
+  },
+  {
+    "input": "<bos> <unk> 211 + 430 <|eom_id|> <unk>",
+    "expected_answer": "641",
+    "expression": "211 + 430"
+  },
+  {
+    "input": "<bos> <unk> 900 / 50 <|eom_id|> <unk>",
+    "expected_answer": "18",
+    "expression": "900 / 50"
+  },
+  {
+    "input": "<bos> <unk> 877 + 112 <|eom_id|> <unk>",
+    "expected_answer": "989",
+    "expression": "877 + 112"
+  },
+  {
+    "input": "<bos> <unk> 0 / 31 <|eom_id|> <unk>",
+    "expected_answer": "0",
+    "expression": "0 / 31"
+  },
+  {
+    "input": "<bos> <unk> 19 * 48 <|eom_id|> <unk>",
+    "expected_answer": "912",
+    "expression": "19 * 48"
+  },
+  {
+    "input": "<bos> <unk> 918 / 27 <|eom_id|> <unk>",
+    "expected_answer": "34",
+    "expression": "918 / 27"
+  },
+  {
+    "input": "<bos> <unk> 499 - 112 <|eom_id|> <unk>",
+    "expected_answer": "387",
+    "expression": "499 - 112"
+  },
+  {
+    "input": "<bos> <unk> 27 * 31 <|eom_id|> <unk>",
+    "expected_answer": "837",
+    "expression": "27 * 31"
+  },
+  {
+    "input": "<bos> <unk> 398 + 344 <|eom_id|> <unk>",
+    "expected_answer": "742",
+    "expression": "398 + 344"
+  },
+  {
+    "input": "<bos> <unk> 235 / 47 <|eom_id|> <unk>",
+    "expected_answer": "5",
+    "expression": "235 / 47"
+  },
+  {
+    "input": "<bos> <unk> 711 / 9 <|eom_id|> <unk>",
+    "expected_answer": "79",
+    "expression": "711 / 9"
+  },
+  {
+    "input": "<bos> <unk> 928 + 50 <|eom_id|> <unk>",
+    "expected_answer": "978",
+    "expression": "928 + 50"
+  },
+  {
+    "input": "<bos> <unk> 85 + 658 <|eom_id|> <unk>",
+    "expected_answer": "743",
+    "expression": "85 + 658"
+  },
+  {
+    "input": "<bos> <unk> 990 / 9 <|eom_id|> <unk>",
+    "expected_answer": "110",
+    "expression": "990 / 9"
+  },
+  {
+    "input": "<bos> <unk> 72 / 12 <|eom_id|> <unk>",
+    "expected_answer": "6",
+    "expression": "72 / 12"
+  },
+  {
+    "input": "<bos> <unk> 24 * 20 <|eom_id|> <unk>",
+    "expected_answer": "480",
+    "expression": "24 * 20"
+  },
+  {
+    "input": "<bos> <unk> 465 - 167 <|eom_id|> <unk>",
+    "expected_answer": "298",
+    "expression": "465 - 167"
+  },
+  {
+    "input": "<bos> <unk> 24 * 17 <|eom_id|> <unk>",
+    "expected_answer": "408",
+    "expression": "24 * 17"
+  },
+  {
+    "input": "<bos> <unk> 901 / 17 <|eom_id|> <unk>",
+    "expected_answer": "53",
+    "expression": "901 / 17"
+  },
+  {
+    "input": "<bos> <unk> 481 + 19 <|eom_id|> <unk>",
+    "expected_answer": "500",
+    "expression": "481 + 19"
+  },
+  {
+    "input": "<bos> <unk> 974 + 11 <|eom_id|> <unk>",
+    "expected_answer": "985",
+    "expression": "974 + 11"
+  },
+  {
+    "input": "<bos> <unk> 665 - 70 <|eom_id|> <unk>",
+    "expected_answer": "595",
+    "expression": "665 - 70"
+  },
+  {
+    "input": "<bos> <unk> 772 + 7 <|eom_id|> <unk>",
+    "expected_answer": "779",
+    "expression": "772 + 7"
+  },
+  {
+    "input": "<bos> <unk> 204 - 5 <|eom_id|> <unk>",
+    "expected_answer": "199",
+    "expression": "204 - 5"
+  },
+  {
+    "input": "<bos> <unk> 244 - 32 <|eom_id|> <unk>",
+    "expected_answer": "212",
+    "expression": "244 - 32"
+  },
+  {
+    "input": "<bos> <unk> 129 / 43 <|eom_id|> <unk>",
+    "expected_answer": "3",
+    "expression": "129 / 43"
+  },
+  {
+    "input": "<bos> <unk> 476 - 358 <|eom_id|> <unk>",
+    "expected_answer": "118",
+    "expression": "476 - 358"
+  },
+  {
+    "input": "<bos> <unk> 23 * 10 <|eom_id|> <unk>",
+    "expected_answer": "230",
+    "expression": "23 * 10"
+  },
+  {
+    "input": "<bos> <unk> 796 + 41 <|eom_id|> <unk>",
+    "expected_answer": "837",
+    "expression": "796 + 41"
+  },
+  {
+    "input": "<bos> <unk> 6 * 148 <|eom_id|> <unk>",
+    "expected_answer": "888",
+    "expression": "6 * 148"
+  },
+  {
+    "input": "<bos> <unk> 951 + 19 <|eom_id|> <unk>",
+    "expected_answer": "970",
+    "expression": "951 + 19"
+  },
+  {
+    "input": "<bos> <unk> 312 / 26 <|eom_id|> <unk>",
+    "expected_answer": "12",
+    "expression": "312 / 26"
+  },
+  {
+    "input": "<bos> <unk> 606 + 353 <|eom_id|> <unk>",
+    "expected_answer": "959",
+    "expression": "606 + 353"
+  },
+  {
+    "input": "<bos> <unk> 104 - 89 <|eom_id|> <unk>",
+    "expected_answer": "15",
+    "expression": "104 - 89"
+  },
+  {
+    "input": "<bos> <unk> 7 * 10 <|eom_id|> <unk>",
+    "expected_answer": "70",
+    "expression": "7 * 10"
+  },
+  {
+    "input": "<bos> <unk> 27 * 23 <|eom_id|> <unk>",
+    "expected_answer": "621",
+    "expression": "27 * 23"
+  },
+  {
+    "input": "<bos> <unk> 518 + 331 <|eom_id|> <unk>",
+    "expected_answer": "849",
+    "expression": "518 + 331"
+  },
+  {
+    "input": "<bos> <unk> 0 * 869 <|eom_id|> <unk>",
+    "expected_answer": "0",
+    "expression": "0 * 869"
+  },
+  {
+    "input": "<bos> <unk> 192 / 32 <|eom_id|> <unk>",
+    "expected_answer": "6",
+    "expression": "192 / 32"
+  },
+  {
+    "input": "<bos> <unk> 960 / 24 <|eom_id|> <unk>",
+    "expected_answer": "40",
+    "expression": "960 / 24"
+  },
+  {
+    "input": "<bos> <unk> 184 / 46 <|eom_id|> <unk>",
+    "expected_answer": "4",
+    "expression": "184 / 46"
+  },
+  {
+    "input": "<bos> <unk> 792 / 12 <|eom_id|> <unk>",
+    "expected_answer": "66",
+    "expression": "792 / 12"
+  },
+  {
+    "input": "<bos> <unk> 30 * 29 <|eom_id|> <unk>",
+    "expected_answer": "870",
+    "expression": "30 * 29"
+  },
+  {
+    "input": "<bos> <unk> 846 / 47 <|eom_id|> <unk>",
+    "expected_answer": "18",
+    "expression": "846 / 47"
+  },
+  {
+    "input": "<bos> <unk> 20 * 15 <|eom_id|> <unk>",
+    "expected_answer": "300",
+    "expression": "20 * 15"
+  },
+  {
+    "input": "<bos> <unk> 285 + 461 <|eom_id|> <unk>",
+    "expected_answer": "746",
+    "expression": "285 + 461"
+  },
+  {
+    "input": "<bos> <unk> 768 - 475 <|eom_id|> <unk>",
+    "expected_answer": "293",
+    "expression": "768 - 475"
+  },
+  {
+    "input": "<bos> <unk> 22 / 22 <|eom_id|> <unk>",
+    "expected_answer": "1",
+    "expression": "22 / 22"
+  },
+  {
+    "input": "<bos> <unk> 231 / 21 <|eom_id|> <unk>",
+    "expected_answer": "11",
+    "expression": "231 / 21"
+  },
+  {
+    "input": "<bos> <unk> 630 / 14 <|eom_id|> <unk>",
+    "expected_answer": "45",
+    "expression": "630 / 14"
+  },
+  {
+    "input": "<bos> <unk> 21 * 17 <|eom_id|> <unk>",
+    "expected_answer": "357",
+    "expression": "21 * 17"
+  },
+  {
+    "input": "<bos> <unk> 0 * 529 <|eom_id|> <unk>",
+    "expected_answer": "0",
+    "expression": "0 * 529"
+  },
+  {
+    "input": "<bos> <unk> 87 - 30 <|eom_id|> <unk>",
+    "expected_answer": "57",
+    "expression": "87 - 30"
+  },
+  {
+    "input": "<bos> <unk> 480 / 32 <|eom_id|> <unk>",
+    "expected_answer": "15",
+    "expression": "480 / 32"
+  },
+  {
+    "input": "<bos> <unk> 924 / 42 <|eom_id|> <unk>",
+    "expected_answer": "22",
+    "expression": "924 / 42"
+  },
+  {
+    "input": "<bos> <unk> 29 / 29 <|eom_id|> <unk>",
+    "expected_answer": "1",
+    "expression": "29 / 29"
+  },
+  {
+    "input": "<bos> <unk> 301 + 226 <|eom_id|> <unk>",
+    "expected_answer": "527",
+    "expression": "301 + 226"
+  },
+  {
+    "input": "<bos> <unk> 315 / 45 <|eom_id|> <unk>",
+    "expected_answer": "7",
+    "expression": "315 / 45"
+  },
+  {
+    "input": "<bos> <unk> 23 * 30 <|eom_id|> <unk>",
+    "expected_answer": "690",
+    "expression": "23 * 30"
+  },
+  {
+    "input": "<bos> <unk> 27 * 35 <|eom_id|> <unk>",
+    "expected_answer": "945",
+    "expression": "27 * 35"
+  },
+  {
+    "input": "<bos> <unk> 22 * 44 <|eom_id|> <unk>",
+    "expected_answer": "968",
+    "expression": "22 * 44"
+  },
+  {
+    "input": "<bos> <unk> 342 / 18 <|eom_id|> <unk>",
+    "expected_answer": "19",
+    "expression": "342 / 18"
+  },
+  {
+    "input": "<bos> <unk> 14 * 15 <|eom_id|> <unk>",
+    "expected_answer": "210",
+    "expression": "14 * 15"
+  },
+  {
+    "input": "<bos> <unk> 323 - 61 <|eom_id|> <unk>",
+    "expected_answer": "262",
+    "expression": "323 - 61"
+  },
+  {
+    "input": "<bos> <unk> 196 - 55 <|eom_id|> <unk>",
+    "expected_answer": "141",
+    "expression": "196 - 55"
+  },
+  {
+    "input": "<bos> <unk> 828 / 18 <|eom_id|> <unk>",
+    "expected_answer": "46",
+    "expression": "828 / 18"
+  },
+  {
+    "input": "<bos> <unk> 6 * 49 <|eom_id|> <unk>",
+    "expected_answer": "294",
+    "expression": "6 * 49"
+  },
+  {
+    "input": "<bos> <unk> 14 * 46 <|eom_id|> <unk>",
+    "expected_answer": "644",
+    "expression": "14 * 46"
+  },
+  {
+    "input": "<bos> <unk> 309 - 7 <|eom_id|> <unk>",
+    "expected_answer": "302",
+    "expression": "309 - 7"
+  },
+  {
+    "input": "<bos> <unk> 280 - 23 <|eom_id|> <unk>",
+    "expected_answer": "257",
+    "expression": "280 - 23"
+  },
+  {
+    "input": "<bos> <unk> 566 + 149 <|eom_id|> <unk>",
+    "expected_answer": "715",
+    "expression": "566 + 149"
+  },
+  {
+    "input": "<bos> <unk> 653 - 502 <|eom_id|> <unk>",
+    "expected_answer": "151",
+    "expression": "653 - 502"
+  },
+  {
+    "input": "<bos> <unk> 893 + 1 <|eom_id|> <unk>",
+    "expected_answer": "894",
+    "expression": "893 + 1"
+  },
+  {
+    "input": "<bos> <unk> 30 * 30 <|eom_id|> <unk>",
+    "expected_answer": "900",
+    "expression": "30 * 30"
+  },
+  {
+    "input": "<bos> <unk> 242 / 22 <|eom_id|> <unk>",
+    "expected_answer": "11",
+    "expression": "242 / 22"
+  },
+  {
+    "input": "<bos> <unk> 258 + 489 <|eom_id|> <unk>",
+    "expected_answer": "747",
+    "expression": "258 + 489"
+  },
+  {
+    "input": "<bos> <unk> 841 + 16 <|eom_id|> <unk>",
+    "expected_answer": "857",
+    "expression": "841 + 16"
+  },
+  {
+    "input": "<bos> <unk> 128 / 32 <|eom_id|> <unk>",
+    "expected_answer": "4",
+    "expression": "128 / 32"
+  },
+  {
+    "input": "<bos> <unk> 155 + 152 <|eom_id|> <unk>",
+    "expected_answer": "307",
+    "expression": "155 + 152"
+  },
+  {
+    "input": "<bos> <unk> 5 * 63 <|eom_id|> <unk>",
+    "expected_answer": "315",
+    "expression": "5 * 63"
+  },
+  {
+    "input": "<bos> <unk> 571 + 391 <|eom_id|> <unk>",
+    "expected_answer": "962",
+    "expression": "571 + 391"
+  },
+  {
+    "input": "<bos> <unk> 741 / 39 <|eom_id|> <unk>",
+    "expected_answer": "19",
+    "expression": "741 / 39"
+  },
+  {
+    "input": "<bos> <unk> 794 - 535 <|eom_id|> <unk>",
+    "expected_answer": "259",
+    "expression": "794 - 535"
+  },
+  {
+    "input": "<bos> <unk> 812 / 29 <|eom_id|> <unk>",
+    "expected_answer": "28",
+    "expression": "812 / 29"
+  },
+  {
+    "input": "<bos> <unk> 27 * 19 <|eom_id|> <unk>",
+    "expected_answer": "513",
+    "expression": "27 * 19"
+  },
+  {
+    "input": "<bos> <unk> 624 + 50 <|eom_id|> <unk>",
+    "expected_answer": "674",
+    "expression": "624 + 50"
+  },
+  {
+    "input": "<bos> <unk> 640 - 216 <|eom_id|> <unk>",
+    "expected_answer": "424",
+    "expression": "640 - 216"
+  },
+  {
+    "input": "<bos> <unk> 5 * 40 <|eom_id|> <unk>",
+    "expected_answer": "200",
+    "expression": "5 * 40"
+  },
+  {
+    "input": "<bos> <unk> 177 - 141 <|eom_id|> <unk>",
+    "expected_answer": "36",
+    "expression": "177 - 141"
+  },
+  {
+    "input": "<bos> <unk> 160 + 2 <|eom_id|> <unk>",
+    "expected_answer": "162",
+    "expression": "160 + 2"
+  },
+  {
+    "input": "<bos> <unk> 870 / 29 <|eom_id|> <unk>",
+    "expected_answer": "30",
+    "expression": "870 / 29"
+  },
+  {
+    "input": "<bos> <unk> 2 * 118 <|eom_id|> <unk>",
+    "expected_answer": "236",
+    "expression": "2 * 118"
+  },
+  {
+    "input": "<bos> <unk> 18 * 44 <|eom_id|> <unk>",
+    "expected_answer": "792",
+    "expression": "18 * 44"
+  },
+  {
+    "input": "<bos> <unk> 875 / 5 <|eom_id|> <unk>",
+    "expected_answer": "175",
+    "expression": "875 / 5"
+  },
+  {
+    "input": "<bos> <unk> 946 - 270 <|eom_id|> <unk>",
+    "expected_answer": "676",
+    "expression": "946 - 270"
+  },
+  {
+    "input": "<bos> <unk> 435 - 58 <|eom_id|> <unk>",
+    "expected_answer": "377",
+    "expression": "435 - 58"
+  },
+  {
+    "input": "<bos> <unk> 663 - 152 <|eom_id|> <unk>",
+    "expected_answer": "511",
+    "expression": "663 - 152"
+  },
+  {
+    "input": "<bos> <unk> 9 * 9 <|eom_id|> <unk>",
+    "expected_answer": "81",
+    "expression": "9 * 9"
+  },
+  {
+    "input": "<bos> <unk> 169 + 811 <|eom_id|> <unk>",
+    "expected_answer": "980",
+    "expression": "169 + 811"
+  },
+  {
+    "input": "<bos> <unk> 18 * 28 <|eom_id|> <unk>",
+    "expected_answer": "504",
+    "expression": "18 * 28"
+  },
+  {
+    "input": "<bos> <unk> 479 + 311 <|eom_id|> <unk>",
+    "expected_answer": "790",
+    "expression": "479 + 311"
+  },
+  {
+    "input": "<bos> <unk> 576 / 18 <|eom_id|> <unk>",
+    "expected_answer": "32",
+    "expression": "576 / 18"
+  },
+  {
+    "input": "<bos> <unk> 145 / 29 <|eom_id|> <unk>",
+    "expected_answer": "5",
+    "expression": "145 / 29"
+  },
+  {
+    "input": "<bos> <unk> 910 + 55 <|eom_id|> <unk>",
+    "expected_answer": "965",
+    "expression": "910 + 55"
+  },
+  {
+    "input": "<bos> <unk> 16 * 1 <|eom_id|> <unk>",
+    "expected_answer": "16",
+    "expression": "16 * 1"
+  },
+  {
+    "input": "<bos> <unk> 234 + 690 <|eom_id|> <unk>",
+    "expected_answer": "924",
+    "expression": "234 + 690"
+  },
+  {
+    "input": "<bos> <unk> 783 + 172 <|eom_id|> <unk>",
+    "expected_answer": "955",
+    "expression": "783 + 172"
+  },
+  {
+    "input": "<bos> <unk> 2 * 390 <|eom_id|> <unk>",
+    "expected_answer": "780",
+    "expression": "2 * 390"
+  },
+  {
+    "input": "<bos> <unk> 481 - 265 <|eom_id|> <unk>",
+    "expected_answer": "216",
+    "expression": "481 - 265"
+  },
+  {
+    "input": "<bos> <unk> 198 / 18 <|eom_id|> <unk>",
+    "expected_answer": "11",
+    "expression": "198 / 18"
+  },
+  {
+    "input": "<bos> <unk> 615 / 41 <|eom_id|> <unk>",
+    "expected_answer": "15",
+    "expression": "615 / 41"
+  },
+  {
+    "input": "<bos> <unk> 481 + 356 <|eom_id|> <unk>",
+    "expected_answer": "837",
+    "expression": "481 + 356"
+  },
+  {
+    "input": "<bos> <unk> 440 / 22 <|eom_id|> <unk>",
+    "expected_answer": "20",
+    "expression": "440 / 22"
+  },
+  {
+    "input": "<bos> <unk> 878 + 20 <|eom_id|> <unk>",
+    "expected_answer": "898",
+    "expression": "878 + 20"
+  },
+  {
+    "input": "<bos> <unk> 26 * 31 <|eom_id|> <unk>",
+    "expected_answer": "806",
+    "expression": "26 * 31"
+  },
+  {
+    "input": "<bos> <unk> 25 * 35 <|eom_id|> <unk>",
+    "expected_answer": "875",
+    "expression": "25 * 35"
+  },
+  {
+    "input": "<bos> <unk> 465 + 90 <|eom_id|> <unk>",
+    "expected_answer": "555",
+    "expression": "465 + 90"
+  },
+  {
+    "input": "<bos> <unk> 16 * 20 <|eom_id|> <unk>",
+    "expected_answer": "320",
+    "expression": "16 * 20"
+  },
+  {
+    "input": "<bos> <unk> 993 + 6 <|eom_id|> <unk>",
+    "expected_answer": "999",
+    "expression": "993 + 6"
+  },
+  {
+    "input": "<bos> <unk> 858 / 33 <|eom_id|> <unk>",
+    "expected_answer": "26",
+    "expression": "858 / 33"
+  },
+  {
+    "input": "<bos> <unk> 673 + 277 <|eom_id|> <unk>",
+    "expected_answer": "950",
+    "expression": "673 + 277"
+  },
+  {
+    "input": "<bos> <unk> 81 / 27 <|eom_id|> <unk>",
+    "expected_answer": "3",
+    "expression": "81 / 27"
+  },
+  {
+    "input": "<bos> <unk> 530 - 370 <|eom_id|> <unk>",
+    "expected_answer": "160",
+    "expression": "530 - 370"
+  },
+  {
+    "input": "<bos> <unk> 574 / 41 <|eom_id|> <unk>",
+    "expected_answer": "14",
+    "expression": "574 / 41"
+  },
+  {
+    "input": "<bos> <unk> 208 + 273 <|eom_id|> <unk>",
+    "expected_answer": "481",
+    "expression": "208 + 273"
+  },
+  {
+    "input": "<bos> <unk> 949 - 294 <|eom_id|> <unk>",
+    "expected_answer": "655",
+    "expression": "949 - 294"
+  },
+  {
+    "input": "<bos> <unk> 675 / 45 <|eom_id|> <unk>",
+    "expected_answer": "15",
+    "expression": "675 / 45"
+  },
+  {
+    "input": "<bos> <unk> 29 + 645 <|eom_id|> <unk>",
+    "expected_answer": "674",
+    "expression": "29 + 645"
+  },
+  {
+    "input": "<bos> <unk> 726 - 162 <|eom_id|> <unk>",
+    "expected_answer": "564",
+    "expression": "726 - 162"
+  },
+  {
+    "input": "<bos> <unk> 0 * 565 <|eom_id|> <unk>",
+    "expected_answer": "0",
+    "expression": "0 * 565"
+  },
+  {
+    "input": "<bos> <unk> 342 / 6 <|eom_id|> <unk>",
+    "expected_answer": "57",
+    "expression": "342 / 6"
+  },
+  {
+    "input": "<bos> <unk> 472 + 120 <|eom_id|> <unk>",
+    "expected_answer": "592",
+    "expression": "472 + 120"
+  },
+  {
+    "input": "<bos> <unk> 510 - 477 <|eom_id|> <unk>",
+    "expected_answer": "33",
+    "expression": "510 - 477"
+  },
+  {
+    "input": "<bos> <unk> 17 * 26 <|eom_id|> <unk>",
+    "expected_answer": "442",
+    "expression": "17 * 26"
+  },
+  {
+    "input": "<bos> <unk> 465 / 31 <|eom_id|> <unk>",
+    "expected_answer": "15",
+    "expression": "465 / 31"
+  },
+  {
+    "input": "<bos> <unk> 144 / 36 <|eom_id|> <unk>",
+    "expected_answer": "4",
+    "expression": "144 / 36"
+  },
+  {
+    "input": "<bos> <unk> 988 / 13 <|eom_id|> <unk>",
+    "expected_answer": "76",
+    "expression": "988 / 13"
+  },
+  {
+    "input": "<bos> <unk> 884 - 71 <|eom_id|> <unk>",
+    "expected_answer": "813",
+    "expression": "884 - 71"
+  },
+  {
+    "input": "<bos> <unk> 26 * 21 <|eom_id|> <unk>",
+    "expected_answer": "546",
+    "expression": "26 * 21"
+  },
+  {
+    "input": "<bos> <unk> 0 * 289 <|eom_id|> <unk>",
+    "expected_answer": "0",
+    "expression": "0 * 289"
+  },
+  {
+    "input": "<bos> <unk> 31 * 9 <|eom_id|> <unk>",
+    "expected_answer": "279",
+    "expression": "31 * 9"
+  },
+  {
+    "input": "<bos> <unk> 525 / 35 <|eom_id|> <unk>",
+    "expected_answer": "15",
+    "expression": "525 / 35"
+  },
+  {
+    "input": "<bos> <unk> 21 * 35 <|eom_id|> <unk>",
+    "expected_answer": "735",
+    "expression": "21 * 35"
+  },
+  {
+    "input": "<bos> <unk> 600 / 30 <|eom_id|> <unk>",
+    "expected_answer": "20",
+    "expression": "600 / 30"
+  },
+  {
+    "input": "<bos> <unk> 714 - 244 <|eom_id|> <unk>",
+    "expected_answer": "470",
+    "expression": "714 - 244"
+  },
+  {
+    "input": "<bos> <unk> 780 / 15 <|eom_id|> <unk>",
+    "expected_answer": "52",
+    "expression": "780 / 15"
+  },
+  {
+    "input": "<bos> <unk> 325 + 484 <|eom_id|> <unk>",
+    "expected_answer": "809",
+    "expression": "325 + 484"
+  },
+  {
+    "input": "<bos> <unk> 225 / 25 <|eom_id|> <unk>",
+    "expected_answer": "9",
+    "expression": "225 / 25"
+  },
+  {
+    "input": "<bos> <unk> 192 / 3 <|eom_id|> <unk>",
+    "expected_answer": "64",
+    "expression": "192 / 3"
+  },
+  {
+    "input": "<bos> <unk> 6 * 112 <|eom_id|> <unk>",
+    "expected_answer": "672",
+    "expression": "6 * 112"
+  },
+  {
+    "input": "<bos> <unk> 538 + 233 <|eom_id|> <unk>",
+    "expected_answer": "771",
+    "expression": "538 + 233"
+  },
+  {
+    "input": "<bos> <unk> 739 + 73 <|eom_id|> <unk>",
+    "expected_answer": "812",
+    "expression": "739 + 73"
+  },
+  {
+    "input": "<bos> <unk> 168 / 42 <|eom_id|> <unk>",
+    "expected_answer": "4",
+    "expression": "168 / 42"
+  },
+  {
+    "input": "<bos> <unk> 480 + 271 <|eom_id|> <unk>",
+    "expected_answer": "751",
+    "expression": "480 + 271"
+  },
+  {
+    "input": "<bos> <unk> 25 * 5 <|eom_id|> <unk>",
+    "expected_answer": "125",
+    "expression": "25 * 5"
+  },
+  {
+    "input": "<bos> <unk> 24 * 20 <|eom_id|> <unk>",
+    "expected_answer": "480",
+    "expression": "24 * 20"
+  },
+  {
+    "input": "<bos> <unk> 35 / 35 <|eom_id|> <unk>",
+    "expected_answer": "1",
+    "expression": "35 / 35"
+  },
+  {
+    "input": "<bos> <unk> 240 + 646 <|eom_id|> <unk>",
+    "expected_answer": "886",
+    "expression": "240 + 646"
+  },
+  {
+    "input": "<bos> <unk> 14 * 11 <|eom_id|> <unk>",
+    "expected_answer": "154",
+    "expression": "14 * 11"
+  },
+  {
+    "input": "<bos> <unk> 175 / 7 <|eom_id|> <unk>",
+    "expected_answer": "25",
+    "expression": "175 / 7"
+  },
+  {
+    "input": "<bos> <unk> 968 / 11 <|eom_id|> <unk>",
+    "expected_answer": "88",
+    "expression": "968 / 11"
+  },
+  {
+    "input": "<bos> <unk> 1 * 47 <|eom_id|> <unk>",
+    "expected_answer": "47",
+    "expression": "1 * 47"
+  },
+  {
+    "input": "<bos> <unk> 3 * 150 <|eom_id|> <unk>",
+    "expected_answer": "450",
+    "expression": "3 * 150"
+  },
+  {
+    "input": "<bos> <unk> 23 * 27 <|eom_id|> <unk>",
+    "expected_answer": "621",
+    "expression": "23 * 27"
+  },
+  {
+    "input": "<bos> <unk> 250 - 135 <|eom_id|> <unk>",
+    "expected_answer": "115",
+    "expression": "250 - 135"
+  },
+  {
+    "input": "<bos> <unk> 777 / 37 <|eom_id|> <unk>",
+    "expected_answer": "21",
+    "expression": "777 / 37"
+  },
+  {
+    "input": "<bos> <unk> 174 - 44 <|eom_id|> <unk>",
+    "expected_answer": "130",
+    "expression": "174 - 44"
+  },
+  {
+    "input": "<bos> <unk> 624 + 195 <|eom_id|> <unk>",
+    "expected_answer": "819",
+    "expression": "624 + 195"
+  },
+  {
+    "input": "<bos> <unk> 509 - 467 <|eom_id|> <unk>",
+    "expected_answer": "42",
+    "expression": "509 - 467"
+  },
+  {
+    "input": "<bos> <unk> 237 - 118 <|eom_id|> <unk>",
+    "expected_answer": "119",
+    "expression": "237 - 118"
+  },
+  {
+    "input": "<bos> <unk> 29 * 16 <|eom_id|> <unk>",
+    "expected_answer": "464",
+    "expression": "29 * 16"
+  },
+  {
+    "input": "<bos> <unk> 920 + 59 <|eom_id|> <unk>",
+    "expected_answer": "979",
+    "expression": "920 + 59"
+  },
+  {
+    "input": "<bos> <unk> 10 * 9 <|eom_id|> <unk>",
+    "expected_answer": "90",
+    "expression": "10 * 9"
+  },
+  {
+    "input": "<bos> <unk> 851 / 23 <|eom_id|> <unk>",
+    "expected_answer": "37",
+    "expression": "851 / 23"
+  },
+  {
+    "input": "<bos> <unk> 27 * 16 <|eom_id|> <unk>",
+    "expected_answer": "432",
+    "expression": "27 * 16"
+  },
+  {
+    "input": "<bos> <unk> 240 / 20 <|eom_id|> <unk>",
+    "expected_answer": "12",
+    "expression": "240 / 20"
+  },
+  {
+    "input": "<bos> <unk> 186 / 31 <|eom_id|> <unk>",
+    "expected_answer": "6",
+    "expression": "186 / 31"
+  },
+  {
+    "input": "<bos> <unk> 390 - 292 <|eom_id|> <unk>",
+    "expected_answer": "98",
+    "expression": "390 - 292"
+  },
+  {
+    "input": "<bos> <unk> 18 * 44 <|eom_id|> <unk>",
+    "expected_answer": "792",
+    "expression": "18 * 44"
+  },
+  {
+    "input": "<bos> <unk> 1 * 849 <|eom_id|> <unk>",
+    "expected_answer": "849",
+    "expression": "1 * 849"
+  },
+  {
+    "input": "<bos> <unk> 0 / 18 <|eom_id|> <unk>",
+    "expected_answer": "0",
+    "expression": "0 / 18"
+  },
+  {
+    "input": "<bos> <unk> 932 + 63 <|eom_id|> <unk>",
+    "expected_answer": "995",
+    "expression": "932 + 63"
+  },
+  {
+    "input": "<bos> <unk> 14 * 45 <|eom_id|> <unk>",
+    "expected_answer": "630",
+    "expression": "14 * 45"
+  },
+  {
+    "input": "<bos> <unk> 651 - 194 <|eom_id|> <unk>",
+    "expected_answer": "457",
+    "expression": "651 - 194"
+  },
+  {
+    "input": "<bos> <unk> 8 * 80 <|eom_id|> <unk>",
+    "expected_answer": "640",
+    "expression": "8 * 80"
+  },
+  {
+    "input": "<bos> <unk> 925 + 5 <|eom_id|> <unk>",
+    "expected_answer": "930",
+    "expression": "925 + 5"
+  },
+  {
+    "input": "<bos> <unk> 28 * 2 <|eom_id|> <unk>",
+    "expected_answer": "56",
+    "expression": "28 * 2"
+  },
+  {
+    "input": "<bos> <unk> 8 * 11 <|eom_id|> <unk>",
+    "expected_answer": "88",
+    "expression": "8 * 11"
+  },
+  {
+    "input": "<bos> <unk> 20 * 47 <|eom_id|> <unk>",
+    "expected_answer": "940",
+    "expression": "20 * 47"
+  },
+  {
+    "input": "<bos> <unk> 300 / 12 <|eom_id|> <unk>",
+    "expected_answer": "25",
+    "expression": "300 / 12"
+  },
+  {
+    "input": "<bos> <unk> 805 - 552 <|eom_id|> <unk>",
+    "expected_answer": "253",
+    "expression": "805 - 552"
+  },
+  {
+    "input": "<bos> <unk> 17 * 53 <|eom_id|> <unk>",
+    "expected_answer": "901",
+    "expression": "17 * 53"
+  },
+  {
+    "input": "<bos> <unk> 263 - 246 <|eom_id|> <unk>",
+    "expected_answer": "17",
+    "expression": "263 - 246"
+  },
+  {
+    "input": "<bos> <unk> 21 * 7 <|eom_id|> <unk>",
+    "expected_answer": "147",
+    "expression": "21 * 7"
+  },
+  {
+    "input": "<bos> <unk> 180 / 5 <|eom_id|> <unk>",
+    "expected_answer": "36",
+    "expression": "180 / 5"
+  },
+  {
+    "input": "<bos> <unk> 880 - 692 <|eom_id|> <unk>",
+    "expected_answer": "188",
+    "expression": "880 - 692"
+  },
+  {
+    "input": "<bos> <unk> 396 / 36 <|eom_id|> <unk>",
+    "expected_answer": "11",
+    "expression": "396 / 36"
+  },
+  {
+    "input": "<bos> <unk> 809 + 101 <|eom_id|> <unk>",
+    "expected_answer": "910",
+    "expression": "809 + 101"
+  },
+  {
+    "input": "<bos> <unk> 270 + 549 <|eom_id|> <unk>",
+    "expected_answer": "819",
+    "expression": "270 + 549"
+  },
+  {
+    "input": "<bos> <unk> 465 + 377 <|eom_id|> <unk>",
+    "expected_answer": "842",
+    "expression": "465 + 377"
+  },
+  {
+    "input": "<bos> <unk> 24 * 40 <|eom_id|> <unk>",
+    "expected_answer": "960",
+    "expression": "24 * 40"
+  },
+  {
+    "input": "<bos> <unk> 6 * 59 <|eom_id|> <unk>",
+    "expected_answer": "354",
+    "expression": "6 * 59"
+  },
+  {
+    "input": "<bos> <unk> 634 / 2 <|eom_id|> <unk>",
+    "expected_answer": "317",
+    "expression": "634 / 2"
+  },
+  {
+    "input": "<bos> <unk> 14 * 8 <|eom_id|> <unk>",
+    "expected_answer": "112",
+    "expression": "14 * 8"
+  },
+  {
+    "input": "<bos> <unk> 405 / 45 <|eom_id|> <unk>",
+    "expected_answer": "9",
+    "expression": "405 / 45"
+  },
+  {
+    "input": "<bos> <unk> 136 / 8 <|eom_id|> <unk>",
+    "expected_answer": "17",
+    "expression": "136 / 8"
+  },
+  {
+    "input": "<bos> <unk> 968 + 2 <|eom_id|> <unk>",
+    "expected_answer": "970",
+    "expression": "968 + 2"
+  },
+  {
+    "input": "<bos> <unk> 31 * 7 <|eom_id|> <unk>",
+    "expected_answer": "217",
+    "expression": "31 * 7"
+  },
+  {
+    "input": "<bos> <unk> 240 + 550 <|eom_id|> <unk>",
+    "expected_answer": "790",
+    "expression": "240 + 550"
+  },
+  {
+    "input": "<bos> <unk> 397 - 232 <|eom_id|> <unk>",
+    "expected_answer": "165",
+    "expression": "397 - 232"
+  },
+  {
+    "input": "<bos> <unk> 26 * 37 <|eom_id|> <unk>",
+    "expected_answer": "962",
+    "expression": "26 * 37"
+  },
+  {
+    "input": "<bos> <unk> 906 - 424 <|eom_id|> <unk>",
+    "expected_answer": "482",
+    "expression": "906 - 424"
+  },
+  {
+    "input": "<bos> <unk> 853 + 125 <|eom_id|> <unk>",
+    "expected_answer": "978",
+    "expression": "853 + 125"
+  },
+  {
+    "input": "<bos> <unk> 36 / 18 <|eom_id|> <unk>",
+    "expected_answer": "2",
+    "expression": "36 / 18"
+  },
+  {
+    "input": "<bos> <unk> 13 * 56 <|eom_id|> <unk>",
+    "expected_answer": "728",
+    "expression": "13 * 56"
+  },
+  {
+    "input": "<bos> <unk> 864 / 16 <|eom_id|> <unk>",
+    "expected_answer": "54",
+    "expression": "864 / 16"
+  },
+  {
+    "input": "<bos> <unk> 6 * 94 <|eom_id|> <unk>",
+    "expected_answer": "564",
+    "expression": "6 * 94"
+  },
+  {
+    "input": "<bos> <unk> 3 * 203 <|eom_id|> <unk>",
+    "expected_answer": "609",
+    "expression": "3 * 203"
+  },
+  {
+    "input": "<bos> <unk> 12 * 15 <|eom_id|> <unk>",
+    "expected_answer": "180",
+    "expression": "12 * 15"
+  },
+  {
+    "input": "<bos> <unk> 324 / 6 <|eom_id|> <unk>",
+    "expected_answer": "54",
+    "expression": "324 / 6"
+  },
+  {
+    "input": "<bos> <unk> 51 + 805 <|eom_id|> <unk>",
+    "expected_answer": "856",
+    "expression": "51 + 805"
+  },
+  {
+    "input": "<bos> <unk> 15 * 16 <|eom_id|> <unk>",
+    "expected_answer": "240",
+    "expression": "15 * 16"
+  },
+  {
+    "input": "<bos> <unk> 70 - 70 <|eom_id|> <unk>",
+    "expected_answer": "0",
+    "expression": "70 - 70"
+  },
+  {
+    "input": "<bos> <unk> 600 - 221 <|eom_id|> <unk>",
+    "expected_answer": "379",
+    "expression": "600 - 221"
+  },
+  {
+    "input": "<bos> <unk> 336 - 75 <|eom_id|> <unk>",
+    "expected_answer": "261",
+    "expression": "336 - 75"
+  },
+  {
+    "input": "<bos> <unk> 283 + 148 <|eom_id|> <unk>",
+    "expected_answer": "431",
+    "expression": "283 + 148"
+  },
+  {
+    "input": "<bos> <unk> 553 - 256 <|eom_id|> <unk>",
+    "expected_answer": "297",
+    "expression": "553 - 256"
+  },
+  {
+    "input": "<bos> <unk> 112 - 84 <|eom_id|> <unk>",
+    "expected_answer": "28",
+    "expression": "112 - 84"
+  },
+  {
+    "input": "<bos> <unk> 134 + 15 <|eom_id|> <unk>",
+    "expected_answer": "149",
+    "expression": "134 + 15"
+  },
+  {
+    "input": "<bos> <unk> 15 * 41 <|eom_id|> <unk>",
+    "expected_answer": "615",
+    "expression": "15 * 41"
+  },
+  {
+    "input": "<bos> <unk> 178 + 271 <|eom_id|> <unk>",
+    "expected_answer": "449",
+    "expression": "178 + 271"
+  },
+  {
+    "input": "<bos> <unk> 129 + 759 <|eom_id|> <unk>",
+    "expected_answer": "888",
+    "expression": "129 + 759"
+  },
+  {
+    "input": "<bos> <unk> 102 / 34 <|eom_id|> <unk>",
+    "expected_answer": "3",
+    "expression": "102 / 34"
+  },
+  {
+    "input": "<bos> <unk> 487 + 459 <|eom_id|> <unk>",
+    "expected_answer": "946",
+    "expression": "487 + 459"
+  },
+  {
+    "input": "<bos> <unk> 6 * 115 <|eom_id|> <unk>",
+    "expected_answer": "690",
+    "expression": "6 * 115"
+  },
+  {
+    "input": "<bos> <unk> 968 - 629 <|eom_id|> <unk>",
+    "expected_answer": "339",
+    "expression": "968 - 629"
+  },
+  {
+    "input": "<bos> <unk> 744 + 154 <|eom_id|> <unk>",
+    "expected_answer": "898",
+    "expression": "744 + 154"
+  },
+  {
+    "input": "<bos> <unk> 0 / 42 <|eom_id|> <unk>",
+    "expected_answer": "0",
+    "expression": "0 / 42"
+  },
+  {
+    "input": "<bos> <unk> 490 + 433 <|eom_id|> <unk>",
+    "expected_answer": "923",
+    "expression": "490 + 433"
+  },
+  {
+    "input": "<bos> <unk> 168 / 28 <|eom_id|> <unk>",
+    "expected_answer": "6",
+    "expression": "168 / 28"
+  },
+  {
+    "input": "<bos> <unk> 644 / 46 <|eom_id|> <unk>",
+    "expected_answer": "14",
+    "expression": "644 / 46"
+  },
+  {
+    "input": "<bos> <unk> 920 + 10 <|eom_id|> <unk>",
+    "expected_answer": "930",
+    "expression": "920 + 10"
+  },
+  {
+    "input": "<bos> <unk> 9 * 8 <|eom_id|> <unk>",
+    "expected_answer": "72",
+    "expression": "9 * 8"
+  },
+  {
+    "input": "<bos> <unk> 281 - 280 <|eom_id|> <unk>",
+    "expected_answer": "1",
+    "expression": "281 - 280"
+  },
+  {
+    "input": "<bos> <unk> 24 * 38 <|eom_id|> <unk>",
+    "expected_answer": "912",
+    "expression": "24 * 38"
+  },
+  {
+    "input": "<bos> <unk> 29 * 32 <|eom_id|> <unk>",
+    "expected_answer": "928",
+    "expression": "29 * 32"
+  },
+  {
+    "input": "<bos> <unk> 203 / 7 <|eom_id|> <unk>",
+    "expected_answer": "29",
+    "expression": "203 / 7"
+  },
+  {
+    "input": "<bos> <unk> 440 - 231 <|eom_id|> <unk>",
+    "expected_answer": "209",
+    "expression": "440 - 231"
+  },
+  {
+    "input": "<bos> <unk> 423 - 173 <|eom_id|> <unk>",
+    "expected_answer": "250",
+    "expression": "423 - 173"
+  },
+  {
+    "input": "<bos> <unk> 676 / 26 <|eom_id|> <unk>",
+    "expected_answer": "26",
+    "expression": "676 / 26"
+  },
+  {
+    "input": "<bos> <unk> 320 + 437 <|eom_id|> <unk>",
+    "expected_answer": "757",
+    "expression": "320 + 437"
+  },
+  {
+    "input": "<bos> <unk> 16 * 23 <|eom_id|> <unk>",
+    "expected_answer": "368",
+    "expression": "16 * 23"
+  },
+  {
+    "input": "<bos> <unk> 703 - 485 <|eom_id|> <unk>",
+    "expected_answer": "218",
+    "expression": "703 - 485"
+  },
+  {
+    "input": "<bos> <unk> 93 + 851 <|eom_id|> <unk>",
+    "expected_answer": "944",
+    "expression": "93 + 851"
+  },
+  {
+    "input": "<bos> <unk> 95 + 442 <|eom_id|> <unk>",
+    "expected_answer": "537",
+    "expression": "95 + 442"
+  },
+  {
+    "input": "<bos> <unk> 762 + 189 <|eom_id|> <unk>",
+    "expected_answer": "951",
+    "expression": "762 + 189"
+  },
+  {
+    "input": "<bos> <unk> 8 * 71 <|eom_id|> <unk>",
+    "expected_answer": "568",
+    "expression": "8 * 71"
+  },
+  {
+    "input": "<bos> <unk> 600 + 287 <|eom_id|> <unk>",
+    "expected_answer": "887",
+    "expression": "600 + 287"
+  },
+  {
+    "input": "<bos> <unk> 7 * 105 <|eom_id|> <unk>",
+    "expected_answer": "735",
+    "expression": "7 * 105"
+  },
+  {
+    "input": "<bos> <unk> 27 * 3 <|eom_id|> <unk>",
+    "expected_answer": "81",
+    "expression": "27 * 3"
+  },
+  {
+    "input": "<bos> <unk> 19 * 22 <|eom_id|> <unk>",
+    "expected_answer": "418",
+    "expression": "19 * 22"
+  },
+  {
+    "input": "<bos> <unk> 591 + 259 <|eom_id|> <unk>",
+    "expected_answer": "850",
+    "expression": "591 + 259"
+  },
+  {
+    "input": "<bos> <unk> 158 - 123 <|eom_id|> <unk>",
+    "expected_answer": "35",
+    "expression": "158 - 123"
+  },
+  {
+    "input": "<bos> <unk> 867 - 110 <|eom_id|> <unk>",
+    "expected_answer": "757",
+    "expression": "867 - 110"
+  },
+  {
+    "input": "<bos> <unk> 23 * 7 <|eom_id|> <unk>",
+    "expected_answer": "161",
+    "expression": "23 * 7"
+  },
+  {
+    "input": "<bos> <unk> 14 * 54 <|eom_id|> <unk>",
+    "expected_answer": "756",
+    "expression": "14 * 54"
+  },
+  {
+    "input": "<bos> <unk> 623 + 336 <|eom_id|> <unk>",
+    "expected_answer": "959",
+    "expression": "623 + 336"
+  },
+  {
+    "input": "<bos> <unk> 1 * 184 <|eom_id|> <unk>",
+    "expected_answer": "184",
+    "expression": "1 * 184"
+  },
+  {
+    "input": "<bos> <unk> 19 * 21 <|eom_id|> <unk>",
+    "expected_answer": "399",
+    "expression": "19 * 21"
+  },
+  {
+    "input": "<bos> <unk> 0 * 185 <|eom_id|> <unk>",
+    "expected_answer": "0",
+    "expression": "0 * 185"
+  },
+  {
+    "input": "<bos> <unk> 579 - 410 <|eom_id|> <unk>",
+    "expected_answer": "169",
+    "expression": "579 - 410"
+  },
+  {
+    "input": "<bos> <unk> 145 + 758 <|eom_id|> <unk>",
+    "expected_answer": "903",
+    "expression": "145 + 758"
+  },
+  {
+    "input": "<bos> <unk> 93 + 764 <|eom_id|> <unk>",
+    "expected_answer": "857",
+    "expression": "93 + 764"
+  },
+  {
+    "input": "<bos> <unk> 385 - 214 <|eom_id|> <unk>",
+    "expected_answer": "171",
+    "expression": "385 - 214"
+  },
+  {
+    "input": "<bos> <unk> 220 / 22 <|eom_id|> <unk>",
+    "expected_answer": "10",
+    "expression": "220 / 22"
+  },
+  {
+    "input": "<bos> <unk> 19 * 46 <|eom_id|> <unk>",
+    "expected_answer": "874",
+    "expression": "19 * 46"
+  },
+  {
+    "input": "<bos> <unk> 5 * 13 <|eom_id|> <unk>",
+    "expected_answer": "65",
+    "expression": "5 * 13"
+  },
+  {
+    "input": "<bos> <unk> 161 - 158 <|eom_id|> <unk>",
+    "expected_answer": "3",
+    "expression": "161 - 158"
+  },
+  {
+    "input": "<bos> <unk> 690 + 41 <|eom_id|> <unk>",
+    "expected_answer": "731",
+    "expression": "690 + 41"
+  },
+  {
+    "input": "<bos> <unk> 28 * 27 <|eom_id|> <unk>",
+    "expected_answer": "756",
+    "expression": "28 * 27"
+  },
+  {
+    "input": "<bos> <unk> 546 / 39 <|eom_id|> <unk>",
+    "expected_answer": "14",
+    "expression": "546 / 39"
+  },
+  {
+    "input": "<bos> <unk> 234 / 18 <|eom_id|> <unk>",
+    "expected_answer": "13",
+    "expression": "234 / 18"
+  },
+  {
+    "input": "<bos> <unk> 353 + 440 <|eom_id|> <unk>",
+    "expected_answer": "793",
+    "expression": "353 + 440"
+  },
+  {
+    "input": "<bos> <unk> 290 + 694 <|eom_id|> <unk>",
+    "expected_answer": "984",
+    "expression": "290 + 694"
+  },
+  {
+    "input": "<bos> <unk> 714 / 34 <|eom_id|> <unk>",
+    "expected_answer": "21",
+    "expression": "714 / 34"
+  },
+  {
+    "input": "<bos> <unk> 2 * 112 <|eom_id|> <unk>",
+    "expected_answer": "224",
+    "expression": "2 * 112"
+  },
+  {
+    "input": "<bos> <unk> 39 / 39 <|eom_id|> <unk>",
+    "expected_answer": "1",
+    "expression": "39 / 39"
+  },
+  {
+    "input": "<bos> <unk> 209 + 308 <|eom_id|> <unk>",
+    "expected_answer": "517",
+    "expression": "209 + 308"
+  },
+  {
+    "input": "<bos> <unk> 785 - 140 <|eom_id|> <unk>",
+    "expected_answer": "645",
+    "expression": "785 - 140"
+  },
+  {
+    "input": "<bos> <unk> 18 * 20 <|eom_id|> <unk>",
+    "expected_answer": "360",
+    "expression": "18 * 20"
+  },
+  {
+    "input": "<bos> <unk> 7 + 509 <|eom_id|> <unk>",
+    "expected_answer": "516",
+    "expression": "7 + 509"
+  },
+  {
+    "input": "<bos> <unk> 192 / 12 <|eom_id|> <unk>",
+    "expected_answer": "16",
+    "expression": "192 / 12"
+  },
+  {
+    "input": "<bos> <unk> 770 / 35 <|eom_id|> <unk>",
+    "expected_answer": "22",
+    "expression": "770 / 35"
+  },
+  {
+    "input": "<bos> <unk> 512 - 362 <|eom_id|> <unk>",
+    "expected_answer": "150",
+    "expression": "512 - 362"
+  },
+  {
+    "input": "<bos> <unk> 406 + 43 <|eom_id|> <unk>",
+    "expected_answer": "449",
+    "expression": "406 + 43"
+  },
+  {
+    "input": "<bos> <unk> 470 / 2 <|eom_id|> <unk>",
+    "expected_answer": "235",
+    "expression": "470 / 2"
+  },
+  {
+    "input": "<bos> <unk> 882 + 40 <|eom_id|> <unk>",
+    "expected_answer": "922",
+    "expression": "882 + 40"
+  },
+  {
+    "input": "<bos> <unk> 444 / 37 <|eom_id|> <unk>",
+    "expected_answer": "12",
+    "expression": "444 / 37"
+  },
+  {
+    "input": "<bos> <unk> 133 / 19 <|eom_id|> <unk>",
+    "expected_answer": "7",
+    "expression": "133 / 19"
+  },
+  {
+    "input": "<bos> <unk> 988 / 2 <|eom_id|> <unk>",
+    "expected_answer": "494",
+    "expression": "988 / 2"
+  },
+  {
+    "input": "<bos> <unk> 10 * 79 <|eom_id|> <unk>",
+    "expected_answer": "790",
+    "expression": "10 * 79"
+  },
+  {
+    "input": "<bos> <unk> 495 / 45 <|eom_id|> <unk>",
+    "expected_answer": "11",
+    "expression": "495 / 45"
+  },
+  {
+    "input": "<bos> <unk> 447 + 108 <|eom_id|> <unk>",
+    "expected_answer": "555",
+    "expression": "447 + 108"
+  },
+  {
+    "input": "<bos> <unk> 446 - 301 <|eom_id|> <unk>",
+    "expected_answer": "145",
+    "expression": "446 - 301"
+  },
+  {
+    "input": "<bos> <unk> 68 / 34 <|eom_id|> <unk>",
+    "expected_answer": "2",
+    "expression": "68 / 34"
+  },
+  {
+    "input": "<bos> <unk> 940 / 20 <|eom_id|> <unk>",
+    "expected_answer": "47",
+    "expression": "940 / 20"
+  },
+  {
+    "input": "<bos> <unk> 14 * 42 <|eom_id|> <unk>",
+    "expected_answer": "588",
+    "expression": "14 * 42"
+  },
+  {
+    "input": "<bos> <unk> 78 - 65 <|eom_id|> <unk>",
+    "expected_answer": "13",
+    "expression": "78 - 65"
+  },
+  {
+    "input": "<bos> <unk> 543 + 261 <|eom_id|> <unk>",
+    "expected_answer": "804",
+    "expression": "543 + 261"
+  },
+  {
+    "input": "<bos> <unk> 927 - 794 <|eom_id|> <unk>",
+    "expected_answer": "133",
+    "expression": "927 - 794"
+  },
+  {
+    "input": "<bos> <unk> 22 * 41 <|eom_id|> <unk>",
+    "expected_answer": "902",
+    "expression": "22 * 41"
+  },
+  {
+    "input": "<bos> <unk> 241 - 26 <|eom_id|> <unk>",
+    "expected_answer": "215",
+    "expression": "241 - 26"
+  },
+  {
+    "input": "<bos> <unk> 262 - 101 <|eom_id|> <unk>",
+    "expected_answer": "161",
+    "expression": "262 - 101"
+  },
+  {
+    "input": "<bos> <unk> 616 - 156 <|eom_id|> <unk>",
+    "expected_answer": "460",
+    "expression": "616 - 156"
+  },
+  {
+    "input": "<bos> <unk> 181 + 791 <|eom_id|> <unk>",
+    "expected_answer": "972",
+    "expression": "181 + 791"
+  },
+  {
+    "input": "<bos> <unk> 840 / 30 <|eom_id|> <unk>",
+    "expected_answer": "28",
+    "expression": "840 / 30"
+  },
+  {
+    "input": "<bos> <unk> 20 * 9 <|eom_id|> <unk>",
+    "expected_answer": "180",
+    "expression": "20 * 9"
+  },
+  {
+    "input": "<bos> <unk> 600 / 5 <|eom_id|> <unk>",
+    "expected_answer": "120",
+    "expression": "600 / 5"
+  },
+  {
+    "input": "<bos> <unk> 369 / 41 <|eom_id|> <unk>",
+    "expected_answer": "9",
+    "expression": "369 / 41"
+  },
+  {
+    "input": "<bos> <unk> 3 * 180 <|eom_id|> <unk>",
+    "expected_answer": "540",
+    "expression": "3 * 180"
+  },
+  {
+    "input": "<bos> <unk> 317 + 472 <|eom_id|> <unk>",
+    "expected_answer": "789",
+    "expression": "317 + 472"
+  },
+  {
+    "input": "<bos> <unk> 87 / 3 <|eom_id|> <unk>",
+    "expected_answer": "29",
+    "expression": "87 / 3"
+  },
+  {
+    "input": "<bos> <unk> 18 * 4 <|eom_id|> <unk>",
+    "expected_answer": "72",
+    "expression": "18 * 4"
+  },
+  {
+    "input": "<bos> <unk> 629 + 304 <|eom_id|> <unk>",
+    "expected_answer": "933",
+    "expression": "629 + 304"
+  },
+  {
+    "input": "<bos> <unk> 60 / 30 <|eom_id|> <unk>",
+    "expected_answer": "2",
+    "expression": "60 / 30"
+  },
+  {
+    "input": "<bos> <unk> 740 / 37 <|eom_id|> <unk>",
+    "expected_answer": "20",
+    "expression": "740 / 37"
+  },
+  {
+    "input": "<bos> <unk> 329 - 309 <|eom_id|> <unk>",
+    "expected_answer": "20",
+    "expression": "329 - 309"
+  },
+  {
+    "input": "<bos> <unk> 132 / 33 <|eom_id|> <unk>",
+    "expected_answer": "4",
+    "expression": "132 / 33"
+  },
+  {
+    "input": "<bos> <unk> 461 + 105 <|eom_id|> <unk>",
+    "expected_answer": "566",
+    "expression": "461 + 105"
+  },
+  {
+    "input": "<bos> <unk> 5 * 129 <|eom_id|> <unk>",
+    "expected_answer": "645",
+    "expression": "5 * 129"
+  },
+  {
+    "input": "<bos> <unk> 40 - 15 <|eom_id|> <unk>",
+    "expected_answer": "25",
+    "expression": "40 - 15"
+  },
+  {
+    "input": "<bos> <unk> 957 / 29 <|eom_id|> <unk>",
+    "expected_answer": "33",
+    "expression": "957 / 29"
+  },
+  {
+    "input": "<bos> <unk> 372 - 190 <|eom_id|> <unk>",
+    "expected_answer": "182",
+    "expression": "372 - 190"
+  },
+  {
+    "input": "<bos> <unk> 24 * 26 <|eom_id|> <unk>",
+    "expected_answer": "624",
+    "expression": "24 * 26"
+  },
+  {
+    "input": "<bos> <unk> 3 * 323 <|eom_id|> <unk>",
+    "expected_answer": "969",
+    "expression": "3 * 323"
+  },
+  {
+    "input": "<bos> <unk> 4 * 84 <|eom_id|> <unk>",
+    "expected_answer": "336",
+    "expression": "4 * 84"
+  },
+  {
+    "input": "<bos> <unk> 571 + 347 <|eom_id|> <unk>",
+    "expected_answer": "918",
+    "expression": "571 + 347"
+  },
+  {
+    "input": "<bos> <unk> 304 / 19 <|eom_id|> <unk>",
+    "expected_answer": "16",
+    "expression": "304 / 19"
+  },
+  {
+    "input": "<bos> <unk> 341 - 41 <|eom_id|> <unk>",
+    "expected_answer": "300",
+    "expression": "341 - 41"
+  },
+  {
+    "input": "<bos> <unk> 938 - 358 <|eom_id|> <unk>",
+    "expected_answer": "580",
+    "expression": "938 - 358"
+  },
+  {
+    "input": "<bos> <unk> 25 * 8 <|eom_id|> <unk>",
+    "expected_answer": "200",
+    "expression": "25 * 8"
+  },
+  {
+    "input": "<bos> <unk> 317 + 572 <|eom_id|> <unk>",
+    "expected_answer": "889",
+    "expression": "317 + 572"
+  },
+  {
+    "input": "<bos> <unk> 420 / 42 <|eom_id|> <unk>",
+    "expected_answer": "10",
+    "expression": "420 / 42"
+  },
+  {
+    "input": "<bos> <unk> 686 - 539 <|eom_id|> <unk>",
+    "expected_answer": "147",
+    "expression": "686 - 539"
+  },
+  {
+    "input": "<bos> <unk> 661 + 216 <|eom_id|> <unk>",
+    "expected_answer": "877",
+    "expression": "661 + 216"
+  },
+  {
+    "input": "<bos> <unk> 1 * 371 <|eom_id|> <unk>",
+    "expected_answer": "371",
+    "expression": "1 * 371"
+  },
+  {
+    "input": "<bos> <unk> 11 * 27 <|eom_id|> <unk>",
+    "expected_answer": "297",
+    "expression": "11 * 27"
+  },
+  {
+    "input": "<bos> <unk> 31 * 12 <|eom_id|> <unk>",
+    "expected_answer": "372",
+    "expression": "31 * 12"
+  },
+  {
+    "input": "<bos> <unk> 140 - 39 <|eom_id|> <unk>",
+    "expected_answer": "101",
+    "expression": "140 - 39"
+  },
+  {
+    "input": "<bos> <unk> 302 + 103 <|eom_id|> <unk>",
+    "expected_answer": "405",
+    "expression": "302 + 103"
+  },
+  {
+    "input": "<bos> <unk> 677 + 172 <|eom_id|> <unk>",
+    "expected_answer": "849",
+    "expression": "677 + 172"
+  },
+  {
+    "input": "<bos> <unk> 611 - 385 <|eom_id|> <unk>",
+    "expected_answer": "226",
+    "expression": "611 - 385"
+  },
+  {
+    "input": "<bos> <unk> 166 - 46 <|eom_id|> <unk>",
+    "expected_answer": "120",
+    "expression": "166 - 46"
+  },
+  {
+    "input": "<bos> <unk> 738 - 448 <|eom_id|> <unk>",
+    "expected_answer": "290",
+    "expression": "738 - 448"
+  },
+  {
+    "input": "<bos> <unk> 420 + 373 <|eom_id|> <unk>",
+    "expected_answer": "793",
+    "expression": "420 + 373"
+  },
+  {
+    "input": "<bos> <unk> 992 - 454 <|eom_id|> <unk>",
+    "expected_answer": "538",
+    "expression": "992 - 454"
+  },
+  {
+    "input": "<bos> <unk> 28 * 14 <|eom_id|> <unk>",
+    "expected_answer": "392",
+    "expression": "28 * 14"
+  },
+  {
+    "input": "<bos> <unk> 316 - 240 <|eom_id|> <unk>",
+    "expected_answer": "76",
+    "expression": "316 - 240"
+  },
+  {
+    "input": "<bos> <unk> 376 - 347 <|eom_id|> <unk>",
+    "expected_answer": "29",
+    "expression": "376 - 347"
+  },
+  {
+    "input": "<bos> <unk> 540 / 30 <|eom_id|> <unk>",
+    "expected_answer": "18",
+    "expression": "540 / 30"
+  },
+  {
+    "input": "<bos> <unk> 528 / 33 <|eom_id|> <unk>",
+    "expected_answer": "16",
+    "expression": "528 / 33"
+  },
+  {
+    "input": "<bos> <unk> 275 / 11 <|eom_id|> <unk>",
+    "expected_answer": "25",
+    "expression": "275 / 11"
+  },
+  {
+    "input": "<bos> <unk> 893 - 256 <|eom_id|> <unk>",
+    "expected_answer": "637",
+    "expression": "893 - 256"
+  },
+  {
+    "input": "<bos> <unk> 656 + 246 <|eom_id|> <unk>",
+    "expected_answer": "902",
+    "expression": "656 + 246"
+  },
+  {
+    "input": "<bos> <unk> 6 * 132 <|eom_id|> <unk>",
+    "expected_answer": "792",
+    "expression": "6 * 132"
+  },
+  {
+    "input": "<bos> <unk> 291 + 85 <|eom_id|> <unk>",
+    "expected_answer": "376",
+    "expression": "291 + 85"
+  },
+  {
+    "input": "<bos> <unk> 279 - 230 <|eom_id|> <unk>",
+    "expected_answer": "49",
+    "expression": "279 - 230"
+  },
+  {
+    "input": "<bos> <unk> 850 - 447 <|eom_id|> <unk>",
+    "expected_answer": "403",
+    "expression": "850 - 447"
+  },
+  {
+    "input": "<bos> <unk> 969 + 29 <|eom_id|> <unk>",
+    "expected_answer": "998",
+    "expression": "969 + 29"
+  },
+  {
+    "input": "<bos> <unk> 836 - 461 <|eom_id|> <unk>",
+    "expected_answer": "375",
+    "expression": "836 - 461"
+  },
+  {
+    "input": "<bos> <unk> 1 * 424 <|eom_id|> <unk>",
+    "expected_answer": "424",
+    "expression": "1 * 424"
+  },
+  {
+    "input": "<bos> <unk> 405 + 514 <|eom_id|> <unk>",
+    "expected_answer": "919",
+    "expression": "405 + 514"
+  },
+  {
+    "input": "<bos> <unk> 15 * 49 <|eom_id|> <unk>",
+    "expected_answer": "735",
+    "expression": "15 * 49"
+  },
+  {
+    "input": "<bos> <unk> 383 + 229 <|eom_id|> <unk>",
+    "expected_answer": "612",
+    "expression": "383 + 229"
+  },
+  {
+    "input": "<bos> <unk> 326 + 101 <|eom_id|> <unk>",
+    "expected_answer": "427",
+    "expression": "326 + 101"
+  },
+  {
+    "input": "<bos> <unk> 9 * 17 <|eom_id|> <unk>",
+    "expected_answer": "153",
+    "expression": "9 * 17"
+  },
+  {
+    "input": "<bos> <unk> 293 + 483 <|eom_id|> <unk>",
+    "expected_answer": "776",
+    "expression": "293 + 483"
+  },
+  {
+    "input": "<bos> <unk> 777 - 722 <|eom_id|> <unk>",
+    "expected_answer": "55",
+    "expression": "777 - 722"
+  },
+  {
+    "input": "<bos> <unk> 0 / 29 <|eom_id|> <unk>",
+    "expected_answer": "0",
+    "expression": "0 / 29"
+  },
+  {
+    "input": "<bos> <unk> 19 + 262 <|eom_id|> <unk>",
+    "expected_answer": "281",
+    "expression": "19 + 262"
+  },
+  {
+    "input": "<bos> <unk> 855 - 153 <|eom_id|> <unk>",
+    "expected_answer": "702",
+    "expression": "855 - 153"
+  },
+  {
+    "input": "<bos> <unk> 792 / 8 <|eom_id|> <unk>",
+    "expected_answer": "99",
+    "expression": "792 / 8"
+  },
+  {
+    "input": "<bos> <unk> 15 * 38 <|eom_id|> <unk>",
+    "expected_answer": "570",
+    "expression": "15 * 38"
+  },
+  {
+    "input": "<bos> <unk> 48 + 244 <|eom_id|> <unk>",
+    "expected_answer": "292",
+    "expression": "48 + 244"
+  },
+  {
+    "input": "<bos> <unk> 779 / 41 <|eom_id|> <unk>",
+    "expected_answer": "19",
+    "expression": "779 / 41"
+  },
+  {
+    "input": "<bos> <unk> 140 / 5 <|eom_id|> <unk>",
+    "expected_answer": "28",
+    "expression": "140 / 5"
+  },
+  {
+    "input": "<bos> <unk> 663 / 39 <|eom_id|> <unk>",
+    "expected_answer": "17",
+    "expression": "663 / 39"
+  },
+  {
+    "input": "<bos> <unk> 647 + 263 <|eom_id|> <unk>",
+    "expected_answer": "910",
+    "expression": "647 + 263"
+  },
+  {
+    "input": "<bos> <unk> 735 - 147 <|eom_id|> <unk>",
+    "expected_answer": "588",
+    "expression": "735 - 147"
+  },
+  {
+    "input": "<bos> <unk> 27 * 0 <|eom_id|> <unk>",
+    "expected_answer": "0",
+    "expression": "27 * 0"
+  },
+  {
+    "input": "<bos> <unk> 15 * 53 <|eom_id|> <unk>",
+    "expected_answer": "795",
+    "expression": "15 * 53"
+  },
+  {
+    "input": "<bos> <unk> 680 - 87 <|eom_id|> <unk>",
+    "expected_answer": "593",
+    "expression": "680 - 87"
+  },
+  {
+    "input": "<bos> <unk> 4 * 244 <|eom_id|> <unk>",
+    "expected_answer": "976",
+    "expression": "4 * 244"
+  },
+  {
+    "input": "<bos> <unk> 399 + 481 <|eom_id|> <unk>",
+    "expected_answer": "880",
+    "expression": "399 + 481"
+  },
+  {
+    "input": "<bos> <unk> 650 + 198 <|eom_id|> <unk>",
+    "expected_answer": "848",
+    "expression": "650 + 198"
+  },
+  {
+    "input": "<bos> <unk> 16 * 47 <|eom_id|> <unk>",
+    "expected_answer": "752",
+    "expression": "16 * 47"
+  },
+  {
+    "input": "<bos> <unk> 365 + 69 <|eom_id|> <unk>",
+    "expected_answer": "434",
+    "expression": "365 + 69"
+  },
+  {
+    "input": "<bos> <unk> 15 * 13 <|eom_id|> <unk>",
+    "expected_answer": "195",
+    "expression": "15 * 13"
+  },
+  {
+    "input": "<bos> <unk> 8 * 5 <|eom_id|> <unk>",
+    "expected_answer": "40",
+    "expression": "8 * 5"
+  },
+  {
+    "input": "<bos> <unk> 21 * 41 <|eom_id|> <unk>",
+    "expected_answer": "861",
+    "expression": "21 * 41"
+  },
+  {
+    "input": "<bos> <unk> 850 - 797 <|eom_id|> <unk>",
+    "expected_answer": "53",
+    "expression": "850 - 797"
+  },
+  {
+    "input": "<bos> <unk> 675 / 45 <|eom_id|> <unk>",
+    "expected_answer": "15",
+    "expression": "675 / 45"
+  },
+  {
+    "input": "<bos> <unk> 830 - 138 <|eom_id|> <unk>",
+    "expected_answer": "692",
+    "expression": "830 - 138"
+  },
+  {
+    "input": "<bos> <unk> 733 + 234 <|eom_id|> <unk>",
+    "expected_answer": "967",
+    "expression": "733 + 234"
+  },
+  {
+    "input": "<bos> <unk> 300 + 206 <|eom_id|> <unk>",
+    "expected_answer": "506",
+    "expression": "300 + 206"
+  },
+  {
+    "input": "<bos> <unk> 810 + 51 <|eom_id|> <unk>",
+    "expected_answer": "861",
+    "expression": "810 + 51"
+  },
+  {
+    "input": "<bos> <unk> 323 + 317 <|eom_id|> <unk>",
+    "expected_answer": "640",
+    "expression": "323 + 317"
+  },
+  {
+    "input": "<bos> <unk> 525 / 35 <|eom_id|> <unk>",
+    "expected_answer": "15",
+    "expression": "525 / 35"
+  },
+  {
+    "input": "<bos> <unk> 2 * 385 <|eom_id|> <unk>",
+    "expected_answer": "770",
+    "expression": "2 * 385"
+  },
+  {
+    "input": "<bos> <unk> 292 - 182 <|eom_id|> <unk>",
+    "expected_answer": "110",
+    "expression": "292 - 182"
+  },
+  {
+    "input": "<bos> <unk> 886 + 83 <|eom_id|> <unk>",
+    "expected_answer": "969",
+    "expression": "886 + 83"
+  },
+  {
+    "input": "<bos> <unk> 17 * 7 <|eom_id|> <unk>",
+    "expected_answer": "119",
+    "expression": "17 * 7"
+  },
+  {
+    "input": "<bos> <unk> 27 * 25 <|eom_id|> <unk>",
+    "expected_answer": "675",
+    "expression": "27 * 25"
+  },
+  {
+    "input": "<bos> <unk> 525 / 25 <|eom_id|> <unk>",
+    "expected_answer": "21",
+    "expression": "525 / 25"
+  },
+  {
+    "input": "<bos> <unk> 508 - 354 <|eom_id|> <unk>",
+    "expected_answer": "154",
+    "expression": "508 - 354"
+  },
+  {
+    "input": "<bos> <unk> 792 / 24 <|eom_id|> <unk>",
+    "expected_answer": "33",
+    "expression": "792 / 24"
+  },
+  {
+    "input": "<bos> <unk> 5 * 186 <|eom_id|> <unk>",
+    "expected_answer": "930",
+    "expression": "5 * 186"
+  },
+  {
+    "input": "<bos> <unk> 660 / 6 <|eom_id|> <unk>",
+    "expected_answer": "110",
+    "expression": "660 / 6"
+  },
+  {
+    "input": "<bos> <unk> 558 - 300 <|eom_id|> <unk>",
+    "expected_answer": "258",
+    "expression": "558 - 300"
+  },
+  {
+    "input": "<bos> <unk> 6 * 20 <|eom_id|> <unk>",
+    "expected_answer": "120",
+    "expression": "6 * 20"
+  },
+  {
+    "input": "<bos> <unk> 18 * 19 <|eom_id|> <unk>",
+    "expected_answer": "342",
+    "expression": "18 * 19"
+  },
+  {
+    "input": "<bos> <unk> 858 / 39 <|eom_id|> <unk>",
+    "expected_answer": "22",
+    "expression": "858 / 39"
+  },
+  {
+    "input": "<bos> <unk> 968 / 11 <|eom_id|> <unk>",
+    "expected_answer": "88",
+    "expression": "968 / 11"
+  },
+  {
+    "input": "<bos> <unk> 644 / 23 <|eom_id|> <unk>",
+    "expected_answer": "28",
+    "expression": "644 / 23"
+  },
+  {
+    "input": "<bos> <unk> 744 + 180 <|eom_id|> <unk>",
+    "expected_answer": "924",
+    "expression": "744 + 180"
+  },
+  {
+    "input": "<bos> <unk> 720 / 18 <|eom_id|> <unk>",
+    "expected_answer": "40",
+    "expression": "720 / 18"
+  },
+  {
+    "input": "<bos> <unk> 76 + 687 <|eom_id|> <unk>",
+    "expected_answer": "763",
+    "expression": "76 + 687"
+  },
+  {
+    "input": "<bos> <unk> 768 / 24 <|eom_id|> <unk>",
+    "expected_answer": "32",
+    "expression": "768 / 24"
+  },
+  {
+    "input": "<bos> <unk> 975 - 31 <|eom_id|> <unk>",
+    "expected_answer": "944",
+    "expression": "975 - 31"
+  },
+  {
+    "input": "<bos> <unk> 869 - 622 <|eom_id|> <unk>",
+    "expected_answer": "247",
+    "expression": "869 - 622"
+  },
+  {
+    "input": "<bos> <unk> 192 / 3 <|eom_id|> <unk>",
+    "expected_answer": "64",
+    "expression": "192 / 3"
+  },
+  {
+    "input": "<bos> <unk> 241 + 660 <|eom_id|> <unk>",
+    "expected_answer": "901",
+    "expression": "241 + 660"
+  },
+  {
+    "input": "<bos> <unk> 23 * 24 <|eom_id|> <unk>",
+    "expected_answer": "552",
+    "expression": "23 * 24"
+  },
+  {
+    "input": "<bos> <unk> 619 + 78 <|eom_id|> <unk>",
+    "expected_answer": "697",
+    "expression": "619 + 78"
+  },
+  {
+    "input": "<bos> <unk> 552 / 24 <|eom_id|> <unk>",
+    "expected_answer": "23",
+    "expression": "552 / 24"
+  },
+  {
+    "input": "<bos> <unk> 98 / 49 <|eom_id|> <unk>",
+    "expected_answer": "2",
+    "expression": "98 / 49"
+  },
+  {
+    "input": "<bos> <unk> 542 - 375 <|eom_id|> <unk>",
+    "expected_answer": "167",
+    "expression": "542 - 375"
+  },
+  {
+    "input": "<bos> <unk> 861 / 21 <|eom_id|> <unk>",
+    "expected_answer": "41",
+    "expression": "861 / 21"
+  },
+  {
+    "input": "<bos> <unk> 15 * 14 <|eom_id|> <unk>",
+    "expected_answer": "210",
+    "expression": "15 * 14"
+  },
+  {
+    "input": "<bos> <unk> 753 + 47 <|eom_id|> <unk>",
+    "expected_answer": "800",
+    "expression": "753 + 47"
+  },
+  {
+    "input": "<bos> <unk> 408 / 34 <|eom_id|> <unk>",
+    "expected_answer": "12",
+    "expression": "408 / 34"
+  },
+  {
+    "input": "<bos> <unk> 268 + 266 <|eom_id|> <unk>",
+    "expected_answer": "534",
+    "expression": "268 + 266"
+  },
+  {
+    "input": "<bos> <unk> 504 / 14 <|eom_id|> <unk>",
+    "expected_answer": "36",
+    "expression": "504 / 14"
+  },
+  {
+    "input": "<bos> <unk> 195 / 13 <|eom_id|> <unk>",
+    "expected_answer": "15",
+    "expression": "195 / 13"
+  },
+  {
+    "input": "<bos> <unk> 873 - 75 <|eom_id|> <unk>",
+    "expected_answer": "798",
+    "expression": "873 - 75"
+  },
+  {
+    "input": "<bos> <unk> 672 / 12 <|eom_id|> <unk>",
+    "expected_answer": "56",
+    "expression": "672 / 12"
+  },
+  {
+    "input": "<bos> <unk> 829 + 81 <|eom_id|> <unk>",
+    "expected_answer": "910",
+    "expression": "829 + 81"
+  },
+  {
+    "input": "<bos> <unk> 4 * 140 <|eom_id|> <unk>",
+    "expected_answer": "560",
+    "expression": "4 * 140"
+  },
+  {
+    "input": "<bos> <unk> 19 * 10 <|eom_id|> <unk>",
+    "expected_answer": "190",
+    "expression": "19 * 10"
+  },
+  {
+    "input": "<bos> <unk> 812 - 370 <|eom_id|> <unk>",
+    "expected_answer": "442",
+    "expression": "812 - 370"
+  },
+  {
+    "input": "<bos> <unk> 124 - 25 <|eom_id|> <unk>",
+    "expected_answer": "99",
+    "expression": "124 - 25"
+  },
+  {
+    "input": "<bos> <unk> 242 - 202 <|eom_id|> <unk>",
+    "expected_answer": "40",
+    "expression": "242 - 202"
+  },
+  {
+    "input": "<bos> <unk> 368 / 2 <|eom_id|> <unk>",
+    "expected_answer": "184",
+    "expression": "368 / 2"
+  },
+  {
+    "input": "<bos> <unk> 29 * 8 <|eom_id|> <unk>",
+    "expected_answer": "232",
+    "expression": "29 * 8"
+  },
+  {
+    "input": "<bos> <unk> 67 + 316 <|eom_id|> <unk>",
+    "expected_answer": "383",
+    "expression": "67 + 316"
+  },
+  {
+    "input": "<bos> <unk> 690 / 46 <|eom_id|> <unk>",
+    "expected_answer": "15",
+    "expression": "690 / 46"
+  },
+  {
+    "input": "<bos> <unk> 650 / 50 <|eom_id|> <unk>",
+    "expected_answer": "13",
+    "expression": "650 / 50"
+  },
+  {
+    "input": "<bos> <unk> 128 + 324 <|eom_id|> <unk>",
+    "expected_answer": "452",
+    "expression": "128 + 324"
+  },
+  {
+    "input": "<bos> <unk> 460 + 477 <|eom_id|> <unk>",
+    "expected_answer": "937",
+    "expression": "460 + 477"
+  },
+  {
+    "input": "<bos> <unk> 8 * 112 <|eom_id|> <unk>",
+    "expected_answer": "896",
+    "expression": "8 * 112"
+  },
+  {
+    "input": "<bos> <unk> 786 - 132 <|eom_id|> <unk>",
+    "expected_answer": "654",
+    "expression": "786 - 132"
+  },
+  {
+    "input": "<bos> <unk> 957 / 33 <|eom_id|> <unk>",
+    "expected_answer": "29",
+    "expression": "957 / 33"
+  },
+  {
+    "input": "<bos> <unk> 851 + 31 <|eom_id|> <unk>",
+    "expected_answer": "882",
+    "expression": "851 + 31"
+  },
+  {
+    "input": "<bos> <unk> 311 - 84 <|eom_id|> <unk>",
+    "expected_answer": "227",
+    "expression": "311 - 84"
+  },
+  {
+    "input": "<bos> <unk> 330 - 115 <|eom_id|> <unk>",
+    "expected_answer": "215",
+    "expression": "330 - 115"
+  },
+  {
+    "input": "<bos> <unk> 18 * 54 <|eom_id|> <unk>",
+    "expected_answer": "972",
+    "expression": "18 * 54"
+  },
+  {
+    "input": "<bos> <unk> 256 + 201 <|eom_id|> <unk>",
+    "expected_answer": "457",
+    "expression": "256 + 201"
+  },
+  {
+    "input": "<bos> <unk> 8 * 80 <|eom_id|> <unk>",
+    "expected_answer": "640",
+    "expression": "8 * 80"
+  },
+  {
+    "input": "<bos> <unk> 5 * 128 <|eom_id|> <unk>",
+    "expected_answer": "640",
+    "expression": "5 * 128"
+  },
+  {
+    "input": "<bos> <unk> 606 - 594 <|eom_id|> <unk>",
+    "expected_answer": "12",
+    "expression": "606 - 594"
+  },
+  {
+    "input": "<bos> <unk> 175 - 168 <|eom_id|> <unk>",
+    "expected_answer": "7",
+    "expression": "175 - 168"
+  },
+  {
+    "input": "<bos> <unk> 2 * 422 <|eom_id|> <unk>",
+    "expected_answer": "844",
+    "expression": "2 * 422"
+  },
+  {
+    "input": "<bos> <unk> 83 + 46 <|eom_id|> <unk>",
+    "expected_answer": "129",
+    "expression": "83 + 46"
+  },
+  {
+    "input": "<bos> <unk> 13 * 73 <|eom_id|> <unk>",
+    "expected_answer": "949",
+    "expression": "13 * 73"
+  },
+  {
+    "input": "<bos> <unk> 800 / 40 <|eom_id|> <unk>",
+    "expected_answer": "20",
+    "expression": "800 / 40"
+  },
+  {
+    "input": "<bos> <unk> 509 + 455 <|eom_id|> <unk>",
+    "expected_answer": "964",
+    "expression": "509 + 455"
+  },
+  {
+    "input": "<bos> <unk> 19 * 30 <|eom_id|> <unk>",
+    "expected_answer": "570",
+    "expression": "19 * 30"
+  },
+  {
+    "input": "<bos> <unk> 824 - 701 <|eom_id|> <unk>",
+    "expected_answer": "123",
+    "expression": "824 - 701"
+  },
+  {
+    "input": "<bos> <unk> 580 / 20 <|eom_id|> <unk>",
+    "expected_answer": "29",
+    "expression": "580 / 20"
+  },
+  {
+    "input": "<bos> <unk> 705 + 30 <|eom_id|> <unk>",
+    "expected_answer": "735",
+    "expression": "705 + 30"
+  },
+  {
+    "input": "<bos> <unk> 450 - 212 <|eom_id|> <unk>",
+    "expected_answer": "238",
+    "expression": "450 - 212"
+  },
+  {
+    "input": "<bos> <unk> 390 / 30 <|eom_id|> <unk>",
+    "expected_answer": "13",
+    "expression": "390 / 30"
+  },
+  {
+    "input": "<bos> <unk> 9 * 40 <|eom_id|> <unk>",
+    "expected_answer": "360",
+    "expression": "9 * 40"
+  },
+  {
+    "input": "<bos> <unk> 22 * 25 <|eom_id|> <unk>",
+    "expected_answer": "550",
+    "expression": "22 * 25"
+  },
+  {
+    "input": "<bos> <unk> 778 - 379 <|eom_id|> <unk>",
+    "expected_answer": "399",
+    "expression": "778 - 379"
+  },
+  {
+    "input": "<bos> <unk> 326 + 247 <|eom_id|> <unk>",
+    "expected_answer": "573",
+    "expression": "326 + 247"
+  },
+  {
+    "input": "<bos> <unk> 272 / 8 <|eom_id|> <unk>",
+    "expected_answer": "34",
+    "expression": "272 / 8"
+  },
+  {
+    "input": "<bos> <unk> 144 / 16 <|eom_id|> <unk>",
+    "expected_answer": "9",
+    "expression": "144 / 16"
+  },
+  {
+    "input": "<bos> <unk> 51 + 297 <|eom_id|> <unk>",
+    "expected_answer": "348",
+    "expression": "51 + 297"
+  },
+  {
+    "input": "<bos> <unk> 520 / 40 <|eom_id|> <unk>",
+    "expected_answer": "13",
+    "expression": "520 / 40"
+  },
+  {
+    "input": "<bos> <unk> 985 - 886 <|eom_id|> <unk>",
+    "expected_answer": "99",
+    "expression": "985 - 886"
+  },
+  {
+    "input": "<bos> <unk> 833 - 335 <|eom_id|> <unk>",
+    "expected_answer": "498",
+    "expression": "833 - 335"
+  },
+  {
+    "input": "<bos> <unk> 12 * 20 <|eom_id|> <unk>",
+    "expected_answer": "240",
+    "expression": "12 * 20"
+  },
+  {
+    "input": "<bos> <unk> 462 / 33 <|eom_id|> <unk>",
+    "expected_answer": "14",
+    "expression": "462 / 33"
+  },
+  {
+    "input": "<bos> <unk> 620 / 20 <|eom_id|> <unk>",
+    "expected_answer": "31",
+    "expression": "620 / 20"
+  },
+  {
+    "input": "<bos> <unk> 92 + 402 <|eom_id|> <unk>",
+    "expected_answer": "494",
+    "expression": "92 + 402"
+  },
+  {
+    "input": "<bos> <unk> 208 / 16 <|eom_id|> <unk>",
+    "expected_answer": "13",
+    "expression": "208 / 16"
+  },
+  {
+    "input": "<bos> <unk> 3 * 25 <|eom_id|> <unk>",
+    "expected_answer": "75",
+    "expression": "3 * 25"
+  },
+  {
+    "input": "<bos> <unk> 31 * 30 <|eom_id|> <unk>",
+    "expected_answer": "930",
+    "expression": "31 * 30"
+  },
+  {
+    "input": "<bos> <unk> 0 * 867 <|eom_id|> <unk>",
+    "expected_answer": "0",
+    "expression": "0 * 867"
+  },
+  {
+    "input": "<bos> <unk> 441 + 137 <|eom_id|> <unk>",
+    "expected_answer": "578",
+    "expression": "441 + 137"
+  },
+  {
+    "input": "<bos> <unk> 23 * 25 <|eom_id|> <unk>",
+    "expected_answer": "575",
+    "expression": "23 * 25"
+  },
+  {
+    "input": "<bos> <unk> 2 * 205 <|eom_id|> <unk>",
+    "expected_answer": "410",
+    "expression": "2 * 205"
+  },
+  {
+    "input": "<bos> <unk> 583 + 287 <|eom_id|> <unk>",
+    "expected_answer": "870",
+    "expression": "583 + 287"
+  },
+  {
+    "input": "<bos> <unk> 371 - 283 <|eom_id|> <unk>",
+    "expected_answer": "88",
+    "expression": "371 - 283"
+  },
+  {
+    "input": "<bos> <unk> 4 * 98 <|eom_id|> <unk>",
+    "expected_answer": "392",
+    "expression": "4 * 98"
+  },
+  {
+    "input": "<bos> <unk> 833 / 49 <|eom_id|> <unk>",
+    "expected_answer": "17",
+    "expression": "833 / 49"
+  },
+  {
+    "input": "<bos> <unk> 7 * 32 <|eom_id|> <unk>",
+    "expected_answer": "224",
+    "expression": "7 * 32"
+  },
+  {
+    "input": "<bos> <unk> 403 + 382 <|eom_id|> <unk>",
+    "expected_answer": "785",
+    "expression": "403 + 382"
+  },
+  {
+    "input": "<bos> <unk> 23 * 9 <|eom_id|> <unk>",
+    "expected_answer": "207",
+    "expression": "23 * 9"
+  },
+  {
+    "input": "<bos> <unk> 616 - 521 <|eom_id|> <unk>",
+    "expected_answer": "95",
+    "expression": "616 - 521"
+  },
+  {
+    "input": "<bos> <unk> 33 / 33 <|eom_id|> <unk>",
+    "expected_answer": "1",
+    "expression": "33 / 33"
+  },
+  {
+    "input": "<bos> <unk> 39 + 140 <|eom_id|> <unk>",
+    "expected_answer": "179",
+    "expression": "39 + 140"
+  },
+  {
+    "input": "<bos> <unk> 30 * 33 <|eom_id|> <unk>",
+    "expected_answer": "990",
+    "expression": "30 * 33"
+  },
+  {
+    "input": "<bos> <unk> 770 / 10 <|eom_id|> <unk>",
+    "expected_answer": "77",
+    "expression": "770 / 10"
+  },
+  {
+    "input": "<bos> <unk> 335 - 313 <|eom_id|> <unk>",
+    "expected_answer": "22",
+    "expression": "335 - 313"
+  },
+  {
+    "input": "<bos> <unk> 10 * 50 <|eom_id|> <unk>",
+    "expected_answer": "500",
+    "expression": "10 * 50"
+  },
+  {
+    "input": "<bos> <unk> 21 * 32 <|eom_id|> <unk>",
+    "expected_answer": "672",
+    "expression": "21 * 32"
+  },
+  {
+    "input": "<bos> <unk> 828 / 46 <|eom_id|> <unk>",
+    "expected_answer": "18",
+    "expression": "828 / 46"
+  },
+  {
+    "input": "<bos> <unk> 30 * 1 <|eom_id|> <unk>",
+    "expected_answer": "30",
+    "expression": "30 * 1"
+  },
+  {
+    "input": "<bos> <unk> 21 * 43 <|eom_id|> <unk>",
+    "expected_answer": "903",
+    "expression": "21 * 43"
+  },
+  {
+    "input": "<bos> <unk> 426 + 315 <|eom_id|> <unk>",
+    "expected_answer": "741",
+    "expression": "426 + 315"
+  },
+  {
+    "input": "<bos> <unk> 611 + 242 <|eom_id|> <unk>",
+    "expected_answer": "853",
+    "expression": "611 + 242"
+  },
+  {
+    "input": "<bos> <unk> 14 * 6 <|eom_id|> <unk>",
+    "expected_answer": "84",
+    "expression": "14 * 6"
+  },
+  {
+    "input": "<bos> <unk> 737 / 11 <|eom_id|> <unk>",
+    "expected_answer": "67",
+    "expression": "737 / 11"
+  },
+  {
+    "input": "<bos> <unk> 870 / 10 <|eom_id|> <unk>",
+    "expected_answer": "87",
+    "expression": "870 / 10"
+  },
+  {
+    "input": "<bos> <unk> 32 - 7 <|eom_id|> <unk>",
+    "expected_answer": "25",
+    "expression": "32 - 7"
+  },
+  {
+    "input": "<bos> <unk> 19 - 14 <|eom_id|> <unk>",
+    "expected_answer": "5",
+    "expression": "19 - 14"
+  },
+  {
+    "input": "<bos> <unk> 26 * 9 <|eom_id|> <unk>",
+    "expected_answer": "234",
+    "expression": "26 * 9"
+  },
+  {
+    "input": "<bos> <unk> 270 / 45 <|eom_id|> <unk>",
+    "expected_answer": "6",
+    "expression": "270 / 45"
+  },
+  {
+    "input": "<bos> <unk> 792 / 33 <|eom_id|> <unk>",
+    "expected_answer": "24",
+    "expression": "792 / 33"
+  },
+  {
+    "input": "<bos> <unk> 48 / 48 <|eom_id|> <unk>",
+    "expected_answer": "1",
+    "expression": "48 / 48"
+  },
+  {
+    "input": "<bos> <unk> 531 - 212 <|eom_id|> <unk>",
+    "expected_answer": "319",
+    "expression": "531 - 212"
+  },
+  {
+    "input": "<bos> <unk> 30 * 33 <|eom_id|> <unk>",
+    "expected_answer": "990",
+    "expression": "30 * 33"
+  },
+  {
+    "input": "<bos> <unk> 231 / 21 <|eom_id|> <unk>",
+    "expected_answer": "11",
+    "expression": "231 / 21"
+  },
+  {
+    "input": "<bos> <unk> 350 / 35 <|eom_id|> <unk>",
+    "expected_answer": "10",
+    "expression": "350 / 35"
+  },
+  {
+    "input": "<bos> <unk> 16 * 39 <|eom_id|> <unk>",
+    "expected_answer": "624",
+    "expression": "16 * 39"
+  },
+  {
+    "input": "<bos> <unk> 403 / 13 <|eom_id|> <unk>",
+    "expected_answer": "31",
+    "expression": "403 / 13"
+  },
+  {
+    "input": "<bos> <unk> 19 * 14 <|eom_id|> <unk>",
+    "expected_answer": "266",
+    "expression": "19 * 14"
+  },
+  {
+    "input": "<bos> <unk> 18 * 45 <|eom_id|> <unk>",
+    "expected_answer": "810",
+    "expression": "18 * 45"
+  },
+  {
+    "input": "<bos> <unk> 706 - 500 <|eom_id|> <unk>",
+    "expected_answer": "206",
+    "expression": "706 - 500"
+  },
+  {
+    "input": "<bos> <unk> 30 * 22 <|eom_id|> <unk>",
+    "expected_answer": "660",
+    "expression": "30 * 22"
+  },
+  {
+    "input": "<bos> <unk> 18 * 7 <|eom_id|> <unk>",
+    "expected_answer": "126",
+    "expression": "18 * 7"
+  },
+  {
+    "input": "<bos> <unk> 572 / 26 <|eom_id|> <unk>",
+    "expected_answer": "22",
+    "expression": "572 / 26"
+  },
+  {
+    "input": "<bos> <unk> 297 - 21 <|eom_id|> <unk>",
+    "expected_answer": "276",
+    "expression": "297 - 21"
+  },
+  {
+    "input": "<bos> <unk> 5 * 88 <|eom_id|> <unk>",
+    "expected_answer": "440",
+    "expression": "5 * 88"
+  },
+  {
+    "input": "<bos> <unk> 336 / 42 <|eom_id|> <unk>",
+    "expected_answer": "8",
+    "expression": "336 / 42"
+  },
+  {
+    "input": "<bos> <unk> 350 / 14 <|eom_id|> <unk>",
+    "expected_answer": "25",
+    "expression": "350 / 14"
+  },
+  {
+    "input": "<bos> <unk> 17 * 8 <|eom_id|> <unk>",
+    "expected_answer": "136",
+    "expression": "17 * 8"
+  },
+  {
+    "input": "<bos> <unk> 630 + 300 <|eom_id|> <unk>",
+    "expected_answer": "930",
+    "expression": "630 + 300"
+  },
+  {
+    "input": "<bos> <unk> 248 - 12 <|eom_id|> <unk>",
+    "expected_answer": "236",
+    "expression": "248 - 12"
+  },
+  {
+    "input": "<bos> <unk> 653 - 238 <|eom_id|> <unk>",
+    "expected_answer": "415",
+    "expression": "653 - 238"
+  },
+  {
+    "input": "<bos> <unk> 102 + 423 <|eom_id|> <unk>",
+    "expected_answer": "525",
+    "expression": "102 + 423"
+  },
+  {
+    "input": "<bos> <unk> 30 * 6 <|eom_id|> <unk>",
+    "expected_answer": "180",
+    "expression": "30 * 6"
+  },
+  {
+    "input": "<bos> <unk> 5 - 4 <|eom_id|> <unk>",
+    "expected_answer": "1",
+    "expression": "5 - 4"
+  },
+  {
+    "input": "<bos> <unk> 416 - 334 <|eom_id|> <unk>",
+    "expected_answer": "82",
+    "expression": "416 - 334"
+  },
+  {
+    "input": "<bos> <unk> 372 / 31 <|eom_id|> <unk>",
+    "expected_answer": "12",
+    "expression": "372 / 31"
+  },
+  {
+    "input": "<bos> <unk> 20 * 18 <|eom_id|> <unk>",
+    "expected_answer": "360",
+    "expression": "20 * 18"
+  },
+  {
+    "input": "<bos> <unk> 929 + 11 <|eom_id|> <unk>",
+    "expected_answer": "940",
+    "expression": "929 + 11"
+  },
+  {
+    "input": "<bos> <unk> 547 - 38 <|eom_id|> <unk>",
+    "expected_answer": "509",
+    "expression": "547 - 38"
+  },
+  {
+    "input": "<bos> <unk> 427 - 90 <|eom_id|> <unk>",
+    "expected_answer": "337",
+    "expression": "427 - 90"
+  },
+  {
+    "input": "<bos> <unk> 856 + 101 <|eom_id|> <unk>",
+    "expected_answer": "957",
+    "expression": "856 + 101"
+  },
+  {
+    "input": "<bos> <unk> 444 / 12 <|eom_id|> <unk>",
+    "expected_answer": "37",
+    "expression": "444 / 12"
+  },
+  {
+    "input": "<bos> <unk> 9 + 305 <|eom_id|> <unk>",
+    "expected_answer": "314",
+    "expression": "9 + 305"
+  },
+  {
+    "input": "<bos> <unk> 950 + 21 <|eom_id|> <unk>",
+    "expected_answer": "971",
+    "expression": "950 + 21"
+  },
+  {
+    "input": "<bos> <unk> 29 * 34 <|eom_id|> <unk>",
+    "expected_answer": "986",
+    "expression": "29 * 34"
+  },
+  {
+    "input": "<bos> <unk> 972 / 9 <|eom_id|> <unk>",
+    "expected_answer": "108",
+    "expression": "972 / 9"
+  },
+  {
+    "input": "<bos> <unk> 216 / 18 <|eom_id|> <unk>",
+    "expected_answer": "12",
+    "expression": "216 / 18"
+  },
+  {
+    "input": "<bos> <unk> 338 + 166 <|eom_id|> <unk>",
+    "expected_answer": "504",
+    "expression": "338 + 166"
+  },
+  {
+    "input": "<bos> <unk> 336 / 42 <|eom_id|> <unk>",
+    "expected_answer": "8",
+    "expression": "336 / 42"
+  },
+  {
+    "input": "<bos> <unk> 14 - 11 <|eom_id|> <unk>",
+    "expected_answer": "3",
+    "expression": "14 - 11"
+  },
+  {
+    "input": "<bos> <unk> 18 * 36 <|eom_id|> <unk>",
+    "expected_answer": "648",
+    "expression": "18 * 36"
+  },
+  {
+    "input": "<bos> <unk> 179 - 156 <|eom_id|> <unk>",
+    "expected_answer": "23",
+    "expression": "179 - 156"
+  },
+  {
+    "input": "<bos> <unk> 896 / 28 <|eom_id|> <unk>",
+    "expected_answer": "32",
+    "expression": "896 / 28"
+  },
+  {
+    "input": "<bos> <unk> 5 * 102 <|eom_id|> <unk>",
+    "expected_answer": "510",
+    "expression": "5 * 102"
+  },
+  {
+    "input": "<bos> <unk> 189 + 143 <|eom_id|> <unk>",
+    "expected_answer": "332",
+    "expression": "189 + 143"
+  },
+  {
+    "input": "<bos> <unk> 315 / 21 <|eom_id|> <unk>",
+    "expected_answer": "15",
+    "expression": "315 / 21"
+  },
+  {
+    "input": "<bos> <unk> 267 + 392 <|eom_id|> <unk>",
+    "expected_answer": "659",
+    "expression": "267 + 392"
+  },
+  {
+    "input": "<bos> <unk> 457 - 385 <|eom_id|> <unk>",
+    "expected_answer": "72",
+    "expression": "457 - 385"
+  },
+  {
+    "input": "<bos> <unk> 21 * 19 <|eom_id|> <unk>",
+    "expected_answer": "399",
+    "expression": "21 * 19"
+  },
+  {
+    "input": "<bos> <unk> 267 + 669 <|eom_id|> <unk>",
+    "expected_answer": "936",
+    "expression": "267 + 669"
+  },
+  {
+    "input": "<bos> <unk> 15 * 7 <|eom_id|> <unk>",
+    "expected_answer": "105",
+    "expression": "15 * 7"
+  },
+  {
+    "input": "<bos> <unk> 476 + 314 <|eom_id|> <unk>",
+    "expected_answer": "790",
+    "expression": "476 + 314"
+  },
+  {
+    "input": "<bos> <unk> 415 - 351 <|eom_id|> <unk>",
+    "expected_answer": "64",
+    "expression": "415 - 351"
+  },
+  {
+    "input": "<bos> <unk> 7 * 75 <|eom_id|> <unk>",
+    "expected_answer": "525",
+    "expression": "7 * 75"
+  },
+  {
+    "input": "<bos> <unk> 14 * 28 <|eom_id|> <unk>",
+    "expected_answer": "392",
+    "expression": "14 * 28"
+  },
+  {
+    "input": "<bos> <unk> 489 - 78 <|eom_id|> <unk>",
+    "expected_answer": "411",
+    "expression": "489 - 78"
+  },
+  {
+    "input": "<bos> <unk> 912 / 48 <|eom_id|> <unk>",
+    "expected_answer": "19",
+    "expression": "912 / 48"
+  },
+  {
+    "input": "<bos> <unk> 26 * 35 <|eom_id|> <unk>",
+    "expected_answer": "910",
+    "expression": "26 * 35"
+  },
+  {
+    "input": "<bos> <unk> 833 / 49 <|eom_id|> <unk>",
+    "expected_answer": "17",
+    "expression": "833 / 49"
+  },
+  {
+    "input": "<bos> <unk> 780 - 253 <|eom_id|> <unk>",
+    "expected_answer": "527",
+    "expression": "780 - 253"
+  },
+  {
+    "input": "<bos> <unk> 538 + 228 <|eom_id|> <unk>",
+    "expected_answer": "766",
+    "expression": "538 + 228"
+  },
+  {
+    "input": "<bos> <unk> 4 * 234 <|eom_id|> <unk>",
+    "expected_answer": "936",
+    "expression": "4 * 234"
+  },
+  {
+    "input": "<bos> <unk> 63 + 848 <|eom_id|> <unk>",
+    "expected_answer": "911",
+    "expression": "63 + 848"
+  },
+  {
+    "input": "<bos> <unk> 586 - 549 <|eom_id|> <unk>",
+    "expected_answer": "37",
+    "expression": "586 - 549"
+  },
+  {
+    "input": "<bos> <unk> 168 - 83 <|eom_id|> <unk>",
+    "expected_answer": "85",
+    "expression": "168 - 83"
+  },
+  {
+    "input": "<bos> <unk> 696 / 8 <|eom_id|> <unk>",
+    "expected_answer": "87",
+    "expression": "696 / 8"
+  },
+  {
+    "input": "<bos> <unk> 734 - 597 <|eom_id|> <unk>",
+    "expected_answer": "137",
+    "expression": "734 - 597"
+  },
+  {
+    "input": "<bos> <unk> 780 / 6 <|eom_id|> <unk>",
+    "expected_answer": "130",
+    "expression": "780 / 6"
+  },
+  {
+    "input": "<bos> <unk> 464 / 4 <|eom_id|> <unk>",
+    "expected_answer": "116",
+    "expression": "464 / 4"
+  },
+  {
+    "input": "<bos> <unk> 525 - 425 <|eom_id|> <unk>",
+    "expected_answer": "100",
+    "expression": "525 - 425"
+  },
+  {
+    "input": "<bos> <unk> 37 / 37 <|eom_id|> <unk>",
+    "expected_answer": "1",
+    "expression": "37 / 37"
+  },
+  {
+    "input": "<bos> <unk> 396 / 44 <|eom_id|> <unk>",
+    "expected_answer": "9",
+    "expression": "396 / 44"
+  },
+  {
+    "input": "<bos> <unk> 405 + 260 <|eom_id|> <unk>",
+    "expected_answer": "665",
+    "expression": "405 + 260"
+  },
+  {
+    "input": "<bos> <unk> 763 + 55 <|eom_id|> <unk>",
+    "expected_answer": "818",
+    "expression": "763 + 55"
+  },
+  {
+    "input": "<bos> <unk> 46 + 433 <|eom_id|> <unk>",
+    "expected_answer": "479",
+    "expression": "46 + 433"
+  },
+  {
+    "input": "<bos> <unk> 4 * 138 <|eom_id|> <unk>",
+    "expected_answer": "552",
+    "expression": "4 * 138"
+  },
+  {
+    "input": "<bos> <unk> 957 + 4 <|eom_id|> <unk>",
+    "expected_answer": "961",
+    "expression": "957 + 4"
+  },
+  {
+    "input": "<bos> <unk> 438 / 3 <|eom_id|> <unk>",
+    "expected_answer": "146",
+    "expression": "438 / 3"
+  },
+  {
+    "input": "<bos> <unk> 204 / 12 <|eom_id|> <unk>",
+    "expected_answer": "17",
+    "expression": "204 / 12"
+  },
+  {
+    "input": "<bos> <unk> 576 / 24 <|eom_id|> <unk>",
+    "expected_answer": "24",
+    "expression": "576 / 24"
+  },
+  {
+    "input": "<bos> <unk> 600 / 25 <|eom_id|> <unk>",
+    "expected_answer": "24",
+    "expression": "600 / 25"
+  },
+  {
+    "input": "<bos> <unk> 699 + 276 <|eom_id|> <unk>",
+    "expected_answer": "975",
+    "expression": "699 + 276"
+  },
+  {
+    "input": "<bos> <unk> 669 - 356 <|eom_id|> <unk>",
+    "expected_answer": "313",
+    "expression": "669 - 356"
+  },
+  {
+    "input": "<bos> <unk> 182 + 550 <|eom_id|> <unk>",
+    "expected_answer": "732",
+    "expression": "182 + 550"
+  },
+  {
+    "input": "<bos> <unk> 136 / 34 <|eom_id|> <unk>",
+    "expected_answer": "4",
+    "expression": "136 / 34"
+  },
+  {
+    "input": "<bos> <unk> 854 - 3 <|eom_id|> <unk>",
+    "expected_answer": "851",
+    "expression": "854 - 3"
+  },
+  {
+    "input": "<bos> <unk> 305 + 474 <|eom_id|> <unk>",
+    "expected_answer": "779",
+    "expression": "305 + 474"
+  },
+  {
+    "input": "<bos> <unk> 420 / 35 <|eom_id|> <unk>",
+    "expected_answer": "12",
+    "expression": "420 / 35"
+  },
+  {
+    "input": "<bos> <unk> 253 - 117 <|eom_id|> <unk>",
+    "expected_answer": "136",
+    "expression": "253 - 117"
+  },
+  {
+    "input": "<bos> <unk> 9 * 35 <|eom_id|> <unk>",
+    "expected_answer": "315",
+    "expression": "9 * 35"
+  },
+  {
+    "input": "<bos> <unk> 959 - 896 <|eom_id|> <unk>",
+    "expected_answer": "63",
+    "expression": "959 - 896"
+  },
+  {
+    "input": "<bos> <unk> 32 + 828 <|eom_id|> <unk>",
+    "expected_answer": "860",
+    "expression": "32 + 828"
+  },
+  {
+    "input": "<bos> <unk> 960 / 40 <|eom_id|> <unk>",
+    "expected_answer": "24",
+    "expression": "960 / 40"
+  },
+  {
+    "input": "<bos> <unk> 246 + 211 <|eom_id|> <unk>",
+    "expected_answer": "457",
+    "expression": "246 + 211"
+  },
+  {
+    "input": "<bos> <unk> 103 + 608 <|eom_id|> <unk>",
+    "expected_answer": "711",
+    "expression": "103 + 608"
+  },
+  {
+    "input": "<bos> <unk> 457 + 49 <|eom_id|> <unk>",
+    "expected_answer": "506",
+    "expression": "457 + 49"
+  },
+  {
+    "input": "<bos> <unk> 758 - 45 <|eom_id|> <unk>",
+    "expected_answer": "713",
+    "expression": "758 - 45"
+  },
+  {
+    "input": "<bos> <unk> 406 / 29 <|eom_id|> <unk>",
+    "expected_answer": "14",
+    "expression": "406 / 29"
+  },
+  {
+    "input": "<bos> <unk> 772 - 57 <|eom_id|> <unk>",
+    "expected_answer": "715",
+    "expression": "772 - 57"
+  },
+  {
+    "input": "<bos> <unk> 515 - 296 <|eom_id|> <unk>",
+    "expected_answer": "219",
+    "expression": "515 - 296"
+  },
+  {
+    "input": "<bos> <unk> 835 - 749 <|eom_id|> <unk>",
+    "expected_answer": "86",
+    "expression": "835 - 749"
+  },
+  {
+    "input": "<bos> <unk> 20 * 15 <|eom_id|> <unk>",
+    "expected_answer": "300",
+    "expression": "20 * 15"
+  },
+  {
+    "input": "<bos> <unk> 9 * 84 <|eom_id|> <unk>",
+    "expected_answer": "756",
+    "expression": "9 * 84"
+  },
+  {
+    "input": "<bos> <unk> 423 - 153 <|eom_id|> <unk>",
+    "expected_answer": "270",
+    "expression": "423 - 153"
+  },
+  {
+    "input": "<bos> <unk> 3 * 285 <|eom_id|> <unk>",
+    "expected_answer": "855",
+    "expression": "3 * 285"
+  },
+  {
+    "input": "<bos> <unk> 641 - 437 <|eom_id|> <unk>",
+    "expected_answer": "204",
+    "expression": "641 - 437"
+  },
+  {
+    "input": "<bos> <unk> 992 / 4 <|eom_id|> <unk>",
+    "expected_answer": "248",
+    "expression": "992 / 4"
+  },
+  {
+    "input": "<bos> <unk> 24 * 33 <|eom_id|> <unk>",
+    "expected_answer": "792",
+    "expression": "24 * 33"
+  },
+  {
+    "input": "<bos> <unk> 26 * 26 <|eom_id|> <unk>",
+    "expected_answer": "676",
+    "expression": "26 * 26"
+  },
+  {
+    "input": "<bos> <unk> 307 - 192 <|eom_id|> <unk>",
+    "expected_answer": "115",
+    "expression": "307 - 192"
+  },
+  {
+    "input": "<bos> <unk> 772 - 550 <|eom_id|> <unk>",
+    "expected_answer": "222",
+    "expression": "772 - 550"
+  },
+  {
+    "input": "<bos> <unk> 864 / 16 <|eom_id|> <unk>",
+    "expected_answer": "54",
+    "expression": "864 / 16"
+  },
+  {
+    "input": "<bos> <unk> 307 - 73 <|eom_id|> <unk>",
+    "expected_answer": "234",
+    "expression": "307 - 73"
+  },
+  {
+    "input": "<bos> <unk> 572 / 4 <|eom_id|> <unk>",
+    "expected_answer": "143",
+    "expression": "572 / 4"
+  },
+  {
+    "input": "<bos> <unk> 945 / 27 <|eom_id|> <unk>",
+    "expected_answer": "35",
+    "expression": "945 / 27"
+  },
+  {
+    "input": "<bos> <unk> 397 - 124 <|eom_id|> <unk>",
+    "expected_answer": "273",
+    "expression": "397 - 124"
+  },
+  {
+    "input": "<bos> <unk> 13 * 42 <|eom_id|> <unk>",
+    "expected_answer": "546",
+    "expression": "13 * 42"
+  },
+  {
+    "input": "<bos> <unk> 944 + 28 <|eom_id|> <unk>",
+    "expected_answer": "972",
+    "expression": "944 + 28"
+  },
+  {
+    "input": "<bos> <unk> 5 * 137 <|eom_id|> <unk>",
+    "expected_answer": "685",
+    "expression": "5 * 137"
+  },
+  {
+    "input": "<bos> <unk> 52 - 17 <|eom_id|> <unk>",
+    "expected_answer": "35",
+    "expression": "52 - 17"
+  },
+  {
+    "input": "<bos> <unk> 836 / 44 <|eom_id|> <unk>",
+    "expected_answer": "19",
+    "expression": "836 / 44"
+  },
+  {
+    "input": "<bos> <unk> 894 + 9 <|eom_id|> <unk>",
+    "expected_answer": "903",
+    "expression": "894 + 9"
+  },
+  {
+    "input": "<bos> <unk> 823 - 779 <|eom_id|> <unk>",
+    "expected_answer": "44",
+    "expression": "823 - 779"
+  },
+  {
+    "input": "<bos> <unk> 490 - 106 <|eom_id|> <unk>",
+    "expected_answer": "384",
+    "expression": "490 - 106"
+  },
+  {
+    "input": "<bos> <unk> 19 * 0 <|eom_id|> <unk>",
+    "expected_answer": "0",
+    "expression": "19 * 0"
+  },
+  {
+    "input": "<bos> <unk> 959 - 194 <|eom_id|> <unk>",
+    "expected_answer": "765",
+    "expression": "959 - 194"
+  },
+  {
+    "input": "<bos> <unk> 764 + 193 <|eom_id|> <unk>",
+    "expected_answer": "957",
+    "expression": "764 + 193"
+  },
+  {
+    "input": "<bos> <unk> 704 / 16 <|eom_id|> <unk>",
+    "expected_answer": "44",
+    "expression": "704 / 16"
+  },
+  {
+    "input": "<bos> <unk> 406 - 122 <|eom_id|> <unk>",
+    "expected_answer": "284",
+    "expression": "406 - 122"
+  },
+  {
+    "input": "<bos> <unk> 18 * 24 <|eom_id|> <unk>",
+    "expected_answer": "432",
+    "expression": "18 * 24"
+  },
+  {
+    "input": "<bos> <unk> 700 / 35 <|eom_id|> <unk>",
+    "expected_answer": "20",
+    "expression": "700 / 35"
+  },
+  {
+    "input": "<bos> <unk> 19 * 16 <|eom_id|> <unk>",
+    "expected_answer": "304",
+    "expression": "19 * 16"
+  },
+  {
+    "input": "<bos> <unk> 31 * 29 <|eom_id|> <unk>",
+    "expected_answer": "899",
+    "expression": "31 * 29"
+  },
+  {
+    "input": "<bos> <unk> 822 + 120 <|eom_id|> <unk>",
+    "expected_answer": "942",
+    "expression": "822 + 120"
+  },
+  {
+    "input": "<bos> <unk> 13 * 47 <|eom_id|> <unk>",
+    "expected_answer": "611",
+    "expression": "13 * 47"
+  },
+  {
+    "input": "<bos> <unk> 26 * 2 <|eom_id|> <unk>",
+    "expected_answer": "52",
+    "expression": "26 * 2"
+  },
+  {
+    "input": "<bos> <unk> 759 - 149 <|eom_id|> <unk>",
+    "expected_answer": "610",
+    "expression": "759 - 149"
+  },
+  {
+    "input": "<bos> <unk> 267 + 566 <|eom_id|> <unk>",
+    "expected_answer": "833",
+    "expression": "267 + 566"
+  },
+  {
+    "input": "<bos> <unk> 171 / 19 <|eom_id|> <unk>",
+    "expected_answer": "9",
+    "expression": "171 / 19"
+  },
+  {
+    "input": "<bos> <unk> 337 - 117 <|eom_id|> <unk>",
+    "expected_answer": "220",
+    "expression": "337 - 117"
+  },
+  {
+    "input": "<bos> <unk> 962 / 37 <|eom_id|> <unk>",
+    "expected_answer": "26",
+    "expression": "962 / 37"
+  },
+  {
+    "input": "<bos> <unk> 511 - 345 <|eom_id|> <unk>",
+    "expected_answer": "166",
+    "expression": "511 - 345"
+  },
+  {
+    "input": "<bos> <unk> 31 * 31 <|eom_id|> <unk>",
+    "expected_answer": "961",
+    "expression": "31 * 31"
+  },
+  {
+    "input": "<bos> <unk> 495 / 11 <|eom_id|> <unk>",
+    "expected_answer": "45",
+    "expression": "495 / 11"
+  },
+  {
+    "input": "<bos> <unk> 143 - 139 <|eom_id|> <unk>",
+    "expected_answer": "4",
+    "expression": "143 - 139"
+  },
+  {
+    "input": "<bos> <unk> 828 / 12 <|eom_id|> <unk>",
+    "expected_answer": "69",
+    "expression": "828 / 12"
+  },
+  {
+    "input": "<bos> <unk> 536 + 17 <|eom_id|> <unk>",
+    "expected_answer": "553",
+    "expression": "536 + 17"
+  },
+  {
+    "input": "<bos> <unk> 967 + 3 <|eom_id|> <unk>",
+    "expected_answer": "970",
+    "expression": "967 + 3"
+  },
+  {
+    "input": "<bos> <unk> 422 + 140 <|eom_id|> <unk>",
+    "expected_answer": "562",
+    "expression": "422 + 140"
+  },
+  {
+    "input": "<bos> <unk> 69 - 19 <|eom_id|> <unk>",
+    "expected_answer": "50",
+    "expression": "69 - 19"
+  },
+  {
+    "input": "<bos> <unk> 223 + 517 <|eom_id|> <unk>",
+    "expected_answer": "740",
+    "expression": "223 + 517"
+  },
+  {
+    "input": "<bos> <unk> 72 / 24 <|eom_id|> <unk>",
+    "expected_answer": "3",
+    "expression": "72 / 24"
+  },
+  {
+    "input": "<bos> <unk> 645 / 43 <|eom_id|> <unk>",
+    "expected_answer": "15",
+    "expression": "645 / 43"
+  },
+  {
+    "input": "<bos> <unk> 6 + 544 <|eom_id|> <unk>",
+    "expected_answer": "550",
+    "expression": "6 + 544"
+  },
+  {
+    "input": "<bos> <unk> 17 / 1 <|eom_id|> <unk>",
+    "expected_answer": "17",
+    "expression": "17 / 1"
+  },
+  {
+    "input": "<bos> <unk> 18 * 1 <|eom_id|> <unk>",
+    "expected_answer": "18",
+    "expression": "18 * 1"
+  },
+  {
+    "input": "<bos> <unk> 156 / 12 <|eom_id|> <unk>",
+    "expected_answer": "13",
+    "expression": "156 / 12"
+  },
+  {
+    "input": "<bos> <unk> 536 + 76 <|eom_id|> <unk>",
+    "expected_answer": "612",
+    "expression": "536 + 76"
+  },
+  {
+    "input": "<bos> <unk> 196 - 158 <|eom_id|> <unk>",
+    "expected_answer": "38",
+    "expression": "196 - 158"
+  },
+  {
+    "input": "<bos> <unk> 22 * 17 <|eom_id|> <unk>",
+    "expected_answer": "374",
+    "expression": "22 * 17"
+  },
+  {
+    "input": "<bos> <unk> 570 / 6 <|eom_id|> <unk>",
+    "expected_answer": "95",
+    "expression": "570 / 6"
+  },
+  {
+    "input": "<bos> <unk> 450 / 30 <|eom_id|> <unk>",
+    "expected_answer": "15",
+    "expression": "450 / 30"
+  },
+  {
+    "input": "<bos> <unk> 307 - 41 <|eom_id|> <unk>",
+    "expected_answer": "266",
+    "expression": "307 - 41"
+  },
+  {
+    "input": "<bos> <unk> 95 + 415 <|eom_id|> <unk>",
+    "expected_answer": "510",
+    "expression": "95 + 415"
+  },
+  {
+    "input": "<bos> <unk> 875 / 25 <|eom_id|> <unk>",
+    "expected_answer": "35",
+    "expression": "875 / 25"
+  },
+  {
+    "input": "<bos> <unk> 652 / 4 <|eom_id|> <unk>",
+    "expected_answer": "163",
+    "expression": "652 / 4"
+  },
+  {
+    "input": "<bos> <unk> 719 + 87 <|eom_id|> <unk>",
+    "expected_answer": "806",
+    "expression": "719 + 87"
+  },
+  {
+    "input": "<bos> <unk> 511 + 432 <|eom_id|> <unk>",
+    "expected_answer": "943",
+    "expression": "511 + 432"
+  },
+  {
+    "input": "<bos> <unk> 420 / 42 <|eom_id|> <unk>",
+    "expected_answer": "10",
+    "expression": "420 / 42"
+  },
+  {
+    "input": "<bos> <unk> 916 + 67 <|eom_id|> <unk>",
+    "expected_answer": "983",
+    "expression": "916 + 67"
+  },
+  {
+    "input": "<bos> <unk> 235 + 216 <|eom_id|> <unk>",
+    "expected_answer": "451",
+    "expression": "235 + 216"
+  },
+  {
+    "input": "<bos> <unk> 36 / 18 <|eom_id|> <unk>",
+    "expected_answer": "2",
+    "expression": "36 / 18"
+  },
+  {
+    "input": "<bos> <unk> 700 + 143 <|eom_id|> <unk>",
+    "expected_answer": "843",
+    "expression": "700 + 143"
+  },
+  {
+    "input": "<bos> <unk> 183 + 322 <|eom_id|> <unk>",
+    "expected_answer": "505",
+    "expression": "183 + 322"
+  },
+  {
+    "input": "<bos> <unk> 984 + 6 <|eom_id|> <unk>",
+    "expected_answer": "990",
+    "expression": "984 + 6"
+  },
+  {
+    "input": "<bos> <unk> 770 - 729 <|eom_id|> <unk>",
+    "expected_answer": "41",
+    "expression": "770 - 729"
+  },
+  {
+    "input": "<bos> <unk> 380 / 5 <|eom_id|> <unk>",
+    "expected_answer": "76",
+    "expression": "380 / 5"
+  },
+  {
+    "input": "<bos> <unk> 577 - 246 <|eom_id|> <unk>",
+    "expected_answer": "331",
+    "expression": "577 - 246"
+  },
+  {
+    "input": "<bos> <unk> 748 / 44 <|eom_id|> <unk>",
+    "expected_answer": "17",
+    "expression": "748 / 44"
+  },
+  {
+    "input": "<bos> <unk> 24 * 8 <|eom_id|> <unk>",
+    "expected_answer": "192",
+    "expression": "24 * 8"
+  },
+  {
+    "input": "<bos> <unk> 512 + 381 <|eom_id|> <unk>",
+    "expected_answer": "893",
+    "expression": "512 + 381"
+  },
+  {
+    "input": "<bos> <unk> 3 * 50 <|eom_id|> <unk>",
+    "expected_answer": "150",
+    "expression": "3 * 50"
+  },
+  {
+    "input": "<bos> <unk> 135 / 15 <|eom_id|> <unk>",
+    "expected_answer": "9",
+    "expression": "135 / 15"
+  },
+  {
+    "input": "<bos> <unk> 25 * 20 <|eom_id|> <unk>",
+    "expected_answer": "500",
+    "expression": "25 * 20"
+  },
+  {
+    "input": "<bos> <unk> 649 + 139 <|eom_id|> <unk>",
+    "expected_answer": "788",
+    "expression": "649 + 139"
+  },
+  {
+    "input": "<bos> <unk> 448 / 32 <|eom_id|> <unk>",
+    "expected_answer": "14",
+    "expression": "448 / 32"
+  },
+  {
+    "input": "<bos> <unk> 24 * 27 <|eom_id|> <unk>",
+    "expected_answer": "648",
+    "expression": "24 * 27"
+  },
+  {
+    "input": "<bos> <unk> 696 - 599 <|eom_id|> <unk>",
+    "expected_answer": "97",
+    "expression": "696 - 599"
+  },
+  {
+    "input": "<bos> <unk> 948 / 6 <|eom_id|> <unk>",
+    "expected_answer": "158",
+    "expression": "948 / 6"
+  },
+  {
+    "input": "<bos> <unk> 15 * 9 <|eom_id|> <unk>",
+    "expected_answer": "135",
+    "expression": "15 * 9"
+  },
+  {
+    "input": "<bos> <unk> 274 + 157 <|eom_id|> <unk>",
+    "expected_answer": "431",
+    "expression": "274 + 157"
+  },
+  {
+    "input": "<bos> <unk> 920 / 46 <|eom_id|> <unk>",
+    "expected_answer": "20",
+    "expression": "920 / 46"
+  },
+  {
+    "input": "<bos> <unk> 757 - 398 <|eom_id|> <unk>",
+    "expected_answer": "359",
+    "expression": "757 - 398"
+  },
+  {
+    "input": "<bos> <unk> 23 * 6 <|eom_id|> <unk>",
+    "expected_answer": "138",
+    "expression": "23 * 6"
+  },
+  {
+    "input": "<bos> <unk> 5 + 965 <|eom_id|> <unk>",
+    "expected_answer": "970",
+    "expression": "5 + 965"
+  },
+  {
+    "input": "<bos> <unk> 28 * 23 <|eom_id|> <unk>",
+    "expected_answer": "644",
+    "expression": "28 * 23"
+  },
+  {
+    "input": "<bos> <unk> 6 * 33 <|eom_id|> <unk>",
+    "expected_answer": "198",
+    "expression": "6 * 33"
+  },
+  {
+    "input": "<bos> <unk> 191 + 441 <|eom_id|> <unk>",
+    "expected_answer": "632",
+    "expression": "191 + 441"
+  },
+  {
+    "input": "<bos> <unk> 612 / 36 <|eom_id|> <unk>",
+    "expected_answer": "17",
+    "expression": "612 / 36"
+  },
+  {
+    "input": "<bos> <unk> 42 / 7 <|eom_id|> <unk>",
+    "expected_answer": "6",
+    "expression": "42 / 7"
+  },
+  {
+    "input": "<bos> <unk> 362 + 567 <|eom_id|> <unk>",
+    "expected_answer": "929",
+    "expression": "362 + 567"
+  },
+  {
+    "input": "<bos> <unk> 611 + 306 <|eom_id|> <unk>",
+    "expected_answer": "917",
+    "expression": "611 + 306"
+  },
+  {
+    "input": "<bos> <unk> 24 * 0 <|eom_id|> <unk>",
+    "expected_answer": "0",
+    "expression": "24 * 0"
+  },
+  {
+    "input": "<bos> <unk> 26 * 24 <|eom_id|> <unk>",
+    "expected_answer": "624",
+    "expression": "26 * 24"
+  },
+  {
+    "input": "<bos> <unk> 742 + 124 <|eom_id|> <unk>",
+    "expected_answer": "866",
+    "expression": "742 + 124"
+  },
+  {
+    "input": "<bos> <unk> 701 - 389 <|eom_id|> <unk>",
+    "expected_answer": "312",
+    "expression": "701 - 389"
+  },
+  {
+    "input": "<bos> <unk> 142 - 68 <|eom_id|> <unk>",
+    "expected_answer": "74",
+    "expression": "142 - 68"
+  },
+  {
+    "input": "<bos> <unk> 17 * 31 <|eom_id|> <unk>",
+    "expected_answer": "527",
+    "expression": "17 * 31"
+  },
+  {
+    "input": "<bos> <unk> 64 - 21 <|eom_id|> <unk>",
+    "expected_answer": "43",
+    "expression": "64 - 21"
+  },
+  {
+    "input": "<bos> <unk> 468 / 18 <|eom_id|> <unk>",
+    "expected_answer": "26",
+    "expression": "468 / 18"
+  },
+  {
+    "input": "<bos> <unk> 30 * 4 <|eom_id|> <unk>",
+    "expected_answer": "120",
+    "expression": "30 * 4"
+  },
+  {
+    "input": "<bos> <unk> 16 * 60 <|eom_id|> <unk>",
+    "expected_answer": "960",
+    "expression": "16 * 60"
+  },
+  {
+    "input": "<bos> <unk> 738 - 640 <|eom_id|> <unk>",
+    "expected_answer": "98",
+    "expression": "738 - 640"
+  },
+  {
+    "input": "<bos> <unk> 741 / 39 <|eom_id|> <unk>",
+    "expected_answer": "19",
+    "expression": "741 / 39"
+  },
+  {
+    "input": "<bos> <unk> 468 - 54 <|eom_id|> <unk>",
+    "expected_answer": "414",
+    "expression": "468 - 54"
+  },
+  {
+    "input": "<bos> <unk> 311 - 3 <|eom_id|> <unk>",
+    "expected_answer": "308",
+    "expression": "311 - 3"
+  },
+  {
+    "input": "<bos> <unk> 858 / 22 <|eom_id|> <unk>",
+    "expected_answer": "39",
+    "expression": "858 / 22"
+  },
+  {
+    "input": "<bos> <unk> 616 / 22 <|eom_id|> <unk>",
+    "expected_answer": "28",
+    "expression": "616 / 22"
+  },
+  {
+    "input": "<bos> <unk> 27 * 8 <|eom_id|> <unk>",
+    "expected_answer": "216",
+    "expression": "27 * 8"
+  },
+  {
+    "input": "<bos> <unk> 20 * 38 <|eom_id|> <unk>",
+    "expected_answer": "760",
+    "expression": "20 * 38"
+  },
+  {
+    "input": "<bos> <unk> 490 - 160 <|eom_id|> <unk>",
+    "expected_answer": "330",
+    "expression": "490 - 160"
+  },
+  {
+    "input": "<bos> <unk> 987 - 407 <|eom_id|> <unk>",
+    "expected_answer": "580",
+    "expression": "987 - 407"
+  },
+  {
+    "input": "<bos> <unk> 18 * 47 <|eom_id|> <unk>",
+    "expected_answer": "846",
+    "expression": "18 * 47"
+  },
+  {
+    "input": "<bos> <unk> 925 / 37 <|eom_id|> <unk>",
+    "expected_answer": "25",
+    "expression": "925 / 37"
+  },
+  {
+    "input": "<bos> <unk> 333 - 192 <|eom_id|> <unk>",
+    "expected_answer": "141",
+    "expression": "333 - 192"
+  },
+  {
+    "input": "<bos> <unk> 25 * 23 <|eom_id|> <unk>",
+    "expected_answer": "575",
+    "expression": "25 * 23"
+  },
+  {
+    "input": "<bos> <unk> 954 + 36 <|eom_id|> <unk>",
+    "expected_answer": "990",
+    "expression": "954 + 36"
+  },
+  {
+    "input": "<bos> <unk> 606 - 558 <|eom_id|> <unk>",
+    "expected_answer": "48",
+    "expression": "606 - 558"
+  },
+  {
+    "input": "<bos> <unk> 698 - 563 <|eom_id|> <unk>",
+    "expected_answer": "135",
+    "expression": "698 - 563"
+  },
+  {
+    "input": "<bos> <unk> 975 + 23 <|eom_id|> <unk>",
+    "expected_answer": "998",
+    "expression": "975 + 23"
+  },
+  {
+    "input": "<bos> <unk> 276 / 46 <|eom_id|> <unk>",
+    "expected_answer": "6",
+    "expression": "276 / 46"
+  },
+  {
+    "input": "<bos> <unk> 836 / 19 <|eom_id|> <unk>",
+    "expected_answer": "44",
+    "expression": "836 / 19"
+  },
+  {
+    "input": "<bos> <unk> 838 + 104 <|eom_id|> <unk>",
+    "expected_answer": "942",
+    "expression": "838 + 104"
+  },
+  {
+    "input": "<bos> <unk> 729 / 9 <|eom_id|> <unk>",
+    "expected_answer": "81",
+    "expression": "729 / 9"
+  },
+  {
+    "input": "<bos> <unk> 15 * 32 <|eom_id|> <unk>",
+    "expected_answer": "480",
+    "expression": "15 * 32"
+  },
+  {
+    "input": "<bos> <unk> 732 - 433 <|eom_id|> <unk>",
+    "expected_answer": "299",
+    "expression": "732 - 433"
+  },
+  {
+    "input": "<bos> <unk> 570 / 5 <|eom_id|> <unk>",
+    "expected_answer": "114",
+    "expression": "570 / 5"
+  },
+  {
+    "input": "<bos> <unk> 456 / 38 <|eom_id|> <unk>",
+    "expected_answer": "12",
+    "expression": "456 / 38"
+  },
+  {
+    "input": "<bos> <unk> 35 / 35 <|eom_id|> <unk>",
+    "expected_answer": "1",
+    "expression": "35 / 35"
+  },
+  {
+    "input": "<bos> <unk> 5 * 27 <|eom_id|> <unk>",
+    "expected_answer": "135",
+    "expression": "5 * 27"
+  },
+  {
+    "input": "<bos> <unk> 673 - 363 <|eom_id|> <unk>",
+    "expected_answer": "310",
+    "expression": "673 - 363"
+  },
+  {
+    "input": "<bos> <unk> 662 - 627 <|eom_id|> <unk>",
+    "expected_answer": "35",
+    "expression": "662 - 627"
+  },
+  {
+    "input": "<bos> <unk> 576 + 330 <|eom_id|> <unk>",
+    "expected_answer": "906",
+    "expression": "576 + 330"
+  },
+  {
+    "input": "<bos> <unk> 490 / 49 <|eom_id|> <unk>",
+    "expected_answer": "10",
+    "expression": "490 / 49"
+  },
+  {
+    "input": "<bos> <unk> 14 / 7 <|eom_id|> <unk>",
+    "expected_answer": "2",
+    "expression": "14 / 7"
+  },
+  {
+    "input": "<bos> <unk> 264 + 227 <|eom_id|> <unk>",
+    "expected_answer": "491",
+    "expression": "264 + 227"
+  },
+  {
+    "input": "<bos> <unk> 456 - 191 <|eom_id|> <unk>",
+    "expected_answer": "265",
+    "expression": "456 - 191"
+  },
+  {
+    "input": "<bos> <unk> 960 / 30 <|eom_id|> <unk>",
+    "expected_answer": "32",
+    "expression": "960 / 30"
+  },
+  {
+    "input": "<bos> <unk> 353 - 12 <|eom_id|> <unk>",
+    "expected_answer": "341",
+    "expression": "353 - 12"
+  },
+  {
+    "input": "<bos> <unk> 525 / 7 <|eom_id|> <unk>",
+    "expected_answer": "75",
+    "expression": "525 / 7"
+  },
+  {
+    "input": "<bos> <unk> 174 / 6 <|eom_id|> <unk>",
+    "expected_answer": "29",
+    "expression": "174 / 6"
+  },
+  {
+    "input": "<bos> <unk> 356 - 159 <|eom_id|> <unk>",
+    "expected_answer": "197",
+    "expression": "356 - 159"
+  },
+  {
+    "input": "<bos> <unk> 29 * 13 <|eom_id|> <unk>",
+    "expected_answer": "377",
+    "expression": "29 * 13"
+  },
+  {
+    "input": "<bos> <unk> 690 / 23 <|eom_id|> <unk>",
+    "expected_answer": "30",
+    "expression": "690 / 23"
+  },
+  {
+    "input": "<bos> <unk> 448 + 463 <|eom_id|> <unk>",
+    "expected_answer": "911",
+    "expression": "448 + 463"
+  },
+  {
+    "input": "<bos> <unk> 4 * 76 <|eom_id|> <unk>",
+    "expected_answer": "304",
+    "expression": "4 * 76"
+  },
+  {
+    "input": "<bos> <unk> 829 + 29 <|eom_id|> <unk>",
+    "expected_answer": "858",
+    "expression": "829 + 29"
+  },
+  {
+    "input": "<bos> <unk> 869 + 87 <|eom_id|> <unk>",
+    "expected_answer": "956",
+    "expression": "869 + 87"
+  },
+  {
+    "input": "<bos> <unk> 693 + 84 <|eom_id|> <unk>",
+    "expected_answer": "777",
+    "expression": "693 + 84"
+  },
+  {
+    "input": "<bos> <unk> 528 - 178 <|eom_id|> <unk>",
+    "expected_answer": "350",
+    "expression": "528 - 178"
+  },
+  {
+    "input": "<bos> <unk> 338 - 286 <|eom_id|> <unk>",
+    "expected_answer": "52",
+    "expression": "338 - 286"
+  },
+  {
+    "input": "<bos> <unk> 420 / 30 <|eom_id|> <unk>",
+    "expected_answer": "14",
+    "expression": "420 / 30"
+  },
+  {
+    "input": "<bos> <unk> 205 / 41 <|eom_id|> <unk>",
+    "expected_answer": "5",
+    "expression": "205 / 41"
+  },
+  {
+    "input": "<bos> <unk> 655 - 442 <|eom_id|> <unk>",
+    "expected_answer": "213",
+    "expression": "655 - 442"
+  },
+  {
+    "input": "<bos> <unk> 754 / 2 <|eom_id|> <unk>",
+    "expected_answer": "377",
+    "expression": "754 / 2"
+  }
+]

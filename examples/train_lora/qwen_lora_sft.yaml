@@ -1,0 +1,53 @@
+### model
+model_name_or_path: Qwen/Qwen2.5-0.5B  # choices: [meta-llama/Meta-Llama-3-8B-Instruct, hyperbolic_model/poincare_wo_norm_scale, hyperbolic_model/lorentz_wo_norm_scale]
+trust_remote_code: true
+
+### method
+stage: sft
+do_train: true
+finetuning_type: lora
+lora_rank: 64
+lora_target: all
+additional_target: "embed_tokens,lm_head"
+
+deepspeed: examples/deepspeed/ds_z2_config.json  # choices: [ds_z0_config.json, ds_z2_config.json, ds_z3_config.json]
+
+### dataset
+dataset: ultra_chat
+template: llama3
+cutoff_len: 2048
+# max_samples: 1000
+overwrite_cache: true
+preprocessing_num_workers: null
+dataloader_num_workers: 0
+# streaming: false
+streaming: true
+
+### output
+output_dir: saves/qwen2.5-0.5b/lora_sft
+logging_steps: 10
+save_steps: 5000
+plot_loss: true
+overwrite_output_dir: true
+save_only_model: false
+# report_to: none  # choices: [none, wandb, tensorboard, swanlab, mlflow]
+report_to: swanlab  # choices: [none, wandb, tensorboard, swanlab, mlflow]
+
+### train
+per_device_train_batch_size: 4
+gradient_accumulation_steps: 4
+learning_rate: 1.0e-4
+num_train_epochs: 5.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.05
+bf16: true
+ddp_timeout: 180000000
+resume_from_checkpoint: null
+max_steps: 20000
+
+### eval
+# eval_dataset: alpaca_en_demo
+# val_size: 0.1
+# per_device_eval_batch_size: 1
+# eval_strategy: steps
+# eval_steps: 500

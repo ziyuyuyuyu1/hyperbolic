@@ -15,6 +15,7 @@ from transformers import (
 )
 
 from transformers.models.qwen2.modeling_qwen2 import Qwen2RMSNorm
+from ..model import lorentz as L
 
 def lift_to_lorentz(x, c=1.0):
     # Debug prints for input
@@ -482,6 +483,18 @@ def remove_all_norms(model):
             else:
                 setattr(model, child_name, nn.Identity())
             print(f"Replaced {name} with Identity")
+
+def lorentz_loss_func(hidden_input, hidden_output):
+    """
+    Compute the Lorentz distance loss between hidden_input and hidden_output.
+    """
+    # Hyperbolic entailment loss: text should entail matching image.
+    # TODO: make this a parameter
+    _curv = 1.0
+    _angle = L.oxy_angle(hidden_input, hidden_output, _curv)
+    _aperture = L.half_aperture(hidden_input, _curv)
+    entailment_loss = torch.clamp(_angle - _aperture, min=0).mean()
+    return entailment_loss
 
 class PoincareLogExpDistanceHead(nn.Module):
     def __init__(self, embedding_weight, eps=1e-2, scale=False, hidden_dim=None):

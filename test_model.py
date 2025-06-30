@@ -13,6 +13,7 @@ from llamafactory.model import hyperbolic_utils  # This runs the registration co
 # Path to your saved model and tokenizer
 # MODEL_PATH = "saves/poincare_log_exp_all_wo_norm/checkpoint-5000"  # Try earlier checkpoint
 MODEL_PATH = "saves/qwen2_large_sft"
+# MODEL_PATH = "hyperbolic_models/poincare_log_exp_wo_norm"
 
 # Load tokenizer and model
 tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)

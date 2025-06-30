@@ -77,6 +77,11 @@ class RayArguments:
 class TrainingArguments(RayArguments, Seq2SeqTrainingArguments):
     r"""Arguments pertaining to the trainer."""
 
+    hyperbolic_loss_weight: float = field(
+        default=0.0,
+        metadata={"help": "Weight for the hyperbolic loss component in training."},
+    )
+
     def __post_init__(self):
         Seq2SeqTrainingArguments.__post_init__(self)
         RayArguments.__post_init__(self)

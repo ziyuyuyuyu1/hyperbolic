@@ -18,8 +18,8 @@ class CalcDataGenerator:
     
     def __init__(self, max_num: int = 999):
         self.max_num = max_num
-        self.operators = ["+", "-", "*", "/"]
-        # self.operators = ["+", "-"]
+        # self.operators = ["+", "-", "*", "/"]
+        self.operators = ["+", "-"]
         
     def generate_simple_expression(self) -> (str, str, str):
         """Generate a simple two-number expression: a op b = c. Returns (expression, result_str, full_eqn)."""

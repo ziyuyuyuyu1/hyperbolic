@@ -1,0 +1,74 @@
+[
+  {
+    "input": "<bos> <unk> 654 + 57 <|eom_id|> <unk>",
+    "expected_answer": "711",
+    "expression": "654 + 57",
+    "operator": "+"
+  },
+  {
+    "input": "<bos> <unk> 25 + 759 <|eom_id|> <unk>",
+    "expected_answer": "784",
+    "expression": "25 + 759",
+    "operator": "+"
+  },
+  {
+    "input": "<bos> <unk> 281 + 250 <|eom_id|> <unk>",
+    "expected_answer": "531",
+    "expression": "281 + 250",
+    "operator": "+"
+  },
+  {
+    "input": "<bos> <unk> 228 - 35 <|eom_id|> <unk>",
+    "expected_answer": "193",
+    "expression": "228 - 35",
+    "operator": "-"
+  },
+  {
+    "input": "<bos> <unk> 754 - 104 <|eom_id|> <unk>",
+    "expected_answer": "650",
+    "expression": "754 - 104",
+    "operator": "-"
+  },
+  {
+    "input": "<bos> <unk> 692 - 558 <|eom_id|> <unk>",
+    "expected_answer": "134",
+    "expression": "692 - 558",
+    "operator": "-"
+  },
+  {
+    "input": "<bos> <unk> 5 * 151 <|eom_id|> <unk>",
+    "expected_answer": "755",
+    "expression": "5 * 151",
+    "operator": "*"
+  },
+  {
+    "input": "<bos> <unk> 27 * 2 <|eom_id|> <unk>",
+    "expected_answer": "54",
+    "expression": "27 * 2",
+    "operator": "*"
+  },
+  {
+    "input": "<bos> <unk> 1 * 95 <|eom_id|> <unk>",
+    "expected_answer": "95",
+    "expression": "1 * 95",
+    "operator": "*"
+  },
+  {
+    "input": "<bos> <unk> 406 / 14 <|eom_id|> <unk>",
+    "expected_answer": "29",
+    "expression": "406 / 14",
+    "operator": "/"
+  },
+  {
+    "input": "<bos> <unk> 627 / 33 <|eom_id|> <unk>",
+    "expected_answer": "19",
+    "expression": "627 / 33",
+    "operator": "/"
+  },
+  {
+    "input": "<bos> <unk> 574 / 2 <|eom_id|> <unk>",
+    "expected_answer": "287",
+    "expression": "574 / 2",
+    "operator": "/"
+  }
+]

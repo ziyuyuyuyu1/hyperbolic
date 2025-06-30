@@ -22,6 +22,7 @@ from typing import TYPE_CHECKING, Any, Optional, Union
 
 import numpy as np
 import torch
+import torch.nn as nn
 from transformers import Seq2SeqTrainer
 from typing_extensions import override
 
@@ -30,7 +31,22 @@ from ...extras.constants import IGNORE_INDEX
 from ...extras.packages import is_transformers_version_greater_than
 from ..callbacks import SaveProcessorCallback
 from ..trainer_utils import create_custom_optimizer, create_custom_scheduler
+from ...model.hyperbolic_utils import lorentz_loss_func
 
+from transformers.utils import is_sagemaker_mp_enabled, is_torch_xpu_available, is_torch_mlu_available, is_torch_musa_available, is_torch_npu_available, is_torch_mps_available, is_torch_hpu_available
+import torch.amp as amp
+from transformers.training_args import OptimizerNames
+from transformers.trainer import DistributedType
+
+if is_sagemaker_mp_enabled():
+    import smdistributed.modelparallel.torch as smp
+    from smdistributed.modelparallel import __version__ as SMP_VERSION
+
+    IS_SAGEMAKER_MP_POST_1_10 = version.parse(SMP_VERSION) >= version.parse("1.10")
+
+    from .trainer_pt_utils import smp_forward_backward, smp_forward_only, smp_gather, smp_nested_concat
+else:
+    IS_SAGEMAKER_MP_POST_1_10 = False
 
 if TYPE_CHECKING:
     from torch.utils.data import Dataset
@@ -99,9 +115,145 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         return super()._get_train_sampler(*args, **kwargs)
 
     @override
-    def compute_loss(self, model, inputs, *args, **kwargs):
-        return super().compute_loss(model, inputs, *args, **kwargs)
+    def training_step(
+        self, model: nn.Module, inputs: dict[str, Union[torch.Tensor, Any]], num_items_in_batch=None
+    ) -> torch.Tensor:
+        """
+        Perform a training step on a batch of inputs.
 
+        Subclass and override to inject custom behavior.
+
+        Args:
+            model (`nn.Module`):
+                The model to train.
+            inputs (`Dict[str, Union[torch.Tensor, Any]]`):
+                The inputs and targets of the model.
+
+                The dictionary will be unpacked before being fed to the model. Most models expect the targets under the
+                argument `labels`. Check your model's documentation for all accepted arguments.
+
+        Return:
+            `torch.Tensor`: The tensor with training loss on this batch.
+        """
+        model.train()
+        if hasattr(self.optimizer, "train") and callable(self.optimizer.train):
+            self.optimizer.train()
+
+        inputs = self._prepare_inputs(inputs)
+        if is_sagemaker_mp_enabled():
+            loss_mb = smp_forward_backward(model, inputs, self.args.gradient_accumulation_steps)
+            return loss_mb.reduce_mean().detach().to(self.args.device)
+
+        with self.compute_loss_context_manager():
+            if self.args.hyperbolic_loss_weight > 0:
+                loss, hyperbolic_loss = self.compute_hyperbolic_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+            else:
+                loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+
+        del inputs
+        if (
+            self.args.torch_empty_cache_steps is not None
+            and self.state.global_step % self.args.torch_empty_cache_steps == 0
+        ):
+            if is_torch_xpu_available():
+                torch.xpu.empty_cache()
+            elif is_torch_mlu_available():
+                torch.mlu.empty_cache()
+            elif is_torch_musa_available():
+                torch.musa.empty_cache()
+            elif is_torch_npu_available():
+                torch.npu.empty_cache()
+            elif is_torch_mps_available(min_version="2.0"):
+                torch.mps.empty_cache()
+            elif is_torch_hpu_available():
+                logger.warning(
+                    "`torch_empty_cache_steps` is set but HPU device/backend does not support empty_cache()."
+                )
+            else:
+                torch.cuda.empty_cache()
+
+        kwargs = {}
+
+        # For LOMO optimizers you need to explicitly use the learnign rate
+        if self.args.optim in [OptimizerNames.LOMO, OptimizerNames.ADALOMO]:
+            kwargs["learning_rate"] = self._get_learning_rate()
+
+        if self.args.n_gpu > 1:
+            if self.args.hyperbolic_loss_weight > 0:
+                loss = loss.mean()
+                hyperbolic_loss = hyperbolic_loss.mean()
+            else:
+                loss = loss.mean()  # mean() to average on multi-gpu parallel training
+
+        if self.use_apex:
+            with amp.scale_loss(loss, self.optimizer) as scaled_loss:
+                scaled_loss.backward()
+            if self.args.hyperbolic_loss_weight > 0:
+                with amp.scale_loss(hyperbolic_loss, self.optimizer) as scaled_hyperbolic_loss:
+                    scaled_hyperbolic_loss.backward()
+        else:
+            # Finally we need to normalize the loss for reporting
+            if not self.model_accepts_loss_kwargs and self.compute_loss_func is None:
+                loss = loss / self.args.gradient_accumulation_steps
+                if self.args.hyperbolic_loss_weight > 0:
+                    hyperbolic_loss = hyperbolic_loss / self.args.gradient_accumulation_steps
+
+            # Turning off loss scaling w.r.t. gradient accumulation when DeepSpeed is enabled
+            # https://github.com/huggingface/transformers/pull/35808
+            if self.accelerator.distributed_type == DistributedType.DEEPSPEED:
+                kwargs["scale_wrt_gas"] = False
+
+            self.accelerator.backward(loss, **kwargs)
+            if self.args.hyperbolic_loss_weight > 0:
+                self.accelerator.backward(hyperbolic_loss, **kwargs)
+
+            return loss.detach() if self.args.hyperbolic_loss_weight == 0 else loss.detach() + hyperbolic_loss.detach()
+
+    @override
+    def compute_loss(self, model, inputs, *args, **kwargs):
+        if self.args.hyperbolic_loss_weight > 0:
+            return self.compute_hyperbolic_loss(model, inputs, *args, **kwargs)
+        else:
+            return super().compute_loss(model, inputs, *args, **kwargs)
+    
+    def compute_hyperbolic_loss(self, model, inputs, return_outputs=False, *args, **kwargs):
+        # Main LM loss (no backward yet)
+        lm_loss, outputs = super().compute_loss(model, inputs, return_outputs=True, *args, **kwargs)
+
+        input_ids = inputs["input_ids"].clone().detach()
+
+        # Create masks
+        with torch.no_grad():
+            attention_mask = inputs["attention_mask"]
+            attention_mask_input = ((inputs["labels"] != -100).long() & attention_mask)
+            attention_mask_output = ((inputs["labels"] == -100).long() & attention_mask)
+            attention_mask_concat = torch.cat([attention_mask_input, attention_mask_output], dim=0)
+
+        input_ids_concat = torch.cat([input_ids.clone().detach(), input_ids.clone().detach()], dim=0)
+
+        total_output = model(
+            input_ids=input_ids_concat,
+            attention_mask=attention_mask_concat,
+            output_hidden_states=True,
+            return_dict=True,
+        )
+        hidden_states = total_output.hidden_states[-1]
+        hidden_states_input = hidden_states[:input_ids.shape[0], :, :]
+        hidden_states_output = hidden_states[input_ids.shape[0]:, :, :]
+
+        hidden_input = hidden_states_input * attention_mask_input.unsqueeze(-1)
+        hidden_input = hidden_input.sum(dim=1) / attention_mask_input.sum(dim=1).unsqueeze(-1)
+        hidden_output = hidden_states_output * attention_mask_output.unsqueeze(-1)
+        hidden_output = hidden_output.sum(dim=1) / attention_mask_output.sum(dim=1).unsqueeze(-1)
+
+        # Compute your custom loss
+        hyperbolic_loss = lorentz_loss_func(hidden_input, hidden_output)
+        weight = getattr(self.args, "hyperbolic_loss_weight", 0.1)
+
+        hyperbolic_loss = hyperbolic_loss * weight
+
+        return (lm_loss, hyperbolic_loss, outputs) if return_outputs else (lm_loss, hyperbolic_loss)
+    
     @override
     def prediction_step(
         self,
