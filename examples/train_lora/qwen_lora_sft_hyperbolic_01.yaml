@@ -24,7 +24,7 @@ dataloader_num_workers: 0
 streaming: true
 
 ### output
-output_dir: saves/qwen2.5-0.5b/lora_sft_hyperbolic_05
+output_dir: saves/qwen2.5-0.5b/lora_sft_hyperbolic_01
 logging_steps: 10
 save_steps: 5000
 plot_loss: true
@@ -54,4 +54,4 @@ max_steps: 20000
 
 
 ### hyperbolic
-hyperbolic_loss_weight: 0.5
+hyperbolic_loss_weight: 0.1

@@ -1,0 +1,13 @@
+### Note: DO NOT use quantized model or quantization_bit when merging lora adapters
+
+### model
+model_name_or_path: Qwen/Qwen2.5-0.5B
+adapter_name_or_path: saves/qwen2.5-0.5b/lora_sft_hyperbolic_05/checkpoint-5000
+template: qwen
+trust_remote_code: true
+
+### export
+export_dir: output/qwen2_0.5b_lora_sft_hyperbolic_05_step_5000
+export_size: 5
+export_device: cpu  # choices: [cpu, auto]
+export_legacy_format: false

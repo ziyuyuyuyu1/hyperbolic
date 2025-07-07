@@ -241,10 +241,11 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         hidden_states_input = hidden_states[:input_ids.shape[0], :, :]
         hidden_states_output = hidden_states[input_ids.shape[0]:, :, :]
 
+        eps = 1e-8
         hidden_input = hidden_states_input * attention_mask_input.unsqueeze(-1)
-        hidden_input = hidden_input.sum(dim=1) / attention_mask_input.sum(dim=1).unsqueeze(-1)
+        hidden_input = hidden_input.sum(dim=1) / (attention_mask_input.sum(dim=1).unsqueeze(-1) + eps)
         hidden_output = hidden_states_output * attention_mask_output.unsqueeze(-1)
-        hidden_output = hidden_output.sum(dim=1) / attention_mask_output.sum(dim=1).unsqueeze(-1)
+        hidden_output = hidden_output.sum(dim=1) / (attention_mask_output.sum(dim=1).unsqueeze(-1) + eps)
 
         # Compute your custom loss
         hyperbolic_loss = lorentz_loss_func(hidden_input, hidden_output)
