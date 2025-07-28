@@ -242,6 +242,8 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         hidden_states_output = hidden_states[input_ids.shape[0]:, :, :]
 
         eps = 1e-8
+        attention_mask_input = attention_mask_input.to(hidden_states_input.dtype)
+        attention_mask_output = attention_mask_output.to(hidden_states_output.dtype)
         hidden_input = hidden_states_input * attention_mask_input.unsqueeze(-1)
         hidden_input = hidden_input.sum(dim=1) / (attention_mask_input.sum(dim=1).unsqueeze(-1) + eps)
         hidden_output = hidden_states_output * attention_mask_output.unsqueeze(-1)

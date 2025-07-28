@@ -1,7 +1,8 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM
+from src.llamafactory.model.hyperbolic_utils import QwenWoNormForCausalLM, QwenWoNormConfig
 
 
-model_path = "output/qwen2_0.5b_lora_sft_hyperbolic_05_step_5000"
+model_path = "hyperbolic_models/qwen_0.5b_wo_norm"
 
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 model = AutoModelForCausalLM.from_pretrained(model_path).to("cuda")

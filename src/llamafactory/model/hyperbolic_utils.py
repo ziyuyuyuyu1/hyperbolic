@@ -828,6 +828,23 @@ class PoincareWoNormForCausalLM(Qwen2ForCausalLM):
 AutoConfig.register("poincare_wo_norm_config", PoinCareWoNormConfig)
 AutoModelForCausalLM.register(PoinCareWoNormConfig, PoincareWoNormForCausalLM)
 
+class QwenWoNormConfig(Qwen2Config):
+    """
+    Custom configuration for Qwen2 model with hyperbolic distance head.
+    This is a placeholder if you want to register a custom config class.
+    """
+    model_type = "qwen_wo_norm_config"
+    
+class QwenWoNormForCausalLM(Qwen2ForCausalLM):
+    config_class = QwenWoNormConfig
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.model.norm = nn.Identity()
+
+AutoConfig.register("qwen_wo_norm_config", QwenWoNormConfig)
+AutoModelForCausalLM.register(QwenWoNormConfig, QwenWoNormForCausalLM)
+
 
 # class PoinCareWoNormProjConfig(Qwen2Config):
 #     """
@@ -1167,37 +1184,98 @@ if __name__ == "__main__":
     # print("Model and tokenizer saved to hyperbolic_models/lorentz_log_exp_wo_norm")
 
 
-    # --- LorentzLogExpAllWoNorm block ---
+    # # --- LorentzLogExpAllWoNorm block ---
 
+    # import sys
+    # import os
+    # sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+    # from calc_tokenizer import CalcTokenizer
+    # tokenizer = CalcTokenizer()
+    # print(f"Tokenizer vocab size: {tokenizer.vocab_size}")
+    # from transformers import Qwen2Config
+    # config = LorentzLogExpAllWoNormConfig(
+    #     vocab_size=tokenizer.vocab_size + 1,
+    #     hidden_size=128,
+    #     intermediate_size=512,
+    #     num_hidden_layers=8,
+    #     num_attention_heads=4,
+    #     num_key_value_heads=4,
+    #     max_position_embeddings=64,
+    #     pad_token_id=tokenizer.pad_token_id,
+    #     bos_token_id=tokenizer.bos_token_id,
+    #     eos_token_id=tokenizer.eos_token_id,
+    #     tie_word_embeddings=True,
+    #     use_cache=False,
+    #     attention_dropout=0.0,
+    #     hidden_dropout=0.0,
+    #     rope_theta=10000.0,
+    #     use_sliding_window=False,
+    #     sliding_window=4096,
+    #     attention_bias=False,
+    #     max_window_layers=0,
+    # )
+    # model = LorentzLogExpAllWoNormForCausalLM(config)
+    # model.save_pretrained('hyperbolic_models/lorentz_log_exp_all_wo_norm')
+    # tokenizer.save_pretrained('hyperbolic_models/lorentz_log_exp_all_wo_norm')
+    # print("Model and tokenizer saved to hyperbolic_models/lorentz_log_exp_all_wo_norm")
+
+    # # --- QwenWoNorm block ---
+    # import sys
+    # import os
+    # sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+    # model_path = "Qwen/Qwen2.5-0.5B"
+    # tokenizer = AutoTokenizer.from_pretrained(model_path)
+    # original_model = AutoModelForCausalLM.from_pretrained(model_path)
+    # # copy the original model's config to the new model
+    # original_config = original_model.config
+    # config = QwenWoNormConfig(**original_config.to_dict())
+    # model = QwenWoNormForCausalLM(config)
+    # # copy the original model's weights to the new model
+    # m, u = model.load_state_dict(original_model.state_dict(), strict=False)
+    # print(f"Missing keys: {m}")
+    # print(f"Unexpected keys: {u}")
+    # model.save_pretrained('hyperbolic_models/qwen_0.5b_wo_norm')
+    # tokenizer.save_pretrained('hyperbolic_models/qwen_0.5b_wo_norm')
+    # print(original_model.model.norm)
+    # print(model.model.norm)
+    # print("Model and tokenizer saved to hyperbolic_models/qwen_0.5b_wo_norm")
+
+    # --- PoincareLogExpWoNorm block ---
     import sys
     import os
     sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
-    from calc_tokenizer import CalcTokenizer
-    tokenizer = CalcTokenizer()
-    print(f"Tokenizer vocab size: {tokenizer.vocab_size}")
-    from transformers import Qwen2Config
-    config = LorentzLogExpAllWoNormConfig(
-        vocab_size=tokenizer.vocab_size + 1,
-        hidden_size=128,
-        intermediate_size=512,
-        num_hidden_layers=8,
-        num_attention_heads=4,
-        num_key_value_heads=4,
-        max_position_embeddings=64,
-        pad_token_id=tokenizer.pad_token_id,
-        bos_token_id=tokenizer.bos_token_id,
-        eos_token_id=tokenizer.eos_token_id,
-        tie_word_embeddings=True,
-        use_cache=False,
-        attention_dropout=0.0,
-        hidden_dropout=0.0,
-        rope_theta=10000.0,
-        use_sliding_window=False,
-        sliding_window=4096,
-        attention_bias=False,
-        max_window_layers=0,
-    )
-    model = LorentzLogExpAllWoNormForCausalLM(config)
-    model.save_pretrained('hyperbolic_models/lorentz_log_exp_all_wo_norm')
-    tokenizer.save_pretrained('hyperbolic_models/lorentz_log_exp_all_wo_norm')
-    print("Model and tokenizer saved to hyperbolic_models/lorentz_log_exp_all_wo_norm")
+    model_path = "Qwen/Qwen2.5-0.5B"
+    tokenizer = AutoTokenizer.from_pretrained(model_path)
+    original_model = AutoModelForCausalLM.from_pretrained(model_path)
+    # copy the original model's config to the new model
+    original_config = original_model.config
+    config = PoincareLogExpWoNormConfig(**original_config.to_dict())
+    model = PoincareLogExpWoNormForCausalLM(config)
+    # copy the original model's weights to the new model
+    m, u = model.load_state_dict(original_model.state_dict(), strict=False)
+    print(model.lm_head.hidden_state_scale, model.lm_head.logit_scale)
+    print(f"Missing keys: {m}")
+    print(f"Unexpected keys: {u}")
+    model.save_pretrained('hyperbolic_models/poincare_log_exp_wo_norm_text')
+    tokenizer.save_pretrained('hyperbolic_models/poincare_log_exp_wo_norm_text')
+    print("Model and tokenizer saved to hyperbolic_models/poincare_log_exp_wo_norm_text")
+
+    # # --- LorentzLogExpWoNorm block ---
+    # import sys
+    # import os
+    # sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+    # model_path = "Qwen/Qwen2.5-0.5B"
+    # tokenizer = AutoTokenizer.from_pretrained(model_path)
+    # original_model = AutoModelForCausalLM.from_pretrained(model_path)
+    # # copy the original model's config to the new model
+    # original_config = original_model.config
+    # config = LorentzLogExpWoNormConfig(**original_config.to_dict())
+    # model = LorentzLogExpWoNormForCausalLM(config)
+    # # copy the original model's weights to the new model
+    # m, u = model.load_state_dict(original_model.state_dict(), strict=False)
+    # print(model.lm_head.hidden_state_scale, model.lm_head.logit_scale)
+    # print(f"Missing keys: {m}")
+    # print(f"Unexpected keys: {u}")
+    # model.save_pretrained('hyperbolic_models/lorentz_log_exp_wo_norm_text')
+    # tokenizer.save_pretrained('hyperbolic_models/lorentz_log_exp_wo_norm_text')
+    # print("Model and tokenizer saved to hyperbolic_models/lorentz_log_exp_wo_norm_text")
